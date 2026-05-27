@@ -435,7 +435,7 @@ Hệ thống sử dụng SQLite với **17 bảng** dữ liệu, được tổ c
 |------|------|----------|
 | **Dữ liệu gốc** | `bookings`, `data_sources` | Lưu 119.390 bản ghi đặt phòng gốc |
 | **Khai phá** | `rule_configs`, `association_rules` | Lưu cấu hình chạy thuật toán và các quy luật tìm được |
-| **Kinh doanh** | `combos`, `promotions`, `events`, `banners`, `vouchers` | Lưu thông tin combo, khuyến mãi, sự kiện |
+| **Kinh doanh** | `hotels`, `rooms`, `combos`, `promotions`, `events`, `banners`, `vouchers` | Quản lý thông tin khách sạn, loại phòng, combo, khuyến mãi, sự kiện |
 | **Người dùng** | `users`, `user_bookings`, `quiz_results` | Lưu tài khoản, đặt phòng online, kết quả quiz |
 | **AI** | `ai_providers`, `ai_contents`, `ai_usage_logs` | Lưu cấu hình AI, nội dung đã tạo, lịch sử sử dụng |
 
