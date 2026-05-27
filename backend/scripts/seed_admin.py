@@ -1,6 +1,9 @@
 import sys
+import io
 from pathlib import Path
 from datetime import datetime, date, timedelta
+
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 # Add parent directory to path to import app
 sys.path.append(str(Path(__file__).resolve().parent.parent))

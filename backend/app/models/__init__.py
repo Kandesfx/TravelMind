@@ -1,5 +1,7 @@
 from app.models.user import User
 from app.models.booking import Booking
+from app.models.hotel import Hotel
+from app.models.room import Room
 from app.models.user_booking import UserBooking
 from app.models.data_source import DataSource
 from app.models.rule import RuleConfig, AssociationRule

@@ -20,6 +20,8 @@ class Combo(db.Model):
     target_season = db.Column(db.String(20), index=True) # Spring / Summer / Autumn / Winter
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'), nullable=True)
     image_url = db.Column(db.String(255), nullable=True)
+    hotel_id = db.Column(db.Integer, db.ForeignKey('hotels.id'), nullable=True)
+    room_ids = db.Column(db.JSON, nullable=True) # list of room IDs compatible with this combo
     is_active = db.Column(db.Boolean, default=True, index=True)
     display_order = db.Column(db.Integer, default=0)
     total_bookings = db.Column(db.Integer, default=0)
@@ -32,6 +34,7 @@ class Combo(db.Model):
     vouchers = db.relationship('Voucher', backref='combo', lazy=True)
     ai_contents = db.relationship('AIContent', backref='combo', lazy=True)
     ai_media = db.relationship('AIMedia', backref='combo', lazy=True)
+    hotel_ref = db.relationship('Hotel', foreign_keys=[hotel_id], lazy='select')
     
     def to_dict(self):
         return {
@@ -51,6 +54,8 @@ class Combo(db.Model):
             "target_season": self.target_season,
             "event_id": self.event_id,
             "image_url": self.image_url,
+            "hotel_id": self.hotel_id,
+            "room_ids": self.room_ids,
             "is_active": self.is_active,
             "display_order": self.display_order,
             "total_bookings": self.total_bookings,

@@ -173,7 +173,7 @@ export default function LandingPage() {
         {[
           { label: 'Lượt đặt phòng phân tích', value: data.stats.total_bookings?.toLocaleString() || '119,390', desc: 'Dữ liệu thực từ khách sạn quốc tế', icon: Compass },
           { label: 'Quốc gia du khách', value: data.stats.total_countries || '178', desc: 'Khách hàng từ khắp nơi trên thế giới', icon: Users },
-          { label: 'Sự hài lòng', value: `${data.stats.match_percentage || 95}%`, desc: 'Dựa trên đánh giá thực tế', icon: ShieldCheck },
+          { label: 'Khách sạn & Phòng', value: `${data.stats.total_hotels || 4} KS • ${data.stats.total_room_types || 24} loại`, desc: 'Hệ thống phòng thực tế từ dữ liệu', icon: ShieldCheck },
           { label: 'Gói dịch vụ đa dạng', value: data.stats.total_combos || '15+', desc: 'Tùy chỉnh theo nhu cầu của bạn', icon: TrendingUp }
         ].map((item, idx) => (
           <GlassCard key={idx} style={{ padding: '1.5rem', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '0.5rem' }} hover={false}>
@@ -197,7 +197,61 @@ export default function LandingPage() {
         ))}
       </section>
 
-      {/* 4. How It Works — NEW section */}
+      {/* 3.5 Featured Hotels — NEW */}
+      {data.featured_hotels && data.featured_hotels.length > 0 && (
+        <section style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div>
+              <h2 style={{ fontSize: '1.8rem' }}>Khách Sạn Nổi Bật</h2>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Danh sách khách sạn thực tế với phòng và giá từ dữ liệu Hotel Bookings.</p>
+            </div>
+            <Link to="/hotels" style={{ color: 'var(--primary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.9rem', fontWeight: 500 }}>
+              <span>Xem tất cả</span>
+              <ChevronRight size={14} />
+            </Link>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.25rem' }}>
+            {data.featured_hotels.map(hotel => (
+              <GlassCard key={hotel.id} style={{ overflow: 'hidden', padding: 0, cursor: 'pointer' }} className="glass-panel-hover">
+                <div onClick={() => navigate(`/hotels/${hotel.id}`)} style={{ display: 'flex', flexDirection: 'column' }}>
+                  <div style={{
+                    height: '120px',
+                    background: hotel.hotel_type?.includes('Resort')
+                      ? 'linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%)'
+                      : 'linear-gradient(135deg, #8b5cf6 0%, #d946ef 100%)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    position: 'relative',
+                  }}>
+                    <span style={{ fontSize: '2rem', opacity: 0.4 }}>{hotel.hotel_type?.includes('Resort') ? '🏖️' : '🏙️'}</span>
+                    <div style={{ position: 'absolute', top: '8px', right: '8px', background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(8px)', padding: '0.2rem 0.5rem', borderRadius: '12px', fontSize: '0.65rem', color: 'white' }}>
+                      {hotel.hotel_type}
+                    </div>
+                  </div>
+                  <div style={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                    <div style={{ display: 'flex', gap: '0.15rem' }}>
+                      {Array.from({ length: hotel.star_rating || 4 }, (_, i) => <Star key={i} size={11} fill="#f59e0b" color="#f59e0b" />)}
+                    </div>
+                    <h4 style={{ fontSize: '0.95rem', margin: 0 }}>{hotel.name}</h4>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                      <MapPin size={11} /> {hotel.city}
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.25rem' }}>
+                      <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{hotel.total_rooms} phòng</span>
+                      {hotel.min_price && (
+                        <span style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--primary)' }}>
+                          €{hotel.min_price}<span style={{ fontSize: '0.65rem', fontWeight: 400, color: 'var(--text-muted)' }}>/đêm</span>
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </GlassCard>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* 4. How It Works */}
       <section style={{ display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center', textAlign: 'center' }}>
         <div>
           <h2 style={{ fontSize: '1.8rem', fontWeight: 800 }}>Cách Hoạt Động</h2>
@@ -399,6 +453,7 @@ export default function LandingPage() {
         <div style={{ display: 'flex', gap: '2.5rem' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             <span style={{ color: 'var(--text-primary)', fontWeight: 600, fontSize: '0.85rem' }}>Khám phá</span>
+            <Link to="/hotels" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Khách Sạn</Link>
             <Link to="/combo-builder" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Tìm Combo</Link>
             <Link to="/quiz" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Quiz Du Lịch</Link>
             <Link to="/insights" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Xu Hướng</Link>

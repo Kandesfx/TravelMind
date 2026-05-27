@@ -24,6 +24,8 @@ def create_app(config_class=Config):
     from app.routes.admin_business import admin_business_bp
     from app.routes.admin_ai import admin_ai_bp
     from app.routes.admin_settings import admin_settings_bp
+    from app.routes.admin_hotels import admin_hotels_bp
+    from app.routes.admin_bookings import admin_bookings_bp
 
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(public_bp, url_prefix='/api/public')
@@ -32,6 +34,8 @@ def create_app(config_class=Config):
     app.register_blueprint(admin_business_bp, url_prefix='/api/admin/business')
     app.register_blueprint(admin_ai_bp, url_prefix='/api/admin/ai')
     app.register_blueprint(admin_settings_bp, url_prefix='/api/admin/settings')
+    app.register_blueprint(admin_hotels_bp, url_prefix='/api/admin/inventory')
+    app.register_blueprint(admin_bookings_bp, url_prefix='/api/admin/bookings')
 
     # Register user loader
     from app.models.user import User

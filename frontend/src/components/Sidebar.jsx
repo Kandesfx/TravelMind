@@ -3,7 +3,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../App';
 import {
   LayoutDashboard, BarChart2, Briefcase, Gift, Calendar, Image, Ticket, Users, GitMerge, Database,
-  FileText, ImageIcon, Video, Library, ClipboardList, History, Key, Activity, LogOut, ArrowLeft
+  FileText, ImageIcon, Video, Library, ClipboardList, History, Key, Activity, LogOut, ArrowLeft,
+  Hotel, ShoppingBag, Brain
 } from 'lucide-react';
 
 export default function Sidebar() {
@@ -29,6 +30,13 @@ export default function Sidebar() {
       ]
     },
     {
+      title: 'QUẢN LÝ PHÒNG',
+      items: [
+        { path: '/admin/hotels', label: 'Khách Sạn & Phòng', icon: Hotel },
+        { path: '/admin/bookings', label: 'Đơn Đặt Phòng', icon: ShoppingBag },
+      ]
+    },
+    {
       title: 'QUẢN LÝ KINH DOANH',
       items: [
         { path: '/admin/combos', label: 'Quản Lý Combo', icon: Briefcase },
@@ -43,6 +51,7 @@ export default function Sidebar() {
       items: [
         { path: '/admin/customers', label: 'Phân Khúc Khách Hàng', icon: Users },
         { path: '/admin/rules', label: 'Rules Lab (Mining)', icon: GitMerge },
+        { path: '/admin/ai-insights', label: 'AI Insights', icon: Brain },
         { path: '/admin/data', label: 'Dữ Liệu Booking Gốc', icon: Database },
       ]
     },

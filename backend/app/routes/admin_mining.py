@@ -3,6 +3,11 @@ from flask_login import login_required, current_user
 from app.extensions import db
 from app.models.rule import RuleConfig, AssociationRule
 from app.services.mining_service import run_association_rules_mining
+from app.services.ai_insight_service import (
+    generate_mining_insight_summary,
+    suggest_promotions_from_rules,
+    answer_business_qa
+)
 
 admin_mining_bp = Blueprint('admin_mining', __name__)
 
@@ -159,3 +164,37 @@ def get_customer_segments():
         }
     ]
     return jsonify({"segments": segments}), 200
+
+@admin_mining_bp.route('/insights', methods=['GET'])
+def get_ai_insights():
+    config_id = request.args.get('config_id', type=int)
+    if not config_id:
+        latest = RuleConfig.query.order_by(RuleConfig.created_at.desc()).first()
+        if not latest:
+            return jsonify({"error": "Chưa có cấu hình khai phá nào"}), 400
+        config_id = latest.id
+        
+    insights = generate_mining_insight_summary(config_id, admin_id=current_user.id)
+    return jsonify(insights), 200
+
+@admin_mining_bp.route('/promotions', methods=['GET'])
+def get_ai_promotions():
+    config_id = request.args.get('config_id', type=int)
+    if not config_id:
+        latest = RuleConfig.query.order_by(RuleConfig.created_at.desc()).first()
+        if not latest:
+            return jsonify({"error": "Chưa có cấu hình khai phá nào"}), 400
+        config_id = latest.id
+        
+    promotions = suggest_promotions_from_rules(config_id, admin_id=current_user.id)
+    return jsonify({"promotions": promotions}), 200
+
+@admin_mining_bp.route('/qa', methods=['POST'])
+def post_business_qa():
+    data = request.get_json() or {}
+    question = data.get('question')
+    if not question:
+        return jsonify({"error": "Vui lòng cung cấp câu hỏi", "code": 400}), 400
+        
+    ans = answer_business_qa(question, admin_id=current_user.id)
+    return jsonify(ans), 200

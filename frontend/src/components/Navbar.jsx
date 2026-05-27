@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../App';
 import { useTheme } from './ThemeProvider';
-import { Brain, Compass, Sliders, Calendar, TrendingUp, User, LogOut, LayoutDashboard, Sun, Moon } from 'lucide-react';
+import { Brain, Compass, Sliders, Calendar, TrendingUp, User, LogOut, LayoutDashboard, Sun, Moon, Building } from 'lucide-react';
 
 export default function Navbar() {
   const { auth, logout } = useAuth();
@@ -21,6 +21,7 @@ export default function Navbar() {
 
   const navLinks = [
     { path: '/', label: 'Trang Chủ', icon: Compass },
+    { path: '/hotels', label: 'Khách Sạn', icon: Building },
     { path: '/combo-builder', label: 'Tìm Combo', icon: Sliders },
     { path: '/quiz', label: 'Quiz Du Lịch', icon: Brain },
     { path: '/insights', label: 'Khám Phá', icon: TrendingUp },

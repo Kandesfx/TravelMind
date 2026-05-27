@@ -3,12 +3,13 @@ import axios from 'axios';
 import GlassCard from '../../components/GlassCard';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, ArcElement, Title, Tooltip, Legend } from 'chart.js';
 import { Line, Doughnut, Bar } from 'react-chartjs-2';
-import { Compass, Users, Percent, ShieldCheck } from 'lucide-react';
+import { Compass, Users, Percent, ShieldCheck, Hotel, BedDouble } from 'lucide-react';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, ArcElement, Title, Tooltip, Legend);
 
 export default function DashboardKPI() {
   const [data, setData] = useState(null);
+  const [occupancy, setOccupancy] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,6 +24,8 @@ export default function DashboardKPI() {
       }
     };
     fetchDashboard();
+    // Fetch hotel occupancy
+    axios.get('/api/admin/inventory/occupancy').then(r => setOccupancy(r.data.occupancy || [])).catch(() => {});
   }, []);
 
   if (loading) {
@@ -110,6 +113,36 @@ export default function DashboardKPI() {
           </GlassCard>
         ))}
       </div>
+
+      {/* Hotel Occupancy Quick View */}
+      {occupancy.length > 0 && (
+        <div style={{ display: 'grid', gridTemplateColumns: `repeat(${occupancy.length}, 1fr)`, gap: '1rem' }}>
+          {occupancy.map(o => (
+            <GlassCard key={o.hotel_id} hover={false} style={{ padding: '1.25rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                <Hotel size={16} color="var(--primary)" />
+                <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-primary)' }}>{o.hotel_name}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                <div>
+                  <div style={{ fontSize: '1.8rem', fontWeight: 800, color: o.occupancy_rate > 70 ? 'var(--success)' : o.occupancy_rate > 40 ? 'var(--warning)' : 'var(--text-primary)' }}>
+                    {o.occupancy_rate}%
+                  </div>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Công suất phòng</div>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)' }}>{o.active_bookings}/{o.total_inventory}</div>
+                  <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>{o.room_types_count} loại phòng</div>
+                </div>
+              </div>
+              {/* Occupancy bar */}
+              <div style={{ marginTop: '0.5rem', height: '4px', background: 'var(--input-bg)', borderRadius: '2px', overflow: 'hidden' }}>
+                <div style={{ width: `${o.occupancy_rate}%`, height: '100%', background: o.occupancy_rate > 70 ? 'var(--success)' : o.occupancy_rate > 40 ? 'var(--warning)' : 'var(--primary)', borderRadius: '2px', transition: 'width 0.5s ease' }} />
+              </div>
+            </GlassCard>
+          ))}
+        </div>
+      )}
 
       {/* Charts Grid */}
       <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '2rem' }}>

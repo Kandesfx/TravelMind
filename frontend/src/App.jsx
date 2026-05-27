@@ -14,6 +14,8 @@ export const useAuth = () => useContext(AuthContext);
 // Import public pages
 import LandingPage from './pages/public/LandingPage';
 import HotelExplorer from './pages/public/HotelExplorer';
+import HotelListPage from './pages/public/HotelListPage';
+import HotelDetailPage from './pages/public/HotelDetailPage';
 import ComboBuilder from './pages/public/ComboBuilder';
 import TravelerQuiz from './pages/public/TravelerQuiz';
 import BookingFlow from './pages/public/BookingFlow';
@@ -40,6 +42,9 @@ import TemplateManager from './pages/admin/TemplateManager';
 import ContentHistory from './pages/admin/ContentHistory';
 import ApiKeySettings from './pages/admin/ApiKeySettings';
 import AiUsageDashboard from './pages/admin/AiUsageDashboard';
+import HotelManager from './pages/admin/HotelManager';
+import BookingManager from './pages/admin/BookingManager';
+import AIInsights from './pages/admin/AIInsights';
 
 // Import auth pages
 import LoginPage from './pages/auth/LoginPage';
@@ -109,7 +114,9 @@ export default function App() {
         <Routes>
           {/* Public Pages with Navbar Layout */}
           <Route path="/" element={<Layout><LandingPage /></Layout>} />
-          <Route path="/hotels" element={<Layout><HotelExplorer /></Layout>} />
+          <Route path="/hotels" element={<Layout><HotelListPage /></Layout>} />
+          <Route path="/hotels/:id" element={<Layout><HotelDetailPage /></Layout>} />
+          <Route path="/explorer" element={<Layout><HotelExplorer /></Layout>} />
           <Route path="/combo-builder" element={<Layout><ComboBuilder /></Layout>} />
           <Route path="/quiz" element={<Layout><TravelerQuiz /></Layout>} />
           <Route path="/booking" element={<RequireAuth><Layout><BookingFlow /></Layout></RequireAuth>} />
@@ -210,6 +217,21 @@ export default function App() {
           <Route path="/admin/settings/ai-usage" element={
             <RequireAuth role="admin">
               <AdminLayout><AiUsageDashboard /></AdminLayout>
+            </RequireAuth>
+          } />
+          <Route path="/admin/hotels" element={
+            <RequireAuth role="admin">
+              <AdminLayout><HotelManager /></AdminLayout>
+            </RequireAuth>
+          } />
+          <Route path="/admin/bookings" element={
+            <RequireAuth role="admin">
+              <AdminLayout><BookingManager /></AdminLayout>
+            </RequireAuth>
+          } />
+          <Route path="/admin/ai-insights" element={
+            <RequireAuth role="admin">
+              <AdminLayout><AIInsights /></AdminLayout>
             </RequireAuth>
           } />
 
