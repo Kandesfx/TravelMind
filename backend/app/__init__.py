@@ -1,0 +1,64 @@
+from flask import Flask, jsonify
+from app.config import Config
+from app.extensions import db, cors, login_manager
+
+def create_app(config_class=Config):
+    app = Flask(__name__)
+    app.config.from_object(config_class)
+
+    # Initialize extensions
+    db.init_app(app)
+    
+    # Configure CORS to allow session cookies
+    cors.init_app(app, supports_credentials=True, resources={
+        r"/api/*": {"origins": ["http://localhost:5173", "http://127.0.0.1:5173"]}
+    })
+    
+    login_manager.init_app(app)
+
+    # Register routes blueprints
+    from app.routes.auth import auth_bp
+    from app.routes.public import public_bp
+    from app.routes.admin_data import admin_data_bp
+    from app.routes.admin_mining import admin_mining_bp
+    from app.routes.admin_business import admin_business_bp
+    from app.routes.admin_ai import admin_ai_bp
+    from app.routes.admin_settings import admin_settings_bp
+
+    app.register_blueprint(auth_bp, url_prefix='/api/auth')
+    app.register_blueprint(public_bp, url_prefix='/api/public')
+    app.register_blueprint(admin_data_bp, url_prefix='/api/admin/data')
+    app.register_blueprint(admin_mining_bp, url_prefix='/api/admin/rules')
+    app.register_blueprint(admin_business_bp, url_prefix='/api/admin/business')
+    app.register_blueprint(admin_ai_bp, url_prefix='/api/admin/ai')
+    app.register_blueprint(admin_settings_bp, url_prefix='/api/admin/settings')
+
+    # Register user loader
+    from app.models.user import User
+    
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
+
+    # Global error handlers
+    @app.errorhandler(401)
+    def unauthorized(e):
+        return jsonify({"error": "Chưa đăng nhập", "code": 401}), 401
+
+    @app.errorhandler(403)
+    def forbidden(e):
+        return jsonify({"error": "Không có quyền truy cập", "code": 403}), 403
+
+    @app.errorhandler(404)
+    def not_found(e):
+        return jsonify({"error": "Không tìm thấy tài nguyên", "code": 404}), 404
+
+    @app.errorhandler(500)
+    def server_error(e):
+        return jsonify({"error": f"Lỗi máy chủ nội bộ: {str(e)}", "code": 500}), 500
+
+    # Ensure tables are created
+    with app.app_context():
+        db.create_all()
+
+    return app
