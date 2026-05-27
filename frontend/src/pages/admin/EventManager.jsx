@@ -109,12 +109,12 @@ export default function EventManager() {
       </div>
 
       {loading ? (
-        <div style={{ color: 'white', textAlign: 'center', padding: '3rem' }}>Đang tải danh sách sự kiện...</div>
+        <div style={{ color: 'var(--text-primary)', textAlign: 'center', padding: '3rem' }}>Đang tải danh sách sự kiện...</div>
       ) : (
         <GlassCard style={{ padding: 0, overflow: 'hidden' }} hover={false}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
             <thead>
-              <tr style={{ background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid rgba(255,255,255,0.05)', color: 'white' }}>
+              <tr style={{ background: 'var(--input-bg)', borderBottom: '1px solid var(--section-border)', color: 'var(--text-primary)' }}>
                 <th style={{ padding: '1rem' }}>Tên Sự Kiện</th>
                 <th style={{ padding: '1rem' }}>Thời Gian Chạy</th>
                 <th style={{ padding: '1rem' }}>Đối Tượng Phục Vụ</th>
@@ -125,7 +125,7 @@ export default function EventManager() {
             <tbody>
               {events.map((ev) => (
                 <tr key={ev.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)', color: 'var(--text-secondary)' }}>
-                  <td style={{ padding: '1rem', fontWeight: 600, color: 'white' }}>{ev.name}</td>
+                  <td style={{ padding: '1rem', fontWeight: 600, color: 'var(--text-primary)' }}>{ev.name}</td>
                   <td style={{ padding: '1rem' }}>{ev.start_date} ~ {ev.end_date}</td>
                   <td style={{ padding: '1rem' }}>
                     {Array.isArray(ev.target_audience) ? ev.target_audience.join(', ') : 'Family'}
@@ -164,7 +164,7 @@ export default function EventManager() {
           zIndex: 1000
         }} className="animate-fade-in">
           <GlassCard style={{ width: '100%', maxWidth: '500px', padding: '2rem' }} hover={false}>
-            <h3 style={{ fontSize: '1.25rem', color: 'white', marginBottom: '1.25rem' }}>
+            <h3 style={{ fontSize: '1.25rem', color: 'var(--text-primary)', marginBottom: '1.25rem' }}>
               {editingEvent ? 'Chỉnh Sửa Sự Kiện' : 'Tạo Sự Kiện Tiếp Thị Mới'}
             </h3>
 
@@ -200,7 +200,7 @@ export default function EventManager() {
                 <input type="text" value={targetAudience} onChange={(e) => setTargetAudience(e.target.value)} className="glass-input" placeholder="Ví dụ: Family, Couple, Solo..." required />
               </div>
 
-              <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'white', fontSize: '0.85rem', cursor: 'pointer', marginTop: '0.25rem' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-primary)', fontSize: '0.85rem', cursor: 'pointer', marginTop: '0.25rem' }}>
                 <input type="checkbox" checked={isActive} onChange={(e) => setIsActive(e.target.checked)} />
                 <span>Kích hoạt chạy sự kiện</span>
               </label>

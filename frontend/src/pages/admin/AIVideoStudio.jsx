@@ -112,15 +112,15 @@ export default function AIVideoStudio() {
         {/* Settings & Timeline column */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           <GlassCard style={{ padding: '1.5rem' }} hover={false}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.75rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', borderBottom: '1px solid var(--section-border)', paddingBottom: '0.75rem' }}>
               <Film size={18} color="var(--primary)" />
-              <h3 style={{ fontSize: '1.1rem', color: 'white' }}>Cấu Hình Trình Dựng Video</h3>
+              <h3 style={{ fontSize: '1.1rem', color: 'var(--text-primary)' }}>Cấu Hình Trình Dựng Video</h3>
             </div>
 
             <form onSubmit={handleCreateVideo} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               {/* Select image library */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                <label style={{ fontSize: '0.8rem', color: 'white', fontWeight: 600 }}>
+                <label style={{ fontSize: '0.8rem', color: 'var(--text-primary)', fontWeight: 600 }}>
                   Chọn ảnh từ Thư Viện ({selectedImageIds.length} đã chọn)
                 </label>
                 <div style={{
@@ -182,7 +182,7 @@ export default function AIVideoStudio() {
               {/* Subtitle / Slides text */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <label style={{ fontSize: '0.8rem', color: 'white', fontWeight: 600 }}>Nội dung phân cảnh (Subtitles)</label>
+                  <label style={{ fontSize: '0.8rem', color: 'var(--text-primary)', fontWeight: 600 }}>Nội dung phân cảnh (Subtitles)</label>
                   <button type="button" onClick={handleAddSlide} className="glass-button glass-button-secondary" style={{ padding: '0.2rem 0.5rem', borderRadius: '4px', fontSize: '0.7rem' }}>
                     <Plus size={12} /> Add slide
                   </button>
@@ -240,7 +240,7 @@ export default function AIVideoStudio() {
         {/* Right preview column */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           {loading && (
-            <div style={{ color: 'white', textAlign: 'center', padding: '6rem', background: 'rgba(255,255,255,0.02)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.06)' }}>
+            <div style={{ color: 'var(--text-primary)', textAlign: 'center', padding: '6rem', background: 'var(--input-bg)', borderRadius: '16px', border: '1px solid var(--badge-border)' }}>
               <Sparkles size={32} color="var(--primary)" className="animate-pulse" style={{ margin: '0 auto 1rem auto' }} />
               <h3>Đang xử lý Video và Phân cảnh...</h3>
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', marginTop: '0.5rem' }}>
@@ -250,7 +250,7 @@ export default function AIVideoStudio() {
           )}
 
           {!loading && !videoResult && (
-            <div style={{ color: 'var(--text-secondary)', textAlign: 'center', padding: '6rem', background: 'rgba(255,255,255,0.02)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.06)' }}>
+            <div style={{ color: 'var(--text-secondary)', textAlign: 'center', padding: '6rem', background: 'var(--input-bg)', borderRadius: '16px', border: '1px solid var(--badge-border)' }}>
               <Film size={32} style={{ margin: '0 auto 1rem auto', opacity: 0.5 }} />
               <h3>Màn Hình Preview Video</h3>
               <p style={{ fontSize: '0.8rem', marginTop: '0.5rem' }}>Chọn ảnh, soạn phụ đề bên trái và bấm dựng. Kết quả MP4 sẽ phát tại đây.</p>
@@ -260,7 +260,7 @@ export default function AIVideoStudio() {
           {!loading && videoResult && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }} className="animate-fade-in">
               <GlassCard style={{ padding: '1.5rem' }} hover={false}>
-                <h4 style={{ color: 'white', fontSize: '1rem', marginBottom: '1rem' }}>Sản Phẩm Video Hoàn Thiện</h4>
+                <h4 style={{ color: 'var(--text-primary)', fontSize: '1rem', marginBottom: '1rem' }}>Sản Phẩm Video Hoàn Thiện</h4>
                 
                 <div style={{
                   width: '100%',

@@ -52,7 +52,7 @@ export default function RegisterPage() {
       minHeight: '100vh',
       padding: '1rem'
     }} className="animate-fade-in">
-      <GlassCard style={{ width: '100%', maxWidth: '440px', padding: '2rem' }} hover={false}>
+      <GlassCard style={{ width: '100%', maxWidth: '550px', padding: '2rem' }} hover={false}>
         <div style={{ textAlign: 'center', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.4rem', alignItems: 'center' }}>
           <div style={{
             background: 'linear-gradient(135deg, #6366f1, #d946ef)',
@@ -65,7 +65,7 @@ export default function RegisterPage() {
           }}>
             <Sparkles size={22} color="white" />
           </div>
-          <h2 style={{ fontSize: '1.6rem', color: 'white', fontWeight: 800 }}>Đăng Ký Tài Khoản</h2>
+          <h2 style={{ fontSize: '1.6rem', color: 'var(--text-primary)', fontWeight: 800 }}>Đăng Ký Tài Khoản</h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>Tạo tài khoản để đặt phòng và lưu lịch sử</p>
         </div>
 
@@ -84,29 +84,29 @@ export default function RegisterPage() {
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
-              <label style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)' }}>Tên đăng nhập</label>
+              <label style={{ fontSize: '0.75rem', color: 'var(--label-color)' }}>Tên đăng nhập</label>
               <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} className="glass-input" required />
             </div>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
-              <label style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)' }}>Họ và tên</label>
+              <label style={{ fontSize: '0.75rem', color: 'var(--label-color)' }}>Họ và tên</label>
               <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} className="glass-input" required />
             </div>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
-            <label style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)' }}>Địa chỉ Email</label>
+            <label style={{ fontSize: '0.75rem', color: 'var(--label-color)' }}>Địa chỉ Email</label>
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="glass-input" required />
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
-              <label style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)' }}>Mật khẩu</label>
+              <label style={{ fontSize: '0.75rem', color: 'var(--label-color)' }}>Mật khẩu</label>
               <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="glass-input" required />
             </div>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
-              <label style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)' }}>Nhập lại mật khẩu</label>
+              <label style={{ fontSize: '0.75rem', color: 'var(--label-color)' }}>Nhập lại mật khẩu</label>
               <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="glass-input" required />
             </div>
           </div>

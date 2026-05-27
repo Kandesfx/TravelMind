@@ -35,7 +35,7 @@ export default function LandingPage() {
   };
 
   if (loading) {
-    return <div style={{ color: 'white', textAlign: 'center', marginTop: '5rem' }}>Đang tải trang chủ...</div>;
+    return <div style={{ color: 'var(--text-primary)', textAlign: 'center', marginTop: '5rem' }}>Đang tải trang chủ...</div>;
   }
 
   const banner = data.banners[0] || {
@@ -122,7 +122,7 @@ export default function LandingPage() {
           
           <form onSubmit={handleSearch} style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              <label style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>Loại khách sạn mong muốn</label>
+              <label style={{ fontSize: '0.8rem', color: 'var(--label-color)' }}>Loại khách sạn mong muốn</label>
               <select 
                 value={hotelType} 
                 onChange={(e) => setHotelType(e.target.value)} 
@@ -136,7 +136,7 @@ export default function LandingPage() {
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                <label style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>Bạn đi cùng ai?</label>
+                <label style={{ fontSize: '0.8rem', color: 'var(--label-color)' }}>Bạn đi cùng ai?</label>
                 <select value={group} onChange={(e) => setGroup(e.target.value)} className="glass-input">
                   <option value="Solo">Đi một mình</option>
                   <option value="Couple">Cặp đôi</option>
@@ -146,7 +146,7 @@ export default function LandingPage() {
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                <label style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>Mùa dự kiến</label>
+                <label style={{ fontSize: '0.8rem', color: 'var(--label-color)' }}>Mùa dự kiến</label>
                 <select value={season} onChange={(e) => setSeason(e.target.value)} className="glass-input">
                   <option value="Spring">Mùa Xuân (Th3 - Th5)</option>
                   <option value="Summer">Mùa Hạ (Th6 - Th8)</option>
@@ -182,15 +182,15 @@ export default function LandingPage() {
               width: '40px',
               height: '40px',
               borderRadius: '50%',
-              background: 'rgba(255, 255, 255, 0.03)',
-              border: '1px solid rgba(255, 255, 255, 0.05)',
+              background: 'var(--icon-circle-bg)',
+              border: '1px solid var(--icon-circle-border)',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center'
             }}>
               <item.icon size={18} color="var(--primary)" />
             </div>
-            <h4 style={{ fontSize: '1.8rem', fontWeight: 800, color: 'white' }}>{item.value}</h4>
+            <h4 style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--text-primary)' }}>{item.value}</h4>
             <div style={{ fontSize: '0.9rem', fontWeight: 600 }}>{item.label}</div>
             <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{item.desc}</div>
           </GlassCard>
@@ -212,18 +212,18 @@ export default function LandingPage() {
             <GlassCard key={idx} style={{ padding: '2rem', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', position: 'relative' }} hover={false}>
               <div style={{
                 position: 'absolute', top: '-14px', left: '50%', transform: 'translateX(-50%)',
-                background: item.color, color: 'white', width: '28px', height: '28px', borderRadius: '50%',
+                background: item.color, color: 'var(--text-primary)', width: '28px', height: '28px', borderRadius: '50%',
                 display: 'flex', justifyContent: 'center', alignItems: 'center',
                 fontSize: '0.75rem', fontWeight: 800
               }}>{item.step}</div>
               <div style={{
                 width: '50px', height: '50px', borderRadius: '14px',
-                background: `rgba(255,255,255,0.03)`, border: '1px solid rgba(255,255,255,0.06)',
+                background: 'var(--icon-circle-bg)', border: '1px solid var(--icon-circle-border)',
                 display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '0.5rem'
               }}>
                 <item.icon size={24} color={item.color} />
               </div>
-              <h4 style={{ color: 'white', fontSize: '1.1rem', fontWeight: 700 }}>{item.title}</h4>
+              <h4 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', fontWeight: 700 }}>{item.title}</h4>
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: 1.6 }}>{item.desc}</p>
             </GlassCard>
           ))}
@@ -264,7 +264,7 @@ export default function LandingPage() {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    color: 'white',
+                    color: 'var(--text-primary)',
                     fontSize: '0.9rem',
                     fontWeight: 'bold',
                     background: `url(${combo.image_url}) center/cover no-repeat`
@@ -282,7 +282,7 @@ export default function LandingPage() {
                     fontSize: '0.75rem',
                     fontWeight: 600,
                     color: badge.color,
-                    border: '1px solid rgba(255,255,255,0.05)'
+                    border: '1px solid var(--section-border)'
                   }}>
                     {badge.text}
                   </div>
@@ -290,7 +290,7 @@ export default function LandingPage() {
 
                 {/* Body details */}
                 <div style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', flex: 1 }}>
-                  <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'white' }}>{combo.name}</h4>
+                  <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-primary)' }}>{combo.name}</h4>
                   <p style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', lineClamp: 2, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', height: '38px' }}>
                     {combo.short_description}
                   </p>
@@ -300,8 +300,8 @@ export default function LandingPage() {
                     {combo.services.filter(s => friendlyService(s)).map((svc, i) => (
                       <span key={i} style={{
                         fontSize: '0.7rem',
-                        background: 'rgba(255,255,255,0.04)',
-                        border: '1px solid rgba(255,255,255,0.06)',
+                        background: 'var(--badge-bg)',
+                        border: '1px solid var(--badge-border)',
                         padding: '0.15rem 0.4rem',
                         borderRadius: '4px',
                         color: 'var(--text-secondary)'
@@ -315,11 +315,11 @@ export default function LandingPage() {
                     alignItems: 'center',
                     marginTop: 'auto',
                     paddingTop: '1rem',
-                    borderTop: '1px solid rgba(255,255,255,0.05)'
+                    borderTop: '1px solid var(--section-border)'
                   }}>
                     <div>
                       <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Mức giá từ</span>
-                      <div style={{ fontSize: '1.1rem', fontWeight: 850, color: 'white' }}>${combo.price_estimate?.toFixed(0)} <span style={{ fontSize: '0.8rem', fontWeight: 400, color: 'var(--text-secondary)' }}>/ đêm</span></div>
+                      <div style={{ fontSize: '1.1rem', fontWeight: 850, color: 'var(--text-primary)' }}>${combo.price_estimate?.toFixed(0)} <span style={{ fontSize: '0.8rem', fontWeight: 400, color: 'var(--text-secondary)' }}>/ đêm</span></div>
                     </div>
                     <Link to={`/combos/${combo.id}`} className="glass-button" style={{ padding: '0.4rem 0.9rem', fontSize: '0.8rem', borderRadius: '8px' }}>
                       Chi tiết
@@ -342,13 +342,13 @@ export default function LandingPage() {
           <GlassCard key={idx} style={{ padding: '1.75rem', display: 'flex', gap: '1rem', alignItems: 'flex-start' }} hover={false}>
             <div style={{
               width: '42px', height: '42px', borderRadius: '12px',
-              background: `rgba(255,255,255,0.03)`, border: '1px solid rgba(255,255,255,0.06)',
+              background: 'var(--icon-circle-bg)', border: '1px solid var(--icon-circle-border)',
               display: 'flex', justifyContent: 'center', alignItems: 'center', flexShrink: 0
             }}>
               <item.icon size={20} color={item.color} />
             </div>
             <div>
-              <h4 style={{ color: 'white', fontSize: '1rem', fontWeight: 700 }}>{item.title}</h4>
+              <h4 style={{ color: 'var(--text-primary)', fontSize: '1rem', fontWeight: 700 }}>{item.title}</h4>
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', lineHeight: 1.6, marginTop: '0.3rem' }}>{item.desc}</p>
             </div>
           </GlassCard>
@@ -383,7 +383,7 @@ export default function LandingPage() {
 
       {/* 8. Footer */}
       <footer style={{
-        borderTop: '1px solid rgba(255,255,255,0.05)',
+        borderTop: '1px solid var(--section-border)',
         padding: '2.5rem 0 1.5rem 0',
         display: 'flex',
         justifyContent: 'space-between',
@@ -392,19 +392,19 @@ export default function LandingPage() {
         fontSize: '0.8rem'
       }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-          <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.1rem', fontWeight: 800, color: 'white' }}>TravelMind</span>
+          <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-primary)' }}>TravelMind</span>
           <span>Hệ thống gợi ý combo du lịch thông minh</span>
           <span>© 2026 TravelMind — Đồ án môn học KPDL</span>
         </div>
         <div style={{ display: 'flex', gap: '2.5rem' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            <span style={{ color: 'white', fontWeight: 600, fontSize: '0.85rem' }}>Khám phá</span>
+            <span style={{ color: 'var(--text-primary)', fontWeight: 600, fontSize: '0.85rem' }}>Khám phá</span>
             <Link to="/combo-builder" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Tìm Combo</Link>
             <Link to="/quiz" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Quiz Du Lịch</Link>
             <Link to="/insights" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Xu Hướng</Link>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            <span style={{ color: 'white', fontWeight: 600, fontSize: '0.85rem' }}>Tài khoản</span>
+            <span style={{ color: 'var(--text-primary)', fontWeight: 600, fontSize: '0.85rem' }}>Tài khoản</span>
             <Link to="/login" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Đăng nhập</Link>
             <Link to="/register" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Đăng ký</Link>
           </div>

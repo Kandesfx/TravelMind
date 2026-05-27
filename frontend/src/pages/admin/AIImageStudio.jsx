@@ -124,9 +124,9 @@ export default function AIImageStudio() {
         {/* Left config form */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           <GlassCard style={{ padding: '1.5rem' }} hover={false}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.75rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', borderBottom: '1px solid var(--section-border)', paddingBottom: '0.75rem' }}>
               <Sparkles size={18} color="var(--primary)" />
-              <h3 style={{ fontSize: '1.1rem', color: 'white' }}>Cấu Hình Sinh Ảnh AI</h3>
+              <h3 style={{ fontSize: '1.1rem', color: 'var(--text-primary)' }}>Cấu Hình Sinh Ảnh AI</h3>
             </div>
 
             <form onSubmit={handleGenerate} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -185,9 +185,9 @@ export default function AIImageStudio() {
           {/* Text Overlay Controller */}
           {selectedImage && (
             <GlassCard style={{ padding: '1.5rem' }} hover={false}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.5rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem', borderBottom: '1px solid var(--section-border)', paddingBottom: '0.5rem' }}>
                 <Type size={16} color="var(--primary)" />
-                <h4 style={{ color: 'white', fontSize: '0.95rem' }}>Trình Xem Đè Nhãn Chữ (Preview Overlay)</h4>
+                <h4 style={{ color: 'var(--text-primary)', fontSize: '0.95rem' }}>Trình Xem Đè Nhãn Chữ (Preview Overlay)</h4>
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -222,7 +222,7 @@ export default function AIImageStudio() {
         {/* Right preview window */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           {loading && (
-            <div style={{ color: 'white', textAlign: 'center', padding: '6rem', background: 'rgba(255,255,255,0.02)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.06)' }}>
+            <div style={{ color: 'var(--text-primary)', textAlign: 'center', padding: '6rem', background: 'var(--input-bg)', borderRadius: '16px', border: '1px solid var(--badge-border)' }}>
               <Sparkles size={32} color="var(--primary)" className="animate-pulse" style={{ margin: '0 auto 1rem auto' }} />
               <h3>AI Đang Bắt Đầu Vẽ...</h3>
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', marginTop: '0.5rem' }}>Mô phỏng hoặc gọi API tạo hình ảnh nghệ thuật, quá trình sẽ mất vài giây.</p>
@@ -230,7 +230,7 @@ export default function AIImageStudio() {
           )}
 
           {!loading && !selectedImage && (
-            <div style={{ color: 'var(--text-secondary)', textAlign: 'center', padding: '6rem', background: 'rgba(255,255,255,0.02)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.06)' }}>
+            <div style={{ color: 'var(--text-secondary)', textAlign: 'center', padding: '6rem', background: 'var(--input-bg)', borderRadius: '16px', border: '1px solid var(--badge-border)' }}>
               <Image size={32} style={{ margin: '0 auto 1rem auto', opacity: 0.5 }} />
               <h3>Bảng Preview Trống</h3>
               <p style={{ fontSize: '0.8rem', marginTop: '0.5rem' }}>Bản vẽ ảnh AI sau khi hoàn thiện sẽ được hiển thị và thiết lập nhãn tại đây.</p>
@@ -240,7 +240,7 @@ export default function AIImageStudio() {
           {!loading && selectedImage && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }} className="animate-fade-in">
               <GlassCard style={{ padding: '1.5rem' }} hover={false}>
-                <h4 style={{ color: 'white', fontSize: '1rem', marginBottom: '1rem' }}>Hình Ảnh Gốc Đã Sinh</h4>
+                <h4 style={{ color: 'var(--text-primary)', fontSize: '1rem', marginBottom: '1rem' }}>Hình Ảnh Gốc Đã Sinh</h4>
                 
                 {/* Visual canvas for text overlay overlaying on selected image URL */}
                 <div style={{

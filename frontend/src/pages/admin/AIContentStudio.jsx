@@ -186,7 +186,7 @@ export default function AIContentStudio() {
         </div>
 
         {/* Tabs */}
-        <div style={{ display: 'flex', background: 'rgba(255,255,255,0.02)', padding: '0.25rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
+        <div style={{ display: 'flex', background: 'var(--input-bg)', padding: '0.25rem', borderRadius: '8px', border: '1px solid var(--section-border)' }}>
           <button
             onClick={() => setActiveTab('generate')}
             style={{
@@ -220,7 +220,7 @@ export default function AIContentStudio() {
           >
             <span>Hàng Đợi Duyệt</span>
             {draftQueue.length > 0 && (
-              <span style={{ background: 'var(--danger)', color: 'white', borderRadius: '10px', fontSize: '0.7rem', padding: '0.1rem 0.4rem' }}>
+              <span style={{ background: 'var(--danger)', color: 'var(--text-primary)', borderRadius: '10px', fontSize: '0.7rem', padding: '0.1rem 0.4rem' }}>
                 {draftQueue.length}
               </span>
             )}
@@ -232,9 +232,9 @@ export default function AIContentStudio() {
         <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 2fr', gap: '2rem' }}>
           {/* Form */}
           <GlassCard style={{ padding: '1.5rem', height: 'fit-content' }} hover={false}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.75rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', borderBottom: '1px solid var(--section-border)', paddingBottom: '0.75rem' }}>
               <Sparkles size={18} color="var(--primary)" />
-              <h3 style={{ fontSize: '1.1rem', color: 'white' }}>Cấu Hình AI Generator</h3>
+              <h3 style={{ fontSize: '1.1rem', color: 'var(--text-primary)' }}>Cấu Hình AI Generator</h3>
             </div>
 
             <form onSubmit={handleGenerate} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -307,7 +307,7 @@ export default function AIContentStudio() {
           {/* Results Comparison & Moderation */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {loading && (
-              <div style={{ color: 'white', textAlign: 'center', padding: '5rem', background: 'rgba(255,255,255,0.02)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.06)' }}>
+              <div style={{ color: 'var(--text-primary)', textAlign: 'center', padding: '5rem', background: 'var(--input-bg)', borderRadius: '16px', border: '1px solid var(--badge-border)' }}>
                 <Sparkles size={32} color="var(--primary)" className="animate-pulse" style={{ margin: '0 auto 1rem auto' }} />
                 <h3>Đang gửi yêu cầu và đợi phản hồi từ Google Gemini...</h3>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', marginTop: '0.5rem' }}>Thông thường mất khoảng 2-4 giây.</p>
@@ -315,7 +315,7 @@ export default function AIContentStudio() {
             )}
 
             {!loading && !generatedResult && (
-              <div style={{ color: 'var(--text-secondary)', textAlign: 'center', padding: '5rem', background: 'rgba(255,255,255,0.02)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.06)' }}>
+              <div style={{ color: 'var(--text-secondary)', textAlign: 'center', padding: '5rem', background: 'var(--input-bg)', borderRadius: '16px', border: '1px solid var(--badge-border)' }}>
                 <FileText size={32} style={{ margin: '0 auto 1rem auto', opacity: 0.5 }} />
                 <h3>Studio Sẵn Sàng</h3>
                 <p style={{ fontSize: '0.8rem', marginTop: '0.5rem' }}>Chọn đối tượng bên trái và bấm nút để bắt đầu sinh văn bản nháp.</p>
@@ -326,7 +326,7 @@ export default function AIContentStudio() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }} className="animate-fade-in">
                 {/* 3 Versions Tabs */}
                 <GlassCard hover={false} style={{ padding: '1.5rem' }}>
-                  <h4 style={{ color: 'white', fontSize: '1rem', marginBottom: '1rem' }}>Bản Phác Thảo AI Tạo Ra (3 Phiên Bản)</h4>
+                  <h4 style={{ color: 'var(--text-primary)', fontSize: '1rem', marginBottom: '1rem' }}>Bản Phác Thảo AI Tạo Ra (3 Phiên Bản)</h4>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', marginBottom: '1.5rem' }}>
                     {[1, 2, 3].map((num) => (
                       <button
@@ -356,7 +356,7 @@ export default function AIContentStudio() {
                   {/* Edit Panel */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', background: 'rgba(0,0,0,0.1)', padding: '1.25rem', borderRadius: '10px' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'white', fontSize: '0.85rem', fontWeight: 600 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-primary)', fontSize: '0.85rem', fontWeight: 600 }}>
                         <Edit3 size={14} />
                         <span>Biên Tập Lại Nội Dung Của Bản #{selectedVersion}</span>
                       </div>
@@ -413,13 +413,13 @@ export default function AIContentStudio() {
         <div style={{ display: 'grid', gridTemplateColumns: reviewingContent ? '1.2fr 2fr' : '1fr', gap: '2rem' }}>
           {/* List of drafts */}
           <GlassCard style={{ padding: '1.5rem', height: 'fit-content' }} hover={false}>
-            <h3 style={{ fontSize: '1.1rem', color: 'white', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <h3 style={{ fontSize: '1.1rem', color: 'var(--text-primary)', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <MessageSquare size={18} color="var(--primary)" />
               <span>Danh Sách Bản Nháp Đang Chờ Duyệt ({draftQueue.length})</span>
             </h3>
 
             {queueLoading ? (
-              <div style={{ color: 'white', textAlign: 'center', padding: '2rem' }}>Đang tải hàng đợi...</div>
+              <div style={{ color: 'var(--text-primary)', textAlign: 'center', padding: '2rem' }}>Đang tải hàng đợi...</div>
             ) : draftQueue.length === 0 ? (
               <div style={{ color: 'var(--text-secondary)', textAlign: 'center', padding: '2rem' }}>Hàng đợi duyệt trống.</div>
             ) : (
@@ -446,7 +446,7 @@ export default function AIContentStudio() {
                     }}
                   >
                     <div>
-                      <div style={{ fontSize: '0.85rem', color: 'white', fontWeight: 600 }}>
+                      <div style={{ fontSize: '0.85rem', color: 'var(--text-primary)', fontWeight: 600 }}>
                         {item.target_type === 'combo' ? `Combo ID: ${item.combo_id}` : `Event ID: ${item.event_id}`}
                       </div>
                       <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)', marginTop: '0.15rem' }}>
@@ -463,13 +463,13 @@ export default function AIContentStudio() {
           {/* Details & editing of the draft in queue */}
           {reviewingContent && (
             <GlassCard hover={false} style={{ padding: '1.5rem' }} className="animate-fade-in">
-              <h4 style={{ color: 'white', fontSize: '1rem', marginBottom: '1.25rem', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.5rem' }}>
+              <h4 style={{ color: 'var(--text-primary)', fontSize: '1rem', marginBottom: '1.25rem', borderBottom: '1px solid var(--section-border)', paddingBottom: '0.5rem' }}>
                 Chi Tiết Bản Nháp #{reviewingContent.id}
               </h4>
               
               <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', background: 'rgba(0,0,0,0.15)', padding: '0.75rem', borderRadius: '8px', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-                <div><strong style={{ color: 'white' }}>Prompt Used:</strong> {reviewingContent.prompt_used}</div>
-                <div><strong style={{ color: 'white' }}>Đối Tượng:</strong> {reviewingContent.target_type} (#{reviewingContent.target_id})</div>
+                <div><strong style={{ color: 'var(--text-primary)' }}>Prompt Used:</strong> {reviewingContent.prompt_used}</div>
+                <div><strong style={{ color: 'var(--text-primary)' }}>Đối Tượng:</strong> {reviewingContent.target_type} (#{reviewingContent.target_id})</div>
               </div>
 
               {/* 3 Version Tabs */}
@@ -496,7 +496,7 @@ export default function AIContentStudio() {
 
               {/* Edit textarea */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', background: 'rgba(0,0,0,0.1)', padding: '1.25rem', borderRadius: '10px' }}>
-                <div style={{ fontSize: '0.85rem', color: 'white', fontWeight: 600 }}>Biên Tập Bản Nháp #{reviewingContent.id} (Version {selectedVersion})</div>
+                <div style={{ fontSize: '0.85rem', color: 'var(--text-primary)', fontWeight: 600 }}>Biên Tập Bản Nháp #{reviewingContent.id} (Version {selectedVersion})</div>
                 <textarea
                   value={editedText}
                   onChange={(e) => setEditedText(e.target.value)}

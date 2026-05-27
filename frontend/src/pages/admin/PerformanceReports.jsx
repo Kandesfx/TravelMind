@@ -27,7 +27,7 @@ export default function PerformanceReports() {
   }, []);
 
   if (loading) {
-    return <div style={{ color: 'white', textAlign: 'center', marginTop: '5rem' }}>Đang tải báo cáo hiệu suất...</div>;
+    return <div style={{ color: 'var(--text-primary)', textAlign: 'center', marginTop: '5rem' }}>Đang tải báo cáo hiệu suất...</div>;
   }
 
   // Summary indicators
@@ -50,7 +50,7 @@ export default function PerformanceReports() {
           </div>
           <div>
             <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Doanh Thu Combo Tích Lũy</div>
-            <h3 style={{ fontSize: '1.4rem', color: 'white', fontWeight: 800 }}>${totalRevenue.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2})}</h3>
+            <h3 style={{ fontSize: '1.4rem', color: 'var(--text-primary)', fontWeight: 800 }}>${totalRevenue.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2})}</h3>
           </div>
         </GlassCard>
 
@@ -60,7 +60,7 @@ export default function PerformanceReports() {
           </div>
           <div>
             <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Tổng Combo Đã Đặt</div>
-            <h3 style={{ fontSize: '1.4rem', color: 'white', fontWeight: 800 }}>{totalBookings} lượt đặt</h3>
+            <h3 style={{ fontSize: '1.4rem', color: 'var(--text-primary)', fontWeight: 800 }}>{totalBookings} lượt đặt</h3>
           </div>
         </GlassCard>
 
@@ -70,21 +70,21 @@ export default function PerformanceReports() {
           </div>
           <div>
             <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Tỷ Lệ Chuyển Đổi TB</div>
-            <h3 style={{ fontSize: '1.4rem', color: 'white', fontWeight: 800 }}>{avgConversion.toFixed(1)}%</h3>
+            <h3 style={{ fontSize: '1.4rem', color: 'var(--text-primary)', fontWeight: 800 }}>{avgConversion.toFixed(1)}%</h3>
           </div>
         </GlassCard>
       </div>
 
       {/* Table 1: Combo Performance */}
       <GlassCard style={{ padding: '1.5rem' }} hover={false}>
-        <h3 style={{ fontSize: '1.15rem', color: 'white', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+        <h3 style={{ fontSize: '1.15rem', color: 'var(--text-primary)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
           <BarChart3 size={18} color="var(--primary)" />
           <span>Hiệu quả chuyển đổi Combo đề xuất</span>
         </h3>
         
         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
           <thead>
-            <tr style={{ background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid rgba(255,255,255,0.05)', color: 'white' }}>
+            <tr style={{ background: 'var(--input-bg)', borderBottom: '1px solid var(--section-border)', color: 'var(--text-primary)' }}>
               <th style={{ padding: '0.75rem 1rem' }}>Tên Combo</th>
               <th style={{ padding: '0.75rem 1rem', textAlign: 'center' }}>Số Lượt Xem (Views)</th>
               <th style={{ padding: '0.75rem 1rem', textAlign: 'center' }}>Số Lượt Đặt (Bookings)</th>
@@ -95,11 +95,11 @@ export default function PerformanceReports() {
           <tbody>
             {comboReports.map((c) => (
               <tr key={c.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)', color: 'var(--text-secondary)' }}>
-                <td style={{ padding: '1rem', fontWeight: 600, color: 'white' }}>{c.name}</td>
+                <td style={{ padding: '1rem', fontWeight: 600, color: 'var(--text-primary)' }}>{c.name}</td>
                 <td style={{ padding: '1rem', textAlign: 'center' }}>{c.views.toLocaleString()}</td>
                 <td style={{ padding: '1rem', textAlign: 'center' }}>{c.bookings.toLocaleString()}</td>
-                <td style={{ padding: '1rem', textAlign: 'center', fontWeight: 'bold', color: 'white' }}>{c.conversion_rate}%</td>
-                <td style={{ padding: '1rem', textAlign: 'right', fontWeight: 'bold', color: 'white' }}>${c.revenue.toLocaleString()}</td>
+                <td style={{ padding: '1rem', textAlign: 'center', fontWeight: 'bold', color: 'var(--text-primary)' }}>{c.conversion_rate}%</td>
+                <td style={{ padding: '1rem', textAlign: 'right', fontWeight: 'bold', color: 'var(--text-primary)' }}>${c.revenue.toLocaleString()}</td>
               </tr>
             ))}
           </tbody>
@@ -108,14 +108,14 @@ export default function PerformanceReports() {
 
       {/* Table 2: Voucher Performance */}
       <GlassCard style={{ padding: '1.5rem' }} hover={false}>
-        <h3 style={{ fontSize: '1.15rem', color: 'white', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+        <h3 style={{ fontSize: '1.15rem', color: 'var(--text-primary)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
           <BarChart3 size={18} color="var(--success)" />
           <span>Báo cáo sử dụng Voucher sự kiện</span>
         </h3>
         
         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
           <thead>
-            <tr style={{ background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid rgba(255,255,255,0.05)', color: 'white' }}>
+            <tr style={{ background: 'var(--input-bg)', borderBottom: '1px solid var(--section-border)', color: 'var(--text-primary)' }}>
               <th style={{ padding: '0.75rem 1rem' }}>Mã Voucher</th>
               <th style={{ padding: '0.75rem 1rem', textAlign: 'center' }}>Tổng Phát Hành</th>
               <th style={{ padding: '0.75rem 1rem', textAlign: 'center' }}>Đã Sử Dụng</th>
@@ -126,10 +126,10 @@ export default function PerformanceReports() {
           <tbody>
             {voucherReports.map((v) => (
               <tr key={v.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)', color: 'var(--text-secondary)' }}>
-                <td style={{ padding: '1rem', fontWeight: 700, color: 'white' }}>{v.code}</td>
+                <td style={{ padding: '1rem', fontWeight: 700, color: 'var(--text-primary)' }}>{v.code}</td>
                 <td style={{ padding: '1rem', textAlign: 'center' }}>{v.total_quantity}</td>
                 <td style={{ padding: '1rem', textAlign: 'center' }}>{v.used_count}</td>
-                <td style={{ padding: '1rem', textAlign: 'center', fontWeight: 'bold', color: 'white' }}>{v.use_percentage}%</td>
+                <td style={{ padding: '1rem', textAlign: 'center', fontWeight: 'bold', color: 'var(--text-primary)' }}>{v.use_percentage}%</td>
                 <td style={{ padding: '1rem', textAlign: 'right', fontWeight: 'bold', color: 'var(--success)' }}>-${v.revenue_saved?.toLocaleString()}</td>
               </tr>
             ))}

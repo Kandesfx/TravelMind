@@ -30,7 +30,7 @@ export default function CustomerAnalysis() {
   }, []);
 
   if (loading) {
-    return <div style={{ color: 'white', textAlign: 'center', marginTop: '5rem' }}>Đang tải báo cáo phân tích khách hàng...</div>;
+    return <div style={{ color: 'var(--text-primary)', textAlign: 'center', marginTop: '5rem' }}>Đang tải báo cáo phân tích khách hàng...</div>;
   }
 
   // Chart data for Segment Distribution (Doughnut)
@@ -145,7 +145,7 @@ export default function CustomerAnalysis() {
                 <Icon size={20} color={color} />
               </div>
               <div>
-                <div style={{ fontSize: '0.8rem', color: 'white', fontWeight: 600, height: '2.4rem', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-primary)', fontWeight: 600, height: '2.4rem', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   {seg.name.split(' (')[0]}
                 </div>
                 <div style={{ fontSize: '1.2rem', fontWeight: 800, color: color, marginTop: '0.25rem' }}>
@@ -166,8 +166,8 @@ export default function CustomerAnalysis() {
           <GlassCard style={{ padding: '2rem' }} hover={false}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
               <div style={{
-                background: 'rgba(255,255,255,0.02)',
-                border: '1px solid rgba(255,255,255,0.05)',
+                background: 'var(--input-bg)',
+                border: '1px solid var(--section-border)',
                 width: '48px',
                 height: '48px',
                 borderRadius: '12px',
@@ -178,58 +178,58 @@ export default function CustomerAnalysis() {
                 {React.createElement(getPersonaIcon(selectedSegment.type), { size: 24, color: getPersonaColor(selectedSegment.type) })}
               </div>
               <div>
-                <h3 style={{ fontSize: '1.4rem', color: 'white', fontWeight: 700 }}>{selectedSegment.name}</h3>
+                <h3 style={{ fontSize: '1.4rem', color: 'var(--text-primary)', fontWeight: 700 }}>{selectedSegment.name}</h3>
                 <span style={{ fontSize: '0.8rem', color: getPersonaColor(selectedSegment.type), fontWeight: 600 }}>Chi tiết phân khúc du khách</span>
               </div>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginTop: '1.5rem' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <div style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.5rem' }}>
+                <div style={{ borderBottom: '1px solid var(--section-border)', paddingBottom: '0.5rem' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Loại Khách Sạn Ưu Thích</div>
-                  <div style={{ fontSize: '1.1rem', color: 'white', fontWeight: 600, marginTop: '0.25rem' }}>
+                  <div style={{ fontSize: '1.1rem', color: 'var(--text-primary)', fontWeight: 600, marginTop: '0.25rem' }}>
                     {selectedSegment.characteristics.hotel_preference}
                   </div>
                 </div>
-                <div style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.5rem' }}>
+                <div style={{ borderBottom: '1px solid var(--section-border)', paddingBottom: '0.5rem' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Mùa Du Lịch Ưu Thích</div>
-                  <div style={{ fontSize: '1.1rem', color: 'white', fontWeight: 600, marginTop: '0.25rem' }}>
+                  <div style={{ fontSize: '1.1rem', color: 'var(--text-primary)', fontWeight: 600, marginTop: '0.25rem' }}>
                     {selectedSegment.characteristics.season_preference}
                   </div>
                 </div>
-                <div style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.5rem' }}>
+                <div style={{ borderBottom: '1px solid var(--section-border)', paddingBottom: '0.5rem' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Gói Ăn Uống Ưu Thích</div>
-                  <div style={{ fontSize: '1.1rem', color: 'white', fontWeight: 600, marginTop: '0.25rem' }}>
+                  <div style={{ fontSize: '1.1rem', color: 'var(--text-primary)', fontWeight: 600, marginTop: '0.25rem' }}>
                     {selectedSegment.characteristics.meal_preference}
                   </div>
                 </div>
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <div style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.5rem' }}>
+                <div style={{ borderBottom: '1px solid var(--section-border)', paddingBottom: '0.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                     <Clock size={14} color="var(--text-secondary)" />
                     <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Lead Time Trung Bình</span>
                   </div>
-                  <div style={{ fontSize: '1.1rem', color: 'white', fontWeight: 600, marginTop: '0.25rem' }}>
+                  <div style={{ fontSize: '1.1rem', color: 'var(--text-primary)', fontWeight: 600, marginTop: '0.25rem' }}>
                     {selectedSegment.characteristics.lead_time_avg} ngày đặt trước
                   </div>
                 </div>
-                <div style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.5rem' }}>
+                <div style={{ borderBottom: '1px solid var(--section-border)', paddingBottom: '0.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                     <DollarSign size={14} color="var(--text-secondary)" />
                     <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Giá Phòng TB / Đêm (ADR)</span>
                   </div>
-                  <div style={{ fontSize: '1.1rem', color: 'white', fontWeight: 600, marginTop: '0.25rem' }}>
+                  <div style={{ fontSize: '1.1rem', color: 'var(--text-primary)', fontWeight: 600, marginTop: '0.25rem' }}>
                     ${selectedSegment.characteristics.avg_adr} / đêm
                   </div>
                 </div>
-                <div style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.5rem' }}>
+                <div style={{ borderBottom: '1px solid var(--section-border)', paddingBottom: '0.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                     <Users size={14} color="var(--text-secondary)" />
                     <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Tỷ Lệ Chiếm Lĩnh Phân Khúc</span>
                   </div>
-                  <div style={{ fontSize: '1.1rem', color: 'white', fontWeight: 600, marginTop: '0.25rem' }}>
+                  <div style={{ fontSize: '1.1rem', color: 'var(--text-primary)', fontWeight: 600, marginTop: '0.25rem' }}>
                     {selectedSegment.percentage}% tổng bookings ({selectedSegment.count.toLocaleString()} dòng)
                   </div>
                 </div>
@@ -238,7 +238,7 @@ export default function CustomerAnalysis() {
           </GlassCard>
 
           <GlassCard style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }} hover={false}>
-            <h4 style={{ color: 'white', fontSize: '1rem', fontWeight: 600 }}>Tỷ Lệ Đóng Góp Các Nhóm</h4>
+            <h4 style={{ color: 'var(--text-primary)', fontSize: '1rem', fontWeight: 600 }}>Tỷ Lệ Đóng Góp Các Nhóm</h4>
             <div style={{ height: '220px', display: 'flex', justifyContent: 'center' }}>
               <Doughnut data={distributionData} options={{ ...chartOptions, cutout: '70%', scales: {} }} />
             </div>
@@ -249,14 +249,14 @@ export default function CustomerAnalysis() {
       {/* Comparisons Charts */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
         <GlassCard style={{ padding: '1.5rem' }} hover={false}>
-          <h4 style={{ color: 'white', fontSize: '1.1rem', marginBottom: '1rem' }}>So Sánh Lead Time Đặt Phòng</h4>
+          <h4 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', marginBottom: '1rem' }}>So Sánh Lead Time Đặt Phòng</h4>
           <div style={{ height: '280px' }}>
             <Bar data={leadTimeData} options={chartOptions} />
           </div>
         </GlassCard>
 
         <GlassCard style={{ padding: '1.5rem' }} hover={false}>
-          <h4 style={{ color: 'white', fontSize: '1.1rem', marginBottom: '1rem' }}>So Sánh Đơn Giá Phòng Trung Bình (ADR)</h4>
+          <h4 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', marginBottom: '1rem' }}>So Sánh Đơn Giá Phòng Trung Bình (ADR)</h4>
           <div style={{ height: '280px' }}>
             <Bar data={adrData} options={chartOptions} />
           </div>

@@ -128,12 +128,12 @@ export default function PromotionManager() {
         </div>
 
         {loading ? (
-          <div style={{ color: 'white', textAlign: 'center', padding: '3rem' }}>Đang tải danh sách ưu đãi...</div>
+          <div style={{ color: 'var(--text-primary)', textAlign: 'center', padding: '3rem' }}>Đang tải danh sách ưu đãi...</div>
         ) : (
           <GlassCard style={{ padding: 0, overflow: 'hidden' }} hover={false}>
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
               <thead>
-                <tr style={{ background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid rgba(255,255,255,0.05)', color: 'white' }}>
+                <tr style={{ background: 'var(--input-bg)', borderBottom: '1px solid var(--section-border)', color: 'var(--text-primary)' }}>
                   <th style={{ padding: '1rem' }}>Tên Ưu Đãi</th>
                   <th style={{ padding: '1rem' }}>Mức Giảm</th>
                   <th style={{ padding: '1rem' }}>Áp Dụng</th>
@@ -144,7 +144,7 @@ export default function PromotionManager() {
               <tbody>
                 {promotions.map((promo) => (
                   <tr key={promo.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)', color: 'var(--text-secondary)' }}>
-                    <td style={{ padding: '1rem', fontWeight: 600, color: 'white' }}>{promo.name}</td>
+                    <td style={{ padding: '1rem', fontWeight: 600, color: 'var(--text-primary)' }}>{promo.name}</td>
                     <td style={{ padding: '1rem', fontWeight: 'bold' }}>
                       {promo.discount_type === 'percent' ? `${promo.discount_value}%` : `$${promo.discount_value}`}
                     </td>
@@ -173,7 +173,7 @@ export default function PromotionManager() {
         <GlassCard style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }} hover={false}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--warning)' }}>
             <AlertCircle size={20} />
-            <h3 style={{ fontSize: '1.15rem', color: 'white' }}>Cơ Hội Phát Hiện Tự Động</h3>
+            <h3 style={{ fontSize: '1.15rem', color: 'var(--text-primary)' }}>Cơ Hội Phát Hiện Tự Động</h3>
           </div>
           <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
             Mining Engine liên tục giám sát các luật kết hợp mới sinh ra và đề xuất các chiến dịch ưu đãi thích hợp để tối ưu doanh thu.
@@ -211,7 +211,7 @@ export default function PromotionManager() {
           zIndex: 1000
         }} className="animate-fade-in">
           <GlassCard style={{ width: '100%', maxWidth: '500px', padding: '2rem' }} hover={false}>
-            <h3 style={{ fontSize: '1.25rem', color: 'white', marginBottom: '1.25rem' }}>
+            <h3 style={{ fontSize: '1.25rem', color: 'var(--text-primary)', marginBottom: '1.25rem' }}>
               {editingPromo ? 'Chỉnh Sửa Chương Trình' : 'Tạo Chương Trình Ưu Đãi Mới'}
             </h3>
 
@@ -261,7 +261,7 @@ export default function PromotionManager() {
                 <input type="text" value={sourceInsight} onChange={(e) => setSourceInsight(e.target.value)} className="glass-input" />
               </div>
 
-              <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'white', fontSize: '0.85rem', cursor: 'pointer', marginTop: '0.25rem' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-primary)', fontSize: '0.85rem', cursor: 'pointer', marginTop: '0.25rem' }}>
                 <input type="checkbox" checked={isActive} onChange={(e) => setIsActive(e.target.checked)} />
                 <span>Đang hoạt động (Kích hoạt)</span>
               </label>

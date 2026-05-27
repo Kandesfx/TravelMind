@@ -69,8 +69,8 @@ export default function Sidebar() {
   return (
     <div style={{
       width: '260px',
-      background: 'rgba(9, 13, 22, 0.95)',
-      borderRight: '1px solid rgba(255, 255, 255, 0.05)',
+      background: 'var(--navbar-bg)',
+      borderRight: '1px solid var(--navbar-border)',
       backdropFilter: 'blur(20px)',
       display: 'flex',
       flexDirection: 'column',
@@ -81,7 +81,7 @@ export default function Sidebar() {
       {/* Brand area */}
       <div style={{
         padding: '1.5rem',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+        borderBottom: '1px solid var(--section-border)',
         display: 'flex',
         alignItems: 'center',
         gap: '0.5rem'
@@ -114,7 +114,7 @@ export default function Sidebar() {
             <div style={{
               fontSize: '0.7rem',
               fontWeight: 700,
-              color: 'rgba(255,255,255,0.3)',
+              color: 'var(--text-muted)',
               padding: '0 0.75rem 0.5rem 0.75rem',
               letterSpacing: '0.05em'
             }}>{group.title}</div>
@@ -132,7 +132,7 @@ export default function Sidebar() {
                       alignItems: 'center',
                       gap: '0.75rem',
                       textDecoration: 'none',
-                      color: isActive ? '#fff' : 'rgba(255,255,255,0.6)',
+                      color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)',
                       fontSize: '0.85rem',
                       padding: '0.6rem 0.75rem',
                       borderRadius: '8px',
@@ -142,18 +142,18 @@ export default function Sidebar() {
                     }}
                     onMouseEnter={(e) => {
                       if (!isActive) {
-                        e.currentTarget.style.color = '#fff';
+                        e.currentTarget.style.color = 'var(--text-primary)';
                         e.currentTarget.style.background = 'rgba(255, 255, 255, 0.02)';
                       }
                     }}
                     onMouseLeave={(e) => {
                       if (!isActive) {
-                        e.currentTarget.style.color = 'rgba(255,255,255,0.6)';
+                        e.currentTarget.style.color = 'var(--text-secondary)';
                         e.currentTarget.style.background = 'transparent';
                       }
                     }}
                   >
-                    <Icon size={16} color={isActive ? '#6366f1' : 'rgba(255,255,255,0.5)'} />
+                    <Icon size={16} color={isActive ? '#6366f1' : 'var(--text-muted)'} />
                     <span>{item.label}</span>
                   </Link>
                 );
@@ -166,7 +166,7 @@ export default function Sidebar() {
       {/* Footer / Control area */}
       <div style={{
         padding: '1rem',
-        borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+        borderTop: '1px solid var(--section-border)',
         display: 'flex',
         flexDirection: 'column',
         gap: '0.5rem'
@@ -176,14 +176,14 @@ export default function Sidebar() {
           alignItems: 'center',
           gap: '0.5rem',
           textDecoration: 'none',
-          color: 'rgba(255,255,255,0.6)',
+          color: 'var(--text-secondary)',
           fontSize: '0.8rem',
           padding: '0.5rem 0.75rem',
           borderRadius: '8px',
           transition: 'var(--transition-smooth)'
         }}
-        onMouseEnter={(e) => e.currentTarget.style.color = '#white'}
-        onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.6)'}
+        onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
+        onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
         >
           <ArrowLeft size={14} />
           <span>Về Website chính</span>
@@ -196,7 +196,7 @@ export default function Sidebar() {
             gap: '0.5rem',
             background: 'transparent',
             border: 'none',
-            color: 'rgba(255, 255, 255, 0.6)',
+            color: 'var(--text-secondary)',
             fontSize: '0.8rem',
             padding: '0.5rem 0.75rem',
             borderRadius: '8px',
@@ -210,7 +210,7 @@ export default function Sidebar() {
             e.currentTarget.style.background = 'rgba(239, 68, 68, 0.05)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.color = 'rgba(255, 255, 255, 0.6)';
+            e.currentTarget.style.color = 'var(--text-secondary)';
             e.currentTarget.style.background = 'transparent';
           }}
         >

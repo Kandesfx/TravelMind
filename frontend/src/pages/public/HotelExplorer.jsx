@@ -23,7 +23,7 @@ export default function HotelExplorer() {
   }, []);
 
   if (loading) {
-    return <div style={{ color: 'white', textAlign: 'center', marginTop: '5rem' }}>Đang tải thông tin khách sạn...</div>;
+    return <div style={{ color: 'var(--text-primary)', textAlign: 'center', marginTop: '5rem' }}>Đang tải thông tin khách sạn...</div>;
   }
 
   // Fallback default hotels if database has no records
@@ -85,7 +85,7 @@ export default function HotelExplorer() {
                     letterSpacing: '0.05em',
                     textTransform: 'uppercase'
                   }}>{isResort ? 'Nghỉ dưỡng ven biển' : 'Lưu trú đô thị'}</div>
-                  <h3 style={{ fontSize: '1.6rem', color: 'white', marginTop: '0.2rem' }}>{h.type}</h3>
+                  <h3 style={{ fontSize: '1.6rem', color: 'var(--text-primary)', marginTop: '0.2rem' }}>{h.type}</h3>
                 </div>
                 <div style={{
                   fontSize: '2rem',
@@ -103,7 +103,7 @@ export default function HotelExplorer() {
                 </div>
                 <div style={{
                   height: '6px',
-                  background: 'rgba(255,255,255,0.03)',
+                  background: 'var(--icon-circle-bg)',
                   borderRadius: '3px',
                   overflow: 'hidden'
                 }}>
@@ -122,12 +122,12 @@ export default function HotelExplorer() {
                 gridTemplateColumns: '1fr 1fr',
                 gap: '1.25rem',
                 padding: '1.25rem 0',
-                borderTop: '1px solid rgba(255,255,255,0.05)',
-                borderBottom: '1px solid rgba(255,255,255,0.05)'
+                borderTop: '1px solid var(--section-border)',
+                borderBottom: '1px solid var(--section-border)'
               }}>
                 <div>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Giá trung bình / đêm</div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'white', marginTop: '0.15rem' }}>${h.avg_adr}</div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '0.15rem' }}>${h.avg_adr}</div>
                 </div>
 
                 <div>
@@ -154,24 +154,24 @@ export default function HotelExplorer() {
               {/* Peak months & country details */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-                  <Calendar size={18} color="rgba(255,255,255,0.4)" style={{ marginTop: '0.1rem' }} />
+                  <Calendar size={18} color="var(--text-muted)" style={{ marginTop: '0.1rem' }} />
                   <div>
                     <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Mùa cao điểm đặt phòng</div>
-                    <div style={{ fontSize: '0.85rem', color: 'white', marginTop: '0.15rem', display: 'flex', gap: '0.5rem' }}>
+                    <div style={{ fontSize: '0.85rem', color: 'var(--text-primary)', marginTop: '0.15rem', display: 'flex', gap: '0.5rem' }}>
                       {h.peak_months.map((m, i) => (
-                        <span key={i} style={{ background: 'rgba(255,255,255,0.04)', padding: '0.15rem 0.5rem', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.05)' }}>{m}</span>
+                        <span key={i} style={{ background: 'var(--badge-bg)', padding: '0.15rem 0.5rem', borderRadius: '4px', border: '1px solid var(--section-border)' }}>{m}</span>
                       ))}
                     </div>
                   </div>
                 </div>
 
                 <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-                  <Compass size={18} color="rgba(255,255,255,0.4)" style={{ marginTop: '0.1rem' }} />
+                  <Compass size={18} color="var(--text-muted)" style={{ marginTop: '0.1rem' }} />
                   <div>
                     <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Top 3 Quốc gia gửi khách nhiều nhất</div>
-                    <div style={{ fontSize: '0.85rem', color: 'white', marginTop: '0.15rem', display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                    <div style={{ fontSize: '0.85rem', color: 'var(--text-primary)', marginTop: '0.15rem', display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                       {h.top_countries.map((c, i) => (
-                        <span key={i} style={{ background: 'rgba(255,255,255,0.04)', padding: '0.15rem 0.5rem', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.05)' }}>{c}</span>
+                        <span key={i} style={{ background: 'var(--badge-bg)', padding: '0.15rem 0.5rem', borderRadius: '4px', border: '1px solid var(--section-border)' }}>{c}</span>
                       ))}
                     </div>
                   </div>
@@ -204,7 +204,7 @@ export default function HotelExplorer() {
       }} hover={false}>
         <ShieldAlert size={24} color="var(--secondary)" style={{ flexShrink: 0, marginTop: '0.15rem' }} />
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-          <h4 style={{ color: 'white', fontSize: '1.05rem', fontWeight: 700 }}>💡 Mẹo Đặt Phòng Thông Minh</h4>
+          <h4 style={{ color: 'var(--text-primary)', fontSize: '1.05rem', fontWeight: 700 }}>💡 Mẹo Đặt Phòng Thông Minh</h4>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: 1.6 }}>
             Resort ven biển thường có chính sách giữ phòng ổn định hơn và nhiều ưu đãi trọn gói (ăn uống, spa, đỗ xe). 
             Trong khi đó, khách sạn thành phố phù hợp cho những chuyến đi ngắn ngày — bạn nên đặt sớm để có giá tốt nhất 

@@ -26,7 +26,7 @@ export default function AiUsageDashboard() {
   }, []);
 
   if (loading) {
-    return <div style={{ color: 'white', textAlign: 'center', marginTop: '5rem' }}>Đang tải báo cáo thống kê sử dụng AI...</div>;
+    return <div style={{ color: 'var(--text-primary)', textAlign: 'center', marginTop: '5rem' }}>Đang tải báo cáo thống kê sử dụng AI...</div>;
   }
 
   const { summary, total_cost_usd, usage_trend } = data;
@@ -95,8 +95,8 @@ export default function AiUsageDashboard() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
         <GlassCard style={{ padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '1.25rem' }} hover={false}>
           <div style={{
-            background: 'rgba(255,255,255,0.02)',
-            border: '1px solid rgba(255,255,255,0.05)',
+            background: 'var(--input-bg)',
+            border: '1px solid var(--section-border)',
             width: '46px',
             height: '46px',
             borderRadius: '12px',
@@ -108,7 +108,7 @@ export default function AiUsageDashboard() {
           </div>
           <div>
             <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Tổng Chi Phí Thực Tế (Tháng)</div>
-            <h3 style={{ fontSize: '1.6rem', color: 'white', fontWeight: 800, marginTop: '0.15rem' }}>
+            <h3 style={{ fontSize: '1.6rem', color: 'var(--text-primary)', fontWeight: 800, marginTop: '0.15rem' }}>
               ${total_cost_usd.toFixed(4)}
             </h3>
           </div>
@@ -116,8 +116,8 @@ export default function AiUsageDashboard() {
 
         <GlassCard style={{ padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '1.25rem' }} hover={false}>
           <div style={{
-            background: 'rgba(255,255,255,0.02)',
-            border: '1px solid rgba(255,255,255,0.05)',
+            background: 'var(--input-bg)',
+            border: '1px solid var(--section-border)',
             width: '46px',
             height: '46px',
             borderRadius: '12px',
@@ -129,7 +129,7 @@ export default function AiUsageDashboard() {
           </div>
           <div>
             <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Tổng Số Lượt Gọi Dịch Vụ</div>
-            <h3 style={{ fontSize: '1.6rem', color: 'white', fontWeight: 800, marginTop: '0.15rem' }}>
+            <h3 style={{ fontSize: '1.6rem', color: 'var(--text-primary)', fontWeight: 800, marginTop: '0.15rem' }}>
               {totalCalls.toLocaleString()} calls
             </h3>
           </div>
@@ -137,8 +137,8 @@ export default function AiUsageDashboard() {
 
         <GlassCard style={{ padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '1.25rem' }} hover={false}>
           <div style={{
-            background: 'rgba(255,255,255,0.02)',
-            border: '1px solid rgba(255,255,255,0.05)',
+            background: 'var(--input-bg)',
+            border: '1px solid var(--section-border)',
             width: '46px',
             height: '46px',
             borderRadius: '12px',
@@ -150,7 +150,7 @@ export default function AiUsageDashboard() {
           </div>
           <div>
             <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Tổng Số Token Tiêu Thụ</div>
-            <h3 style={{ fontSize: '1.6rem', color: 'white', fontWeight: 800, marginTop: '0.15rem' }}>
+            <h3 style={{ fontSize: '1.6rem', color: 'var(--text-primary)', fontWeight: 800, marginTop: '0.15rem' }}>
               {totalTokens.toLocaleString()} tokens
             </h3>
           </div>
@@ -160,14 +160,14 @@ export default function AiUsageDashboard() {
       {/* Charts Grid */}
       <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '2rem' }}>
         <GlassCard style={{ padding: '1.5rem' }} hover={false}>
-          <h4 style={{ color: 'white', fontSize: '1.1rem', marginBottom: '1rem' }}>Xu Hướng Chi Phí Theo Ngày</h4>
+          <h4 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', marginBottom: '1rem' }}>Xu Hướng Chi Phí Theo Ngày</h4>
           <div style={{ height: '300px' }}>
             <Line data={lineData} options={chartOptions} />
           </div>
         </GlassCard>
 
         <GlassCard style={{ padding: '1.5rem' }} hover={false}>
-          <h4 style={{ color: 'white', fontSize: '1.1rem', marginBottom: '1rem' }}>Phân Bổ Chi Phí Theo Nhà Cung Cấp</h4>
+          <h4 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', marginBottom: '1rem' }}>Phân Bổ Chi Phí Theo Nhà Cung Cấp</h4>
           <div style={{ height: '300px', display: 'flex', justifyContent: 'center' }}>
             <Doughnut data={doughnutData} options={{ ...chartOptions, scales: {} }} />
           </div>
@@ -177,14 +177,14 @@ export default function AiUsageDashboard() {
       {/* Provider Details Table */}
       <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '2rem' }}>
         <GlassCard hover={false} style={{ padding: '1.5rem' }}>
-          <h4 style={{ color: 'white', fontSize: '1.1rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <h4 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <BarChart3 size={18} color="var(--primary)" />
             <span>Chi Tiết Mức Tiêu Thụ Theo Nhà Cung Cấp</span>
           </h4>
           
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
             <thead>
-              <tr style={{ background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid rgba(255,255,255,0.05)', color: 'white' }}>
+              <tr style={{ background: 'var(--input-bg)', borderBottom: '1px solid var(--section-border)', color: 'var(--text-primary)' }}>
                 <th style={{ padding: '0.75rem' }}>Nhà Cung Cấp</th>
                 <th style={{ padding: '0.75rem' }}>Số Requests</th>
                 <th style={{ padding: '0.75rem' }}>Số Tokens</th>
@@ -194,10 +194,10 @@ export default function AiUsageDashboard() {
             <tbody>
               {summary.map((s, idx) => (
                 <tr key={idx} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)', color: 'var(--text-secondary)' }}>
-                  <td style={{ padding: '0.75rem', fontWeight: 600, color: 'white', textTransform: 'uppercase' }}>{s.provider_name}</td>
+                  <td style={{ padding: '0.75rem', fontWeight: 600, color: 'var(--text-primary)', textTransform: 'uppercase' }}>{s.provider_name}</td>
                   <td style={{ padding: '0.75rem' }}>{s.requests_count.toLocaleString()}</td>
                   <td style={{ padding: '0.75rem' }}>{s.total_tokens > 0 ? s.total_tokens.toLocaleString() : 'N/A'}</td>
-                  <td style={{ padding: '0.75rem', textAlign: 'right', fontWeight: 'bold', color: 'white' }}>
+                  <td style={{ padding: '0.75rem', textAlign: 'right', fontWeight: 'bold', color: 'var(--text-primary)' }}>
                     ${s.total_cost_usd.toFixed(4)}
                   </td>
                 </tr>
@@ -207,7 +207,7 @@ export default function AiUsageDashboard() {
         </GlassCard>
 
         <GlassCard style={{ padding: '1.5rem' }} hover={false}>
-          <h4 style={{ color: 'white', fontSize: '1.1rem', marginBottom: '1rem' }}>Tải Lượng Requests Hệ Thống</h4>
+          <h4 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', marginBottom: '1rem' }}>Tải Lượng Requests Hệ Thống</h4>
           <div style={{ height: '220px' }}>
             <Bar data={barData} options={chartOptions} />
           </div>

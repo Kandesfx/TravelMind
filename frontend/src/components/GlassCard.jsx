@@ -2,12 +2,12 @@ import React from 'react';
 
 export default function GlassCard({ children, className = '', style = {}, hover = true }) {
   const baseStyle = {
-    background: 'rgba(255, 255, 255, 0.03)',
-    border: '1px solid rgba(255, 255, 255, 0.06)',
+    background: 'var(--card-bg)',
+    border: '1px solid var(--card-border)',
     backdropFilter: 'blur(16px)',
     WebkitBackdropFilter: 'blur(16px)',
     borderRadius: '16px',
-    boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.3)',
+    boxShadow: 'var(--card-shadow)',
     padding: '1.5rem',
     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
     ...style
@@ -15,17 +15,17 @@ export default function GlassCard({ children, className = '', style = {}, hover 
 
   const handleMouseEnter = (e) => {
     if (hover) {
-      e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.12)';
+      e.currentTarget.style.borderColor = 'var(--card-border-hover)';
       e.currentTarget.style.transform = 'translateY(-2px)';
-      e.currentTarget.style.boxShadow = '0 12px 40px 0 rgba(99, 102, 241, 0.15)';
+      e.currentTarget.style.boxShadow = 'var(--card-shadow-hover)';
     }
   };
 
   const handleMouseLeave = (e) => {
     if (hover) {
-      e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.06)';
+      e.currentTarget.style.borderColor = 'var(--card-border)';
       e.currentTarget.style.transform = 'translateY(0)';
-      e.currentTarget.style.boxShadow = '0 8px 32px 0 rgba(0, 0, 0, 0.3)';
+      e.currentTarget.style.boxShadow = 'var(--card-shadow)';
     }
   };
 

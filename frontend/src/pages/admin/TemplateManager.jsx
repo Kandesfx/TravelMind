@@ -128,7 +128,7 @@ export default function TemplateManager() {
           <GlassCard style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }} hover={false}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#818cf8' }}>
               <Info size={18} />
-              <h3 style={{ fontSize: '1rem', color: 'white', fontWeight: 700 }}>Hướng dẫn đặt Biến</h3>
+              <h3 style={{ fontSize: '1rem', color: 'var(--text-primary)', fontWeight: 700 }}>Hướng dẫn đặt Biến</h3>
             </div>
             
             <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
@@ -136,7 +136,7 @@ export default function TemplateManager() {
             </p>
 
             <div style={{ background: 'rgba(0,0,0,0.15)', padding: '0.75rem', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.75rem' }}>
-              <span style={{ color: 'white', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+              <span style={{ color: 'var(--text-primary)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
                 <Terminal size={12} color="var(--primary)" /> Biến khả dụng cho Combo:
               </span>
               <ul style={{ paddingLeft: '1.25rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
@@ -150,7 +150,7 @@ export default function TemplateManager() {
             </div>
 
             <div style={{ background: 'rgba(0,0,0,0.15)', padding: '0.75rem', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.75rem' }}>
-              <span style={{ color: 'white', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+              <span style={{ color: 'var(--text-primary)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
                 <Terminal size={12} color="var(--accent)" /> Biến khả dụng cho Event:
               </span>
               <ul style={{ paddingLeft: '1.25rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
@@ -165,14 +165,14 @@ export default function TemplateManager() {
 
         {/* Templates list */}
         {loading ? (
-          <div style={{ color: 'white', textAlign: 'center', padding: '3rem' }}>Đang tải danh sách prompt template...</div>
+          <div style={{ color: 'var(--text-primary)', textAlign: 'center', padding: '3rem' }}>Đang tải danh sách prompt template...</div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {templates.map((tpl) => (
               <GlassCard key={tpl.id} style={{ padding: '1.5rem', position: 'relative' }} hover={false}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
                   <div>
-                    <h3 style={{ color: 'white', fontSize: '1.1rem', fontWeight: 700 }}>{tpl.name}</h3>
+                    <h3 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', fontWeight: 700 }}>{tpl.name}</h3>
                     <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.25rem' }}>
                       <span style={{ fontSize: '0.7rem', background: 'rgba(99, 102, 241, 0.15)', color: '#818cf8', padding: '0.15rem 0.4rem', borderRadius: '4px' }}>
                         {tpl.content_type}
@@ -203,7 +203,7 @@ export default function TemplateManager() {
                 <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '0.75rem', alignItems: 'center' }}>
                   <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Biến khai báo:</span>
                   {tpl.variables?.map((v, i) => (
-                    <span key={i} style={{ background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.05)', color: 'white', padding: '0.1rem 0.35rem', borderRadius: '4px', fontSize: '0.7rem' }}>
+                    <span key={i} style={{ background: 'rgba(255, 255, 255, 0.03)', border: '1px solid var(--section-border)', color: 'var(--text-primary)', padding: '0.1rem 0.35rem', borderRadius: '4px', fontSize: '0.7rem' }}>
                       {v}
                     </span>
                   ))}
@@ -227,7 +227,7 @@ export default function TemplateManager() {
           zIndex: 1000
         }} className="animate-fade-in">
           <GlassCard style={{ width: '100%', maxWidth: '600px', padding: '2rem' }} hover={false}>
-            <h3 style={{ fontSize: '1.25rem', color: 'white', marginBottom: '1.25rem' }}>
+            <h3 style={{ fontSize: '1.25rem', color: 'var(--text-primary)', marginBottom: '1.25rem' }}>
               {editingTemplate ? 'Chỉnh Sửa Prompt Template' : 'Tạo Prompt Template Mới'}
             </h3>
 
@@ -277,7 +277,7 @@ export default function TemplateManager() {
                 />
               </div>
 
-              <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'white', fontSize: '0.85rem', cursor: 'pointer', marginTop: '0.25rem' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-primary)', fontSize: '0.85rem', cursor: 'pointer', marginTop: '0.25rem' }}>
                 <input type="checkbox" checked={isActive} onChange={(e) => setIsActive(e.target.checked)} />
                 <span>Hoạt động (Active)</span>
               </label>

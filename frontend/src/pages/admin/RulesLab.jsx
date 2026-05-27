@@ -134,7 +134,7 @@ export default function RulesLab() {
         colorbar: {
           title: 'Lift',
           tickfont: { color: '#94a3b8' },
-          titlefont: { color: 'white' }
+          titlefont: { color: 'var(--text-primary)' }
         }
       },
       text: textData,
@@ -144,7 +144,7 @@ export default function RulesLab() {
     const scatterLayout = {
       title: {
         text: 'Phân Bố Luật Kết Hợp (Support vs Confidence vs Lift)',
-        font: { color: 'white', family: 'Outfit', size: 16 }
+        font: { color: 'var(--text-primary)', family: 'Outfit', size: 16 }
       },
       paper_bgcolor: 'rgba(0,0,0,0)',
       plot_bgcolor: 'rgba(0,0,0,0)',
@@ -185,9 +185,9 @@ export default function RulesLab() {
         {/* Settings panel */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           <GlassCard style={{ padding: '1.5rem' }} hover={false}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.75rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', borderBottom: '1px solid var(--section-border)', paddingBottom: '0.75rem' }}>
               <Settings size={18} color="var(--primary)" />
-              <h3 style={{ fontSize: '1.1rem', color: 'white' }}>Cấu Hình Thuật Toán</h3>
+              <h3 style={{ fontSize: '1.1rem', color: 'var(--text-primary)' }}>Cấu Hình Thuật Toán</h3>
             </div>
 
             <form onSubmit={handleRunMining} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -224,7 +224,7 @@ export default function RulesLab() {
 
               {/* Feature selections */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.5rem' }}>
-                <label style={{ fontSize: '0.8rem', color: 'white', fontWeight: 600 }}>Chọn Thuộc Tính Khai Phá ({selectedFeatures.length}/15)</label>
+                <label style={{ fontSize: '0.8rem', color: 'var(--text-primary)', fontWeight: 600 }}>Chọn Thuộc Tính Khai Phá ({selectedFeatures.length}/15)</label>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', maxHeight: '180px', overflowY: 'auto', paddingRight: '0.5rem', background: 'rgba(0,0,0,0.1)', padding: '0.5rem', borderRadius: '8px' }}>
                   {ALL_FEATURES.map((f) => (
                     <label key={f.id} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.75rem', color: 'var(--text-secondary)', cursor: 'pointer' }}>
@@ -244,7 +244,7 @@ export default function RulesLab() {
 
           {/* Config selection */}
           <GlassCard style={{ padding: '1.25rem' }} hover={false}>
-            <label style={{ fontSize: '0.8rem', color: 'white', fontWeight: 600, display: 'block', marginBottom: '0.5rem' }}>Lịch Sử Lượt Chạy</label>
+            <label style={{ fontSize: '0.8rem', color: 'var(--text-primary)', fontWeight: 600, display: 'block', marginBottom: '0.5rem' }}>Lịch Sử Lượt Chạy</label>
             <select value={selectedConfigId} onChange={handleSelectConfig} className="glass-input" style={{ width: '100%' }}>
               {configs.map(c => (
                 <option key={c.id} value={c.id}>
@@ -259,7 +259,7 @@ export default function RulesLab() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           <GlassCard style={{ padding: '1.5rem' }} hover={false}>
             {loading ? (
-              <div style={{ color: 'white', textAlign: 'center', height: '350px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ color: 'var(--text-primary)', textAlign: 'center', height: '350px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 Đang tải dữ liệu biểu đồ...
               </div>
             ) : rules.length === 0 ? (
@@ -278,7 +278,7 @@ export default function RulesLab() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.25rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <Table size={18} color="var(--primary)" />
-            <h3 style={{ fontSize: '1.1rem', color: 'white', fontWeight: 700 }}>Danh Sách Luật Kết Hợp Đã Khai Phá ({filteredRules.length})</h3>
+            <h3 style={{ fontSize: '1.1rem', color: 'var(--text-primary)', fontWeight: 700 }}>Danh Sách Luật Kết Hợp Đã Khai Phá ({filteredRules.length})</h3>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
@@ -320,14 +320,14 @@ export default function RulesLab() {
         </div>
 
         {loading ? (
-          <div style={{ color: 'white', textAlign: 'center', padding: '2rem' }}>Đang tải danh sách luật kết hợp...</div>
+          <div style={{ color: 'var(--text-primary)', textAlign: 'center', padding: '2rem' }}>Đang tải danh sách luật kết hợp...</div>
         ) : filteredRules.length === 0 ? (
           <div style={{ color: 'var(--text-secondary)', textAlign: 'center', padding: '2rem' }}>Không tìm thấy luật nào phù hợp.</div>
         ) : (
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
               <thead>
-                <tr style={{ background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid rgba(255,255,255,0.05)', color: 'white' }}>
+                <tr style={{ background: 'var(--input-bg)', borderBottom: '1px solid var(--section-border)', color: 'var(--text-primary)' }}>
                   <th style={{ padding: '1rem' }}>Vế trước (Antecedents)</th>
                   <th style={{ padding: '1rem' }}>Vế sau (Consequents)</th>
                   <th style={{ padding: '1rem' }}>Support</th>

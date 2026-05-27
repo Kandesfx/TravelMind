@@ -56,7 +56,7 @@ export default function TravelInsights() {
     const mapLayout = {
       title: {
         text: 'Bản Đồ Phân Bố Du Khách Toàn Cầu',
-        font: { color: 'white', family: 'Outfit', size: 18 }
+        font: { color: 'var(--text-primary)', family: 'Outfit', size: 18 }
       },
       geo: {
         showframe: false,
@@ -95,7 +95,7 @@ export default function TravelInsights() {
     const heatmapLayout = {
       title: {
         text: 'Heatmap Mùa Vụ & Biến Động Giá',
-        font: { color: 'white', family: 'Outfit', size: 18 }
+        font: { color: 'var(--text-primary)', family: 'Outfit', size: 18 }
       },
       paper_bgcolor: 'rgba(0,0,0,0)',
       plot_bgcolor: 'rgba(0,0,0,0)',
@@ -110,7 +110,7 @@ export default function TravelInsights() {
   }, [loading, countries, trends]);
 
   if (loading) {
-    return <div style={{ color: 'white', textAlign: 'center', marginTop: '5rem' }}>Đang chuẩn bị nội dung...</div>;
+    return <div style={{ color: 'var(--text-primary)', textAlign: 'center', marginTop: '5rem' }}>Đang chuẩn bị nội dung...</div>;
   }
 
   return (
@@ -139,7 +139,7 @@ export default function TravelInsights() {
           <GlassCard style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} hover={false}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#818cf8' }}>
               <Calendar size={20} />
-              <h3 style={{ fontSize: '1.15rem', color: 'white' }}>Đặc Điểm Mùa Vụ</h3>
+              <h3 style={{ fontSize: '1.15rem', color: 'var(--text-primary)' }}>Đặc Điểm Mùa Vụ</h3>
             </div>
             <ul style={{
               fontSize: '0.85rem',
@@ -165,7 +165,7 @@ export default function TravelInsights() {
           <GlassCard style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} hover={false}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#818cf8' }}>
               <Globe size={20} />
-              <h3 style={{ fontSize: '1.15rem', color: 'white' }}>Mật Độ Địa Lý</h3>
+              <h3 style={{ fontSize: '1.15rem', color: 'var(--text-primary)' }}>Mật Độ Địa Lý</h3>
             </div>
             <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
               Khách du lịch nội địa Bồ Đào Nha (PRT) chiếm tỷ trọng lớn nhất với hơn **40%** tổng lượng đặt phòng. 

@@ -111,7 +111,7 @@ export default function TravelerQuiz() {
       {!quizFinished ? (
         <GlassCard style={{ padding: '2.5rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
           {/* Question Text */}
-          <h3 style={{ color: 'white', fontSize: '1.25rem', fontWeight: 700, lineHeight: 1.5 }}>
+          <h3 style={{ color: 'var(--text-primary)', fontSize: '1.25rem', fontWeight: 700, lineHeight: 1.5 }}>
             {questions[currentQ].question}
           </h3>
 
@@ -125,7 +125,7 @@ export default function TravelerQuiz() {
                   key={idx}
                   onClick={() => handleSelectOption(opt.val)}
                   style={{
-                    background: isSelected ? 'rgba(99, 102, 241, 0.08)' : 'rgba(255,255,255,0.01)',
+                    background: isSelected ? 'rgba(99, 102, 241, 0.08)' : 'var(--input-bg)',
                     border: isSelected ? '2px solid var(--primary)' : '1px solid var(--panel-border)',
                     borderRadius: '10px',
                     padding: '1rem',
@@ -137,7 +137,7 @@ export default function TravelerQuiz() {
                     transition: 'var(--transition-smooth)'
                   }}
                   onMouseEnter={(e) => {
-                    if (!isSelected) e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
+                    if (!isSelected) e.currentTarget.style.borderColor = 'var(--panel-border-hover)';
                   }}
                   onMouseLeave={(e) => {
                     if (!isSelected) e.currentTarget.style.borderColor = 'var(--panel-border)';
@@ -186,7 +186,7 @@ export default function TravelerQuiz() {
           </div>
           
           <div>
-            <h2 style={{ fontSize: '1.8rem', color: 'white' }}>{result?.persona.name}</h2>
+            <h2 style={{ fontSize: '1.8rem', color: 'var(--text-primary)' }}>{result?.persona.name}</h2>
             <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
               Nhóm này chiếm khoảng {result?.persona.percentage}% tổng số du khách trên cơ sở dữ liệu.
             </div>
@@ -199,8 +199,8 @@ export default function TravelerQuiz() {
           {result?.recommended_combo && (
             <div style={{
               width: '100%',
-              background: 'rgba(255,255,255,0.02)',
-              border: '1px solid rgba(255,255,255,0.05)',
+              background: 'var(--input-bg)',
+              border: '1px solid var(--section-border)',
               borderRadius: '12px',
               padding: '1.25rem',
               marginTop: '0.5rem',
@@ -210,7 +210,7 @@ export default function TravelerQuiz() {
             }}>
               <div style={{ textAlign: 'left' }}>
                 <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Gợi ý combo dành cho bạn</span>
-                <h4 style={{ color: 'white', fontSize: '1.1rem', fontWeight: 700, marginTop: '0.15rem' }}>{result.recommended_combo.name}</h4>
+                <h4 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', fontWeight: 700, marginTop: '0.15rem' }}>{result.recommended_combo.name}</h4>
               </div>
               <Link to={`/combos/${result.recommended_combo.id}`} className="glass-button" style={{ padding: '0.4rem 1rem', fontSize: '0.8rem' }}>
                 <span>Xem Ngay</span>

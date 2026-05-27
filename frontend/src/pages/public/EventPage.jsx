@@ -49,11 +49,11 @@ export default function EventPage() {
   }, [eventData]);
 
   if (loading) {
-    return <div style={{ color: 'white', textAlign: 'center', marginTop: '5rem' }}>Đang tải chiến dịch khuyến mãi...</div>;
+    return <div style={{ color: 'var(--text-primary)', textAlign: 'center', marginTop: '5rem' }}>Đang tải chiến dịch khuyến mãi...</div>;
   }
 
   if (!eventData) {
-    return <div style={{ color: 'white', textAlign: 'center', marginTop: '5rem' }}>Không tìm thấy sự kiện khuyến mãi.</div>;
+    return <div style={{ color: 'var(--text-primary)', textAlign: 'center', marginTop: '5rem' }}>Không tìm thấy sự kiện khuyến mãi.</div>;
   }
 
   return (
@@ -87,7 +87,7 @@ export default function EventPage() {
             <span>Chiến dịch đang diễn ra</span>
           </div>
 
-          <h1 style={{ fontSize: '2.5rem', fontWeight: 800, color: 'white', lineHeight: 1.2 }}>{eventData.name}</h1>
+          <h1 style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1.2 }}>{eventData.name}</h1>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6 }}>
             {eventData.description}
           </p>
@@ -104,7 +104,7 @@ export default function EventPage() {
           alignItems: 'center',
           gap: '1rem',
           background: 'rgba(9, 13, 22, 0.6)',
-          border: '1px solid rgba(255,255,255,0.05)',
+          border: '1px solid var(--section-border)',
           borderRadius: '16px',
           padding: '2rem'
         }}>
@@ -124,9 +124,9 @@ export default function EventPage() {
                 <div style={{
                   fontSize: '2rem',
                   fontWeight: 900,
-                  color: 'white',
-                  background: 'rgba(255,255,255,0.03)',
-                  border: '1px solid rgba(255,255,255,0.05)',
+                  color: 'var(--text-primary)',
+                  background: 'var(--icon-circle-bg)',
+                  border: '1px solid var(--section-border)',
                   width: '54px',
                   height: '54px',
                   borderRadius: '10px',
@@ -144,7 +144,7 @@ export default function EventPage() {
       {/* 2. Vouchers Section */}
       {eventData.vouchers?.length > 0 && (
         <section style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-          <h2 style={{ fontSize: '1.5rem', color: 'white' }}>Mã Voucher Sự Kiện Độc Quyền</h2>
+          <h2 style={{ fontSize: '1.5rem', color: 'var(--text-primary)' }}>Mã Voucher Sự Kiện Độc Quyền</h2>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
             {eventData.vouchers.map((v) => (
               <GlassCard key={v.id} style={{
@@ -167,7 +167,7 @@ export default function EventPage() {
                     <Ticket size={22} color="var(--success)" />
                   </div>
                   <div>
-                    <h3 style={{ fontSize: '1.3rem', color: 'white', letterSpacing: '0.02em', fontWeight: 800 }}>{v.code}</h3>
+                    <h3 style={{ fontSize: '1.3rem', color: 'var(--text-primary)', letterSpacing: '0.02em', fontWeight: 800 }}>{v.code}</h3>
                     <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '0.2rem' }}>{v.description}</p>
                   </div>
                 </div>
@@ -186,7 +186,7 @@ export default function EventPage() {
 
       {/* 3. Combos Grid */}
       <section style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-        <h2 style={{ fontSize: '1.5rem', color: 'white' }}>Gói Combo Khuyến Mãi Gắn Kèm</h2>
+        <h2 style={{ fontSize: '1.5rem', color: 'var(--text-primary)' }}>Gói Combo Khuyến Mãi Gắn Kèm</h2>
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
@@ -215,7 +215,7 @@ export default function EventPage() {
               </div>
 
               <div style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', flex: 1 }}>
-                <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'white' }}>{combo.name}</h4>
+                <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-primary)' }}>{combo.name}</h4>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', height: '38px', overflow: 'hidden' }}>
                   {combo.short_description}
                 </p>
@@ -226,11 +226,11 @@ export default function EventPage() {
                   alignItems: 'center',
                   marginTop: 'auto',
                   paddingTop: '1rem',
-                  borderTop: '1px solid rgba(255,255,255,0.05)'
+                  borderTop: '1px solid var(--section-border)'
                 }}>
                   <div>
                     <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Mức giá từ</span>
-                    <div style={{ fontSize: '1.1rem', fontWeight: 850, color: 'white' }}>${combo.price_estimate?.toFixed(0)} <span style={{ fontSize: '0.8rem', fontWeight: 400, color: 'var(--text-secondary)' }}>/ đêm</span></div>
+                    <div style={{ fontSize: '1.1rem', fontWeight: 850, color: 'var(--text-primary)' }}>${combo.price_estimate?.toFixed(0)} <span style={{ fontSize: '0.8rem', fontWeight: 400, color: 'var(--text-secondary)' }}>/ đêm</span></div>
                   </div>
                   <Link to={`/combos/${combo.id}`} className="glass-button" style={{ padding: '0.4rem 0.9rem', fontSize: '0.8rem', borderRadius: '8px' }}>
                     Chi tiết

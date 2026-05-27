@@ -76,20 +76,20 @@ export default function ContentHistory() {
       </div>
 
       <GlassCard hover={false} style={{ padding: 0, overflow: 'hidden' }}>
-        <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(255,255,255,0.01)' }}>
+        <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid var(--section-border)', display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'var(--input-bg)' }}>
           <History size={18} color="var(--primary)" />
-          <h3 style={{ color: 'white', fontSize: '1rem', fontWeight: 700 }}>Nhật Ký Kiểm Duyệt Hệ Thống ({filteredHistory.length} mục)</h3>
+          <h3 style={{ color: 'var(--text-primary)', fontSize: '1rem', fontWeight: 700 }}>Nhật Ký Kiểm Duyệt Hệ Thống ({filteredHistory.length} mục)</h3>
         </div>
 
         {loading ? (
-          <div style={{ color: 'white', textAlign: 'center', padding: '3rem' }}>Đang tải nhật ký kiểm duyệt...</div>
+          <div style={{ color: 'var(--text-primary)', textAlign: 'center', padding: '3rem' }}>Đang tải nhật ký kiểm duyệt...</div>
         ) : filteredHistory.length === 0 ? (
           <div style={{ color: 'var(--text-secondary)', textAlign: 'center', padding: '3rem' }}>Không tìm thấy lịch sử kiểm duyệt nào.</div>
         ) : (
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
               <thead>
-                <tr style={{ background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid rgba(255,255,255,0.05)', color: 'white' }}>
+                <tr style={{ background: 'var(--input-bg)', borderBottom: '1px solid var(--section-border)', color: 'var(--text-primary)' }}>
                   <th style={{ padding: '1rem' }}>Mã Duyệt</th>
                   <th style={{ padding: '1rem' }}>Loại Nội Dung</th>
                   <th style={{ padding: '1rem' }}>Đối Tượng Đích</th>
@@ -114,7 +114,7 @@ export default function ContentHistory() {
                         }}
                         onClick={() => handleToggleExpand(item.id)}
                       >
-                        <td style={{ padding: '1rem', fontWeight: 'bold', color: 'white' }}>#{item.id}</td>
+                        <td style={{ padding: '1rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>#{item.id}</td>
                         <td style={{ padding: '1rem', textTransform: 'capitalize' }}>{item.content_type?.replace('_', ' ')}</td>
                         <td style={{ padding: '1rem' }}>
                           {item.target_type} (#{item.target_id})
@@ -149,21 +149,21 @@ export default function ContentHistory() {
                         </td>
                       </tr>
                       {isExpanded && (
-                        <tr style={{ background: 'rgba(255,255,255,0.01)', borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
+                        <tr style={{ background: 'var(--input-bg)', borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
                           <td colSpan={7} style={{ padding: '1rem 1.5rem 1.5rem 1.5rem' }}>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                               <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 2fr', gap: '2rem' }}>
                                 <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-                                  <div><strong style={{ color: 'white' }}>Người duyệt:</strong> Admin (ID: {item.reviewed_by || 1})</div>
-                                  <div><strong style={{ color: 'white' }}>Phiên bản đã chọn:</strong> Bản #{item.selected_version || 1}</div>
-                                  <div><strong style={{ color: 'white' }}>Prompt đã chạy:</strong></div>
+                                  <div><strong style={{ color: 'var(--text-primary)' }}>Người duyệt:</strong> Admin (ID: {item.reviewed_by || 1})</div>
+                                  <div><strong style={{ color: 'var(--text-primary)' }}>Phiên bản đã chọn:</strong> Bản #{item.selected_version || 1}</div>
+                                  <div><strong style={{ color: 'var(--text-primary)' }}>Prompt đã chạy:</strong></div>
                                   <div style={{ background: 'rgba(0,0,0,0.2)', padding: '0.5rem', borderRadius: '4px', fontStyle: 'monospace', fontSize: '0.75rem', marginTop: '0.25rem' }}>
                                     {item.prompt_used}
                                   </div>
                                 </div>
                                 
                                 <div style={{ background: 'rgba(0,0,0,0.2)', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.04)' }}>
-                                  <strong style={{ color: 'white', fontSize: '0.85rem', display: 'block', marginBottom: '0.5rem' }}>Văn bản xuất bản cuối cùng:</strong>
+                                  <strong style={{ color: 'var(--text-primary)', fontSize: '0.85rem', display: 'block', marginBottom: '0.5rem' }}>Văn bản xuất bản cuối cùng:</strong>
                                   <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>
                                     {item.edited_text || 'Không có văn bản xuất bản (Đã bị Từ chối).'}
                                   </p>

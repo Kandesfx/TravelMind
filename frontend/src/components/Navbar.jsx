@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../App';
-import { Brain, Compass, Sliders, Calendar, TrendingUp, User, LogOut, LayoutDashboard } from 'lucide-react';
+import { useTheme } from './ThemeProvider';
+import { Brain, Compass, Sliders, Calendar, TrendingUp, User, LogOut, LayoutDashboard, Sun, Moon } from 'lucide-react';
 
 export default function Navbar() {
   const { auth, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -27,8 +29,8 @@ export default function Navbar() {
   return (
     <nav style={{
       height: '70px',
-      borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
-      background: 'rgba(9, 13, 22, 0.4)',
+      borderBottom: '1px solid var(--navbar-border)',
+      background: 'var(--navbar-bg)',
       backdropFilter: 'blur(16px)',
       position: 'sticky',
       top: 0,
@@ -44,7 +46,7 @@ export default function Navbar() {
         alignItems: 'center',
         gap: '0.75rem',
         textDecoration: 'none',
-        color: 'white'
+        color: 'var(--text-primary)'
       }}>
         <div style={{
           background: 'linear-gradient(135deg, #6366f1, #d946ef)',
@@ -62,9 +64,7 @@ export default function Navbar() {
           fontFamily: 'var(--font-display)',
           fontSize: '1.25rem',
           fontWeight: 800,
-          background: 'linear-gradient(to right, #ffffff, #94a3b8)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent'
+          color: 'var(--text-primary)'
         }}>TravelMind</span>
       </Link>
 
@@ -98,8 +98,17 @@ export default function Navbar() {
         })}
       </div>
 
-      {/* Auth Status Bar */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+      {/* Auth Status Bar + Theme Toggle */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        {/* Theme Toggle */}
+        <button
+          onClick={toggleTheme}
+          className="theme-toggle"
+          title={theme === 'dark' ? 'Chuyển sang chế độ sáng' : 'Chuyển sang chế độ tối'}
+        >
+          {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+        </button>
+
         {auth.logged_in ? (
           <>
             {auth.user.role === 'admin' && (
@@ -120,7 +129,7 @@ export default function Navbar() {
               display: 'flex',
               alignItems: 'center',
               gap: '0.5rem',
-              color: 'white',
+              color: 'var(--text-primary)',
               textDecoration: 'none',
               fontSize: '0.9rem',
               fontWeight: 500
@@ -129,8 +138,8 @@ export default function Navbar() {
                 width: '32px',
                 height: '32px',
                 borderRadius: '50%',
-                background: 'rgba(255,255,255,0.06)',
-                border: '1px solid rgba(255,255,255,0.1)',
+                background: 'var(--hover-overlay)',
+                border: '1px solid var(--panel-border)',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center'

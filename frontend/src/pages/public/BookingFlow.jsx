@@ -154,7 +154,7 @@ export default function BookingFlow() {
             <ShieldCheck size={36} color="var(--success)" />
           </div>
           
-          <h2 style={{ fontSize: '1.8rem', color: 'white' }}>Đặt Phòng Thành Công!</h2>
+          <h2 style={{ fontSize: '1.8rem', color: 'var(--text-primary)' }}>Đặt Phòng Thành Công!</h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.5 }}>
             Cảm ơn bạn đã lựa chọn dịch vụ của TravelMind. Mã đơn hàng của bạn là **#{bookingRes?.booking_id}**.
             Hành trình của bạn đã được xác nhận.
@@ -162,8 +162,8 @@ export default function BookingFlow() {
 
           <div style={{
             width: '100%',
-            background: 'rgba(255,255,255,0.02)',
-            border: '1px solid rgba(255,255,255,0.05)',
+            background: 'var(--input-bg)',
+            border: '1px solid var(--section-border)',
             borderRadius: '12px',
             padding: '1.25rem',
             textAlign: 'left',
@@ -174,15 +174,15 @@ export default function BookingFlow() {
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <span style={{ color: 'var(--text-muted)' }}>Loại khách sạn:</span>
-              <span style={{ color: 'white', fontWeight: 600 }}>{hotelType}</span>
+              <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{hotelType}</span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <span style={{ color: 'var(--text-muted)' }}>Thời gian:</span>
-              <span style={{ color: 'white', fontWeight: 600 }}>{checkIn} đến {checkOut} ({calculatedNights} đêm)</span>
+              <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{checkIn} đến {checkOut} ({calculatedNights} đêm)</span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <span style={{ color: 'var(--text-muted)' }}>Tổng thanh toán:</span>
-              <span style={{ color: 'white', fontWeight: 700 }}>${bookingRes?.total_price}</span>
+              <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}>${bookingRes?.total_price}</span>
             </div>
           </div>
           
@@ -202,12 +202,12 @@ export default function BookingFlow() {
     <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr', gap: '2rem' }} className="animate-fade-in">
       {/* Left Form */}
       <GlassCard style={{ padding: '2rem' }} hover={false}>
-        <h2 style={{ fontSize: '1.6rem', color: 'white', marginBottom: '1.5rem' }}>Chi Tiết Đặt Phòng</h2>
+        <h2 style={{ fontSize: '1.6rem', color: 'var(--text-primary)', marginBottom: '1.5rem' }}>Chi Tiết Đặt Phòng</h2>
         
         <form onSubmit={handleBookingSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           {/* Hotel type */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-            <label style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>Loại khách sạn</label>
+            <label style={{ fontSize: '0.8rem', color: 'var(--label-color)' }}>Loại khách sạn</label>
             <select value={hotelType} onChange={(e) => setHotelType(e.target.value)} className="glass-input">
               <option value="Resort Hotel">Resort Hotel</option>
               <option value="City Hotel">City Hotel</option>
@@ -217,12 +217,12 @@ export default function BookingFlow() {
           {/* Dates */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              <label style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>Ngày check-in</label>
+              <label style={{ fontSize: '0.8rem', color: 'var(--label-color)' }}>Ngày check-in</label>
               <input type="date" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} className="glass-input" required />
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              <label style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>Ngày check-out</label>
+              <label style={{ fontSize: '0.8rem', color: 'var(--label-color)' }}>Ngày check-out</label>
               <input type="date" value={checkOut} onChange={(e) => setCheckOut(e.target.value)} className="glass-input" required />
             </div>
           </div>
@@ -230,15 +230,15 @@ export default function BookingFlow() {
           {/* Guests */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              <label style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>Người lớn</label>
+              <label style={{ fontSize: '0.8rem', color: 'var(--label-color)' }}>Người lớn</label>
               <input type="number" min="1" max="10" value={adults} onChange={(e) => setAdults(parseInt(e.target.value))} className="glass-input" />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              <label style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>Trẻ em</label>
+              <label style={{ fontSize: '0.8rem', color: 'var(--label-color)' }}>Trẻ em</label>
               <input type="number" min="0" max="10" value={children} onChange={(e) => setChildren(parseInt(e.target.value))} className="glass-input" />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              <label style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>Em bé</label>
+              <label style={{ fontSize: '0.8rem', color: 'var(--label-color)' }}>Em bé</label>
               <input type="number" min="0" max="10" value={babies} onChange={(e) => setBabies(parseInt(e.target.value))} className="glass-input" />
             </div>
           </div>
@@ -246,7 +246,7 @@ export default function BookingFlow() {
           {/* Service options */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              <label style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>Loại bữa ăn</label>
+              <label style={{ fontSize: '0.8rem', color: 'var(--label-color)' }}>Loại bữa ăn</label>
               <select value={meal} onChange={(e) => setMeal(e.target.value)} className="glass-input">
                 <option value="BB">BB (Bed & Breakfast)</option>
                 <option value="HB">HB (Half Board - Sáng + Tối)</option>
@@ -255,7 +255,7 @@ export default function BookingFlow() {
               </select>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              <label style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>Loại phòng</label>
+              <label style={{ fontSize: '0.8rem', color: 'var(--label-color)' }}>Loại phòng</label>
               <select value={roomType} onChange={(e) => setRoomType(e.target.value)} className="glass-input">
                 <option value="A">Phòng Loại A (Standard)</option>
                 <option value="D">Phòng Loại D (Double Suite)</option>
@@ -268,22 +268,22 @@ export default function BookingFlow() {
           {/* Additional features */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              <label style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>Chỗ đỗ xe ô tô (số xe)</label>
+              <label style={{ fontSize: '0.8rem', color: 'var(--label-color)' }}>Chỗ đỗ xe ô tô (số xe)</label>
               <input type="number" min="0" max="4" value={parking} onChange={(e) => setParking(parseInt(e.target.value))} className="glass-input" />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              <label style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>Số yêu cầu đặc biệt</label>
+              <label style={{ fontSize: '0.8rem', color: 'var(--label-color)' }}>Số yêu cầu đặc biệt</label>
               <input type="number" min="0" max="5" value={specialRequests} onChange={(e) => setSpecialRequests(parseInt(e.target.value))} className="glass-input" />
             </div>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              <label style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>Quốc tịch (Mã ISO)</label>
+              <label style={{ fontSize: '0.8rem', color: 'var(--label-color)' }}>Quốc tịch (Mã ISO)</label>
               <input type="text" maxLength="3" value={country} onChange={(e) => setCountry(e.target.value.toUpperCase())} className="glass-input" />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              <label style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>Loại đặt cọc</label>
+              <label style={{ fontSize: '0.8rem', color: 'var(--label-color)' }}>Loại đặt cọc</label>
               <select value={depositType} onChange={(e) => setDepositType(e.target.value)} className="glass-input">
                 <option value="No Deposit">No Deposit (Không cọc)</option>
                 <option value="Non Refund">Non Refund (Không hoàn hủy)</option>
@@ -345,12 +345,12 @@ export default function BookingFlow() {
 
         {/* Billing box */}
         <GlassCard style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }} hover={false}>
-          <h3 style={{ fontSize: '1.2rem', color: 'white' }}>Chi Chi Tiết Thanh Toán</h3>
+          <h3 style={{ fontSize: '1.2rem', color: 'var(--text-primary)' }}>Chi Chi Tiết Thanh Toán</h3>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.85rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <span style={{ color: 'var(--text-secondary)' }}>Giá phòng gốc:</span>
-              <span style={{ color: 'white' }}>${basePrice.toFixed(2)}</span>
+              <span style={{ color: 'var(--text-primary)' }}>${basePrice.toFixed(2)}</span>
             </div>
             {discountAmount > 0 && (
               <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--success)' }}>
@@ -358,9 +358,9 @@ export default function BookingFlow() {
                 <span>-${discountAmount.toFixed(2)}</span>
               </div>
             )}
-            <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '0.75rem', fontSize: '1.1rem', fontWeight: 'bold' }}>
-              <span style={{ color: 'white' }}>Tổng cộng:</span>
-              <span style={{ color: 'white' }}>${(basePrice - discountAmount).toFixed(2)}</span>
+            <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid var(--section-border)', paddingTop: '0.75rem', fontSize: '1.1rem', fontWeight: 'bold' }}>
+              <span style={{ color: 'var(--text-primary)' }}>Tổng cộng:</span>
+              <span style={{ color: 'var(--text-primary)' }}>${(basePrice - discountAmount).toFixed(2)}</span>
             </div>
           </div>
           

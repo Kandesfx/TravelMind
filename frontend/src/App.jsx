@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import ThemeProvider from './components/ThemeProvider';
 import { BrowserRouter, Routes, Route, Navigate, Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
@@ -102,6 +103,7 @@ export default function App() {
   };
 
   return (
+    <ThemeProvider>
     <AuthContext.Provider value={{ auth, loading, login, logout, checkAuth }}>
       <BrowserRouter>
         <Routes>
@@ -216,6 +218,7 @@ export default function App() {
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>
+    </ThemeProvider>
   );
 }
 
@@ -236,11 +239,11 @@ function AdminLayout({ children }) {
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
       <Sidebar />
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', background: 'rgba(9, 13, 22, 0.5)' }}>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         <header style={{
           height: '70px',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
-          background: 'rgba(255,255,255,0.01)',
+          borderBottom: '1px solid var(--navbar-border)',
+          background: 'var(--navbar-bg)',
           backdropFilter: 'blur(10px)',
           display: 'flex',
           justifyContent: 'flex-end',
@@ -248,7 +251,7 @@ function AdminLayout({ children }) {
           padding: '0 2rem',
           gap: '1rem'
         }}>
-          <span style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)' }}>Quản trị hệ thống</span>
+          <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Quản trị hệ thống</span>
           <div style={{
             width: '36px',
             height: '36px',
@@ -258,7 +261,8 @@ function AdminLayout({ children }) {
             justifyContent: 'center',
             alignItems: 'center',
             fontWeight: 'bold',
-            fontSize: '0.95rem'
+            fontSize: '0.95rem',
+            color: 'white'
           }}>A</div>
         </header>
         <main style={{ padding: '2rem', flex: 1, overflowY: 'auto' }}>

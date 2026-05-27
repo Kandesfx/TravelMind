@@ -138,10 +138,10 @@ export default function DataManager() {
 
       {/* Bookings Table */}
       <GlassCard hover={false} style={{ padding: 0, overflow: 'hidden' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.25rem 1.5rem', borderBottom: '1px solid rgba(255,255,255,0.05)', background: 'rgba(255,255,255,0.01)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.25rem 1.5rem', borderBottom: '1px solid var(--section-border)', background: 'var(--input-bg)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <Database size={18} color="var(--primary)" />
-            <h3 style={{ color: 'white', fontSize: '1rem', fontWeight: 700 }}>Danh Sách Đặt Phòng ({total.toLocaleString()} bookings)</h3>
+            <h3 style={{ color: 'var(--text-primary)', fontSize: '1rem', fontWeight: 700 }}>Danh Sách Đặt Phòng ({total.toLocaleString()} bookings)</h3>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -156,14 +156,14 @@ export default function DataManager() {
         </div>
 
         {loading ? (
-          <div style={{ color: 'white', textAlign: 'center', padding: '4rem' }}>Đang tải danh sách đặt phòng...</div>
+          <div style={{ color: 'var(--text-primary)', textAlign: 'center', padding: '4rem' }}>Đang tải danh sách đặt phòng...</div>
         ) : bookings.length === 0 ? (
           <div style={{ color: 'var(--text-secondary)', textAlign: 'center', padding: '4rem' }}>Không tìm thấy đặt phòng nào phù hợp với bộ lọc.</div>
         ) : (
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
               <thead>
-                <tr style={{ background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid rgba(255,255,255,0.05)', color: 'white' }}>
+                <tr style={{ background: 'var(--input-bg)', borderBottom: '1px solid var(--section-border)', color: 'var(--text-primary)' }}>
                   <th style={{ padding: '1rem' }}>ID</th>
                   <th style={{ padding: '1rem' }}>Khách Sạn</th>
                   <th style={{ padding: '1rem' }}>Hủy</th>
@@ -180,8 +180,8 @@ export default function DataManager() {
               <tbody>
                 {bookings.map((b) => (
                   <tr key={b.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)', color: 'var(--text-secondary)' }}>
-                    <td style={{ padding: '1rem', fontWeight: 'bold', color: 'white' }}>#{b.id}</td>
-                    <td style={{ padding: '1rem', color: 'white' }}>{b.hotel}</td>
+                    <td style={{ padding: '1rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>#{b.id}</td>
+                    <td style={{ padding: '1rem', color: 'var(--text-primary)' }}>{b.hotel}</td>
                     <td style={{ padding: '1rem' }}>
                       <span style={{
                         padding: '0.15rem 0.4rem',
@@ -201,7 +201,7 @@ export default function DataManager() {
                     <td style={{ padding: '1rem' }}>{b.meal}</td>
                     <td style={{ padding: '1rem', fontWeight: 600 }}>{b.country || 'N/A'}</td>
                     <td style={{ padding: '1rem' }}>{b.market_segment}</td>
-                    <td style={{ padding: '1rem', color: 'white', fontWeight: 600 }}>${b.adr?.toFixed(2)}</td>
+                    <td style={{ padding: '1rem', color: 'var(--text-primary)', fontWeight: 600 }}>${b.adr?.toFixed(2)}</td>
                     <td style={{ padding: '1rem', textAlign: 'right' }}>
                       <button onClick={() => setSelectedBooking(b)} className="glass-button glass-button-secondary" style={{ padding: '0.35rem', borderRadius: '6px' }}>
                         <Eye size={14} />
@@ -215,7 +215,7 @@ export default function DataManager() {
         )}
 
         {/* Pagination Panel */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.25rem 1.5rem', borderTop: '1px solid rgba(255,255,255,0.05)', background: 'rgba(255,255,255,0.01)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.25rem 1.5rem', borderTop: '1px solid var(--section-border)', background: 'var(--input-bg)' }}>
           <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
             Hiển thị {(page - 1) * perPage + 1} - {Math.min(page * perPage, total)} trên tổng số {total.toLocaleString()} dòng
           </span>
@@ -231,7 +231,7 @@ export default function DataManager() {
               <span>Trước</span>
             </button>
 
-            <span style={{ fontSize: '0.8rem', color: 'white', fontWeight: 600 }}>
+            <span style={{ fontSize: '0.8rem', color: 'var(--text-primary)', fontWeight: 600 }}>
               Trang {page} / {totalPages}
             </span>
 
@@ -261,33 +261,33 @@ export default function DataManager() {
           zIndex: 1000
         }} className="animate-fade-in">
           <GlassCard style={{ width: '100%', maxWidth: '600px', padding: '2rem' }} hover={false}>
-            <h3 style={{ fontSize: '1.25rem', color: 'white', marginBottom: '1.25rem', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.5rem' }}>
+            <h3 style={{ fontSize: '1.25rem', color: 'var(--text-primary)', marginBottom: '1.25rem', borderBottom: '1px solid var(--section-border)', paddingBottom: '0.5rem' }}>
               Chi Tiết Đặt Phòng #{selectedBooking.id}
             </h3>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
               <div>
-                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'white' }}>Khách sạn:</strong> {selectedBooking.hotel}</div>
-                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'white' }}>Trạng thái:</strong> {selectedBooking.is_canceled ? 'Đã Hủy' : 'Không Hủy'}</div>
-                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'white' }}>Số ngày đặt trước (Lead Time):</strong> {selectedBooking.lead_time} ngày</div>
-                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'white' }}>Năm đến:</strong> {selectedBooking.arrival_date_year}</div>
-                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'white' }}>Tháng đến:</strong> {selectedBooking.arrival_date_month}</div>
-                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'white' }}>Tuần đến trong năm:</strong> {selectedBooking.arrival_date_week_number}</div>
-                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'white' }}>Ngày đến trong tháng:</strong> {selectedBooking.arrival_date_day_of_month}</div>
-                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'white' }}>Số đêm cuối tuần:</strong> {selectedBooking.stays_in_weekend_nights} đêm</div>
-                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'white' }}>Số đêm trong tuần:</strong> {selectedBooking.stays_in_week_nights} đêm</div>
+                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'var(--text-primary)' }}>Khách sạn:</strong> {selectedBooking.hotel}</div>
+                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'var(--text-primary)' }}>Trạng thái:</strong> {selectedBooking.is_canceled ? 'Đã Hủy' : 'Không Hủy'}</div>
+                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'var(--text-primary)' }}>Số ngày đặt trước (Lead Time):</strong> {selectedBooking.lead_time} ngày</div>
+                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'var(--text-primary)' }}>Năm đến:</strong> {selectedBooking.arrival_date_year}</div>
+                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'var(--text-primary)' }}>Tháng đến:</strong> {selectedBooking.arrival_date_month}</div>
+                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'var(--text-primary)' }}>Tuần đến trong năm:</strong> {selectedBooking.arrival_date_week_number}</div>
+                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'var(--text-primary)' }}>Ngày đến trong tháng:</strong> {selectedBooking.arrival_date_day_of_month}</div>
+                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'var(--text-primary)' }}>Số đêm cuối tuần:</strong> {selectedBooking.stays_in_weekend_nights} đêm</div>
+                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'var(--text-primary)' }}>Số đêm trong tuần:</strong> {selectedBooking.stays_in_week_nights} đêm</div>
               </div>
               
               <div>
-                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'white' }}>Số người lớn:</strong> {selectedBooking.adults}</div>
-                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'white' }}>Số trẻ em:</strong> {selectedBooking.children}</div>
-                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'white' }}>Số trẻ sơ sinh:</strong> {selectedBooking.babies}</div>
-                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'white' }}>Gói ăn uống:</strong> {selectedBooking.meal}</div>
-                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'white' }}>Quốc gia:</strong> {selectedBooking.country}</div>
-                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'white' }}>Phân khúc thị trường:</strong> {selectedBooking.market_segment}</div>
-                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'white' }}>Kênh phân phối:</strong> {selectedBooking.distribution_channel}</div>
-                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'white' }}>Loại phòng đặt:</strong> Room {selectedBooking.reserved_room_type}</div>
-                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'white' }}>Đơn giá trung bình (ADR):</strong> ${selectedBooking.adr?.toFixed(2)}</div>
+                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'var(--text-primary)' }}>Số người lớn:</strong> {selectedBooking.adults}</div>
+                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'var(--text-primary)' }}>Số trẻ em:</strong> {selectedBooking.children}</div>
+                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'var(--text-primary)' }}>Số trẻ sơ sinh:</strong> {selectedBooking.babies}</div>
+                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'var(--text-primary)' }}>Gói ăn uống:</strong> {selectedBooking.meal}</div>
+                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'var(--text-primary)' }}>Quốc gia:</strong> {selectedBooking.country}</div>
+                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'var(--text-primary)' }}>Phân khúc thị trường:</strong> {selectedBooking.market_segment}</div>
+                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'var(--text-primary)' }}>Kênh phân phối:</strong> {selectedBooking.distribution_channel}</div>
+                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'var(--text-primary)' }}>Loại phòng đặt:</strong> Room {selectedBooking.reserved_room_type}</div>
+                <div style={{ marginBottom: '0.5rem' }}><strong style={{ color: 'var(--text-primary)' }}>Đơn giá trung bình (ADR):</strong> ${selectedBooking.adr?.toFixed(2)}</div>
               </div>
             </div>
 

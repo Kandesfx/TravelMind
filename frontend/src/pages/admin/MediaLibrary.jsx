@@ -71,7 +71,7 @@ export default function MediaLibrary() {
             />
           </div>
 
-          <div style={{ display: 'flex', background: 'rgba(255,255,255,0.02)', padding: '0.25rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
+          <div style={{ display: 'flex', background: 'var(--input-bg)', padding: '0.25rem', borderRadius: '8px', border: '1px solid var(--section-border)' }}>
             <button
               onClick={() => setFilterType('')}
               style={{
@@ -122,7 +122,7 @@ export default function MediaLibrary() {
       </div>
 
       {loading ? (
-        <div style={{ color: 'white', textAlign: 'center', padding: '4rem' }}>Đang tải thư viện phương tiện...</div>
+        <div style={{ color: 'var(--text-primary)', textAlign: 'center', padding: '4rem' }}>Đang tải thư viện phương tiện...</div>
       ) : filteredMedia.length === 0 ? (
         <div style={{ color: 'var(--text-secondary)', textAlign: 'center', padding: '4rem' }}>Không tìm thấy tệp tin phương tiện nào.</div>
       ) : (
@@ -177,7 +177,7 @@ export default function MediaLibrary() {
                     padding: '0.15rem 0.4rem',
                     borderRadius: '4px',
                     background: item.status === 'approved' || item.status === 'in_use' ? 'rgba(16, 185, 129, 0.85)' : 'rgba(245, 158, 11, 0.85)',
-                    color: 'white'
+                    color: 'var(--text-primary)'
                   }}>
                     {item.status?.toUpperCase() || 'DRAFT'}
                   </span>
@@ -185,7 +185,7 @@ export default function MediaLibrary() {
 
                 {/* Meta details */}
                 <div>
-                  <div style={{ fontSize: '0.75rem', color: 'white', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-primary)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {item.prompt_used || 'No prompt specified'}
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.25rem', fontSize: '0.65rem', color: 'var(--text-muted)' }}>
@@ -212,7 +212,7 @@ export default function MediaLibrary() {
           zIndex: 1000
         }} className="animate-fade-in">
           <GlassCard style={{ width: '100%', maxWidth: '650px', padding: '2rem' }} hover={false}>
-            <h3 style={{ fontSize: '1.25rem', color: 'white', marginBottom: '1.25rem', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.5rem' }}>
+            <h3 style={{ fontSize: '1.25rem', color: 'var(--text-primary)', marginBottom: '1.25rem', borderBottom: '1px solid var(--section-border)', paddingBottom: '0.5rem' }}>
               Chi Tiết Phương Tiện #{selectedMedia.id} ({selectedMedia.media_type === 'video' ? 'Video' : 'Hình Ảnh'})
             </h3>
 
@@ -236,24 +236,24 @@ export default function MediaLibrary() {
             {/* Info details */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
               <div>
-                <div style={{ marginBottom: '0.4rem' }}><strong style={{ color: 'white' }}>Đường dẫn file:</strong> <a href={selectedMedia.file_url} target="_blank" rel="noreferrer" style={{ color: '#0ea5e9', textDecoration: 'none' }}>Link file</a></div>
-                <div style={{ marginBottom: '0.4rem' }}><strong style={{ color: 'white' }}>Người khởi tạo:</strong> Admin (ID: {selectedMedia.admin_id || 1})</div>
-                <div style={{ marginBottom: '0.4rem' }}><strong style={{ color: 'white' }}>Trạng thái duyệt:</strong> {selectedMedia.status?.toUpperCase() || 'DRAFT'}</div>
+                <div style={{ marginBottom: '0.4rem' }}><strong style={{ color: 'var(--text-primary)' }}>Đường dẫn file:</strong> <a href={selectedMedia.file_url} target="_blank" rel="noreferrer" style={{ color: '#0ea5e9', textDecoration: 'none' }}>Link file</a></div>
+                <div style={{ marginBottom: '0.4rem' }}><strong style={{ color: 'var(--text-primary)' }}>Người khởi tạo:</strong> Admin (ID: {selectedMedia.admin_id || 1})</div>
+                <div style={{ marginBottom: '0.4rem' }}><strong style={{ color: 'var(--text-primary)' }}>Trạng thái duyệt:</strong> {selectedMedia.status?.toUpperCase() || 'DRAFT'}</div>
               </div>
 
               <div>
-                <div style={{ marginBottom: '0.4rem' }}><strong style={{ color: 'white' }}>Kích thước:</strong> {selectedMedia.dimensions || 'N/A'}</div>
+                <div style={{ marginBottom: '0.4rem' }}><strong style={{ color: 'var(--text-primary)' }}>Kích thước:</strong> {selectedMedia.dimensions || 'N/A'}</div>
                 {selectedMedia.media_type === 'video' && (
                   <>
-                    <div style={{ marginBottom: '0.4rem' }}><strong style={{ color: 'white' }}>Thời lượng:</strong> {selectedMedia.duration_seconds} giây</div>
-                    <div style={{ marginBottom: '0.4rem' }}><strong style={{ color: 'white' }}>Dung lượng:</strong> {(selectedMedia.file_size_bytes / (1024 * 1024)).toFixed(2)} MB</div>
+                    <div style={{ marginBottom: '0.4rem' }}><strong style={{ color: 'var(--text-primary)' }}>Thời lượng:</strong> {selectedMedia.duration_seconds} giây</div>
+                    <div style={{ marginBottom: '0.4rem' }}><strong style={{ color: 'var(--text-primary)' }}>Dung lượng:</strong> {(selectedMedia.file_size_bytes / (1024 * 1024)).toFixed(2)} MB</div>
                   </>
                 )}
-                <div style={{ marginBottom: '0.4rem' }}><strong style={{ color: 'white' }}>Ngày tạo:</strong> {new Date(selectedMedia.created_at).toLocaleString()}</div>
+                <div style={{ marginBottom: '0.4rem' }}><strong style={{ color: 'var(--text-primary)' }}>Ngày tạo:</strong> {new Date(selectedMedia.created_at).toLocaleString()}</div>
               </div>
 
               <div style={{ gridColumn: 'span 2', background: 'rgba(0,0,0,0.15)', padding: '0.75rem', borderRadius: '8px' }}>
-                <strong style={{ color: 'white', display: 'block', marginBottom: '0.25rem' }}>Prompt đã sử dụng:</strong>
+                <strong style={{ color: 'var(--text-primary)', display: 'block', marginBottom: '0.25rem' }}>Prompt đã sử dụng:</strong>
                 <p style={{ fontSize: '0.8rem', lineHeight: 1.4 }}>{selectedMedia.prompt_used}</p>
               </div>
             </div>

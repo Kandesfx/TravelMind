@@ -152,7 +152,7 @@ export default function ComboBuilder() {
         </p>
         {step < 5 && (
           <div style={{
-            height: '4px', background: 'rgba(255,255,255,0.03)', borderRadius: '2px',
+            height: '4px', background: 'var(--badge-bg)', borderRadius: '2px',
             maxWidth: '300px', margin: '1.25rem auto 0 auto', overflow: 'hidden'
           }}>
             <div style={{
@@ -178,7 +178,7 @@ export default function ComboBuilder() {
                 textAlign: 'center', transition: 'var(--transition-smooth)'
               }}>
                 <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>{item.emoji}</div>
-                <h4 style={{ color: 'white', fontSize: '1.2rem', fontWeight: 700 }}>{item.label}</h4>
+                <h4 style={{ color: 'var(--text-primary)', fontSize: '1.2rem', fontWeight: 700 }}>{item.label}</h4>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', marginTop: '0.5rem', lineHeight: 1.5 }}>{item.desc}</p>
               </div>
             ))}
@@ -206,7 +206,7 @@ export default function ComboBuilder() {
                 textAlign: 'center', transition: 'var(--transition-smooth)'
               }}>
                 <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{item.emoji}</div>
-                <div style={{ color: 'white', fontSize: '0.95rem', fontWeight: 700 }}>{item.label}</div>
+                <div style={{ color: 'var(--text-primary)', fontSize: '0.95rem', fontWeight: 700 }}>{item.label}</div>
                 <div style={{ color: 'var(--text-muted)', fontSize: '0.75rem', marginTop: '0.25rem' }}>{item.desc}</div>
               </div>
             ))}
@@ -235,7 +235,7 @@ export default function ComboBuilder() {
                 textAlign: 'center', transition: 'var(--transition-smooth)'
               }}>
                 <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{item.emoji}</div>
-                <div style={{ color: 'white', fontSize: '0.95rem', fontWeight: 700 }}>{item.label}</div>
+                <div style={{ color: 'var(--text-primary)', fontSize: '0.95rem', fontWeight: 700 }}>{item.label}</div>
                 <div style={{ color: 'var(--text-muted)', fontSize: '0.75rem', marginTop: '0.25rem' }}>{item.desc}</div>
               </div>
             ))}
@@ -263,7 +263,7 @@ export default function ComboBuilder() {
                 textAlign: 'center', transition: 'var(--transition-smooth)'
               }}>
                 <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{item.emoji}</div>
-                <div style={{ color: 'white', fontSize: '1rem', fontWeight: 700 }}>{item.label}</div>
+                <div style={{ color: 'var(--text-primary)', fontSize: '1rem', fontWeight: 700 }}>{item.label}</div>
                 <div style={{ color: 'var(--text-muted)', fontSize: '0.75rem', marginTop: '0.25rem' }}>{item.desc}</div>
               </div>
             ))}
@@ -281,7 +281,7 @@ export default function ComboBuilder() {
       {step === 5 && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
           {loading ? (
-            <div style={{ color: 'white', textAlign: 'center', padding: '3rem' }}>
+            <div style={{ color: 'var(--text-primary)', textAlign: 'center', padding: '3rem' }}>
               <div style={{ fontSize: '2rem', marginBottom: '1rem' }}>🔍</div>
               Đang tìm combo phù hợp nhất cho bạn...
             </div>
@@ -311,19 +311,19 @@ export default function ComboBuilder() {
                 return (
                   <GlassCard key={rec.rank} style={{
                     display: 'flex', gap: '2rem',
-                    border: rec.rank === 1 ? '1px solid rgba(217, 70, 239, 0.3)' : '1px solid rgba(255,255,255,0.06)',
-                    background: rec.rank === 1 ? 'rgba(217, 70, 239, 0.02)' : 'rgba(255,255,255,0.03)'
+                    border: rec.rank === 1 ? '1px solid rgba(217, 70, 239, 0.3)' : '1px solid var(--badge-border)',
+                    background: rec.rank === 1 ? 'rgba(217, 70, 239, 0.02)' : 'var(--card-bg)'
                   }} className="glass-panel-hover animate-fade-in">
                     
                     {/* Left: rank & match score */}
                     <div style={{
                       display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                      background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)',
+                      background: 'var(--input-bg)', border: '1px solid var(--section-border)',
                       borderRadius: '12px', width: '130px', padding: '1rem', flexShrink: 0
                     }}>
                       <div style={{
                         display: 'flex', alignItems: 'center', gap: '0.2rem',
-                        background: rec.rank === 1 ? '#d946ef' : 'rgba(255,255,255,0.06)',
+                        background: rec.rank === 1 ? '#d946ef' : 'var(--hover-overlay)',
                         color: rec.rank === 1 ? 'white' : matchLabel.color,
                         padding: '0.2rem 0.6rem', borderRadius: '10px',
                         fontSize: '0.72rem', fontWeight: 'bold', marginBottom: '0.75rem'
@@ -332,10 +332,10 @@ export default function ComboBuilder() {
                       </div>
                       
                       <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Mức độ phù hợp</div>
-                      <div style={{ fontSize: '1.5rem', fontWeight: 850, color: 'white', marginTop: '0.15rem' }}>{matchScore}%</div>
+                      <div style={{ fontSize: '1.5rem', fontWeight: 850, color: 'var(--text-primary)', marginTop: '0.15rem' }}>{matchScore}%</div>
                       
                       {/* Progress bar instead of raw Lift */}
-                      <div style={{ width: '100%', height: '4px', background: 'rgba(255,255,255,0.05)', borderRadius: '2px', marginTop: '0.5rem', overflow: 'hidden' }}>
+                      <div style={{ width: '100%', height: '4px', background: 'var(--badge-bg)', borderRadius: '2px', marginTop: '0.5rem', overflow: 'hidden' }}>
                         <div style={{
                           width: `${matchScore}%`, height: '100%',
                           background: `linear-gradient(to right, ${matchLabel.color}, #d946ef)`,
@@ -346,7 +346,7 @@ export default function ComboBuilder() {
 
                     {/* Middle: combo info */}
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', flex: 1 }}>
-                      <h3 style={{ fontSize: '1.3rem', color: 'white' }}>{rec.combo.name}</h3>
+                      <h3 style={{ fontSize: '1.3rem', color: 'var(--text-primary)' }}>{rec.combo.name}</h3>
                       <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: 1.5 }}>
                         {rec.combo.short_description}
                       </p>
@@ -357,8 +357,8 @@ export default function ComboBuilder() {
                           const friendly = friendlyService(svc);
                           return (
                             <span key={i} style={{
-                              fontSize: '0.75rem', background: 'rgba(255,255,255,0.04)',
-                              border: '1px solid rgba(255,255,255,0.06)',
+                              fontSize: '0.75rem', background: 'var(--badge-bg)',
+                              border: '1px solid var(--badge-border)',
                               padding: '0.2rem 0.6rem', borderRadius: '6px', color: 'var(--text-secondary)'
                             }}>{friendly.icon} {friendly.label}</span>
                           );
@@ -374,14 +374,14 @@ export default function ComboBuilder() {
                     {/* Right: pricing & book */}
                     <div style={{
                       display: 'flex', flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'center',
-                      gap: '1rem', width: '180px', borderLeft: '1px solid rgba(255,255,255,0.05)',
+                      gap: '1rem', width: '180px', borderLeft: '1px solid var(--section-border)',
                       paddingLeft: '2rem', flexShrink: 0
                     }}>
                       <div style={{ textAlign: 'right' }}>
                         {rec.combo.discount_percent > 0 && (
                           <div style={{ fontSize: '0.75rem', color: 'var(--success)', fontWeight: 'bold' }}>Tiết kiệm {rec.combo.discount_percent}%</div>
                         )}
-                        <div style={{ fontSize: '1.6rem', fontWeight: 900, color: 'white' }}>${rec.combo.price_estimate}</div>
+                        <div style={{ fontSize: '1.6rem', fontWeight: 900, color: 'var(--text-primary)' }}>${rec.combo.price_estimate}</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>/ đêm lưu trú</div>
                       </div>
                       <button onClick={() => handleBook(rec)} className="glass-button" style={{ width: '100%', justifyContent: 'center' }}>

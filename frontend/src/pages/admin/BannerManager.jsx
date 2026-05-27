@@ -118,12 +118,12 @@ export default function BannerManager() {
       </div>
 
       {loading ? (
-        <div style={{ color: 'white', textAlign: 'center', padding: '3rem' }}>Đang tải danh sách banner...</div>
+        <div style={{ color: 'var(--text-primary)', textAlign: 'center', padding: '3rem' }}>Đang tải danh sách banner...</div>
       ) : (
         <GlassCard style={{ padding: 0, overflow: 'hidden' }} hover={false}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
             <thead>
-              <tr style={{ background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid rgba(255,255,255,0.05)', color: 'white' }}>
+              <tr style={{ background: 'var(--input-bg)', borderBottom: '1px solid var(--section-border)', color: 'var(--text-primary)' }}>
                 <th style={{ padding: '1rem' }}>Tiêu Đề Banner (Headline)</th>
                 <th style={{ padding: '1rem' }}>Vị Trí</th>
                 <th style={{ padding: '1rem' }}>Thứ Tự</th>
@@ -134,7 +134,7 @@ export default function BannerManager() {
             <tbody>
               {banners.map((b) => (
                 <tr key={b.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)', color: 'var(--text-secondary)' }}>
-                  <td style={{ padding: '1rem', fontWeight: 600, color: 'white' }}>{b.title}</td>
+                  <td style={{ padding: '1rem', fontWeight: 600, color: 'var(--text-primary)' }}>{b.title}</td>
                   <td style={{ padding: '1rem', textTransform: 'uppercase' }}>{b.position}</td>
                   <td style={{ padding: '1rem' }}>{b.display_order}</td>
                   <td style={{ padding: '1rem' }}>{b.start_date} ~ {b.end_date}</td>
@@ -168,7 +168,7 @@ export default function BannerManager() {
           zIndex: 1000
         }} className="animate-fade-in">
           <GlassCard style={{ width: '100%', maxWidth: '500px', padding: '2rem' }} hover={false}>
-            <h3 style={{ fontSize: '1.25rem', color: 'white', marginBottom: '1.25rem' }}>
+            <h3 style={{ fontSize: '1.25rem', color: 'var(--text-primary)', marginBottom: '1.25rem' }}>
               {editingBanner ? 'Chỉnh Sửa Banner' : 'Tạo Banner Quảng Cáo Mới'}
             </h3>
 
@@ -226,7 +226,7 @@ export default function BannerManager() {
                 </div>
               </div>
 
-              <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'white', fontSize: '0.85rem', cursor: 'pointer', marginTop: '0.25rem' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-primary)', fontSize: '0.85rem', cursor: 'pointer', marginTop: '0.25rem' }}>
                 <input type="checkbox" checked={isActive} onChange={(e) => setIsActive(e.target.checked)} />
                 <span>Hiển thị hoạt động</span>
               </label>

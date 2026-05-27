@@ -98,7 +98,7 @@ export default function ApiKeySettings() {
         {/* Providers list */}
         <GlassCard hover={false} style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <h3 style={{ fontSize: '1.1rem', color: 'white', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <h3 style={{ fontSize: '1.1rem', color: 'var(--text-primary)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <Shield size={18} color="var(--primary)" />
               <span>Nhà Cung Cấp AI Dịch Vụ</span>
             </h3>
@@ -108,7 +108,7 @@ export default function ApiKeySettings() {
           </div>
 
           {loading ? (
-            <div style={{ color: 'white', textAlign: 'center', padding: '2rem' }}>Đang tải danh sách khóa API...</div>
+            <div style={{ color: 'var(--text-primary)', textAlign: 'center', padding: '2rem' }}>Đang tải danh sách khóa API...</div>
           ) : providers.length === 0 ? (
             <div style={{ color: 'var(--text-secondary)', textAlign: 'center', padding: '2rem' }}>Chưa cấu hình dịch vụ AI nào.</div>
           ) : (
@@ -119,8 +119,8 @@ export default function ApiKeySettings() {
                   style={{
                     padding: '1.25rem',
                     borderRadius: '12px',
-                    border: '1px solid rgba(255,255,255,0.05)',
-                    background: 'rgba(255,255,255,0.01)',
+                    border: '1px solid var(--section-border)',
+                    background: 'var(--input-bg)',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center'
@@ -128,7 +128,7 @@ export default function ApiKeySettings() {
                 >
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      <span style={{ fontWeight: 'bold', fontSize: '0.95rem', color: 'white', textTransform: 'uppercase' }}>
+                      <span style={{ fontWeight: 'bold', fontSize: '0.95rem', color: 'var(--text-primary)', textTransform: 'uppercase' }}>
                         {p.provider_name}
                       </span>
                       <span style={{
@@ -177,9 +177,9 @@ export default function ApiKeySettings() {
         {/* Edit Form */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           <GlassCard hover={false} style={{ padding: '1.5rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.75rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', borderBottom: '1px solid var(--section-border)', paddingBottom: '0.75rem' }}>
               <Key size={18} color="var(--primary)" />
-              <h3 style={{ fontSize: '1.1rem', color: 'white' }}>
+              <h3 style={{ fontSize: '1.1rem', color: 'var(--text-primary)' }}>
                 {editingProvider ? `Sửa Dịch Vụ: ${editingProvider.provider_name}` : 'Thêm Dịch Vụ AI'}
               </h3>
             </div>
@@ -237,7 +237,7 @@ export default function ApiKeySettings() {
                 />
               </div>
 
-              <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'white', fontSize: '0.85rem', cursor: 'pointer', marginTop: '0.25rem' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-primary)', fontSize: '0.85rem', cursor: 'pointer', marginTop: '0.25rem' }}>
                 <input type="checkbox" checked={isActive} onChange={(e) => setIsActive(e.target.checked)} />
                 <span>Hiệu lực hoạt động (Is Active)</span>
               </label>

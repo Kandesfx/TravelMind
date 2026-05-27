@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import GlassCard from '../../components/GlassCard';
@@ -117,12 +118,12 @@ export default function ComboManager() {
       </div>
 
       {loading ? (
-        <div style={{ color: 'white', textAlign: 'center', padding: '3rem' }}>Đang tải danh sách combo...</div>
+        <div style={{ color: 'var(--text-primary)', textAlign: 'center', padding: '3rem' }}>Đang tải danh sách combo...</div>
       ) : (
         <GlassCard style={{ padding: 0, overflow: 'hidden' }} hover={false}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
             <thead>
-              <tr style={{ background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid rgba(255,255,255,0.05)', color: 'white' }}>
+              <tr style={{ background: 'var(--input-bg)', borderBottom: '1px solid var(--section-border)', color: 'var(--text-primary)' }}>
                 <th style={{ padding: '1rem' }}>Tên Combo</th>
                 <th style={{ padding: '1rem' }}>Dịch Vụ</th>
                 <th style={{ padding: '1rem' }}>Nhóm Mục Tiêu</th>
@@ -134,11 +135,11 @@ export default function ComboManager() {
             <tbody>
               {combos.map((combo) => (
                 <tr key={combo.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)', color: 'var(--text-secondary)' }}>
-                  <td style={{ padding: '1rem', fontWeight: 600, color: 'white' }}>{combo.name}</td>
+                  <td style={{ padding: '1rem', fontWeight: 600, color: 'var(--text-primary)' }}>{combo.name}</td>
                   <td style={{ padding: '1rem' }}>
                     <div style={{ display: 'flex', gap: '0.25rem', flexWrap: 'wrap' }}>
                       {combo.services.map((s, i) => (
-                        <span key={i} style={{ background: 'rgba(255,255,255,0.03)', padding: '0.1rem 0.4rem', borderRadius: '4px', fontSize: '0.7rem' }}>{s}</span>
+                        <span key={i} style={{ background: 'var(--icon-circle-bg)', padding: '0.1rem 0.4rem', borderRadius: '4px', fontSize: '0.7rem' }}>{s}</span>
                       ))}
                     </div>
                   </td>
@@ -172,7 +173,7 @@ export default function ComboManager() {
       )}
 
       {/* Editor Modal */}
-      {showModal && (
+      {showModal && createPortal(
         <div style={{
           position: 'fixed',
           inset: 0,
@@ -183,8 +184,8 @@ export default function ComboManager() {
           alignItems: 'center',
           zIndex: 1000
         }} className="animate-fade-in">
-          <GlassCard style={{ width: '100%', maxWidth: '500px', padding: '2rem' }} hover={false}>
-            <h3 style={{ fontSize: '1.25rem', color: 'white', marginBottom: '1.25rem' }}>
+          <GlassCard style={{ width: '100%', maxWidth: '500px', padding: '2rem', maxHeight: '90vh', overflowY: 'auto' }} hover={false}>
+            <h3 style={{ fontSize: '1.25rem', color: 'var(--text-primary)', marginBottom: '1.25rem' }}>
               {editingCombo ? 'Chỉnh Sửa Gói Combo' : 'Tạo Gói Combo Mới'}
             </h3>
 
@@ -241,7 +242,7 @@ export default function ComboManager() {
                 </div>
               </div>
 
-              <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'white', fontSize: '0.85rem', cursor: 'pointer', marginTop: '0.25rem' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-primary)', fontSize: '0.85rem', cursor: 'pointer', marginTop: '0.25rem' }}>
                 <input type="checkbox" checked={isActive} onChange={(e) => setIsActive(e.target.checked)} />
                 <span>Hiển thị trên website chính</span>
               </label>
@@ -252,7 +253,8 @@ export default function ComboManager() {
               </div>
             </form>
           </GlassCard>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

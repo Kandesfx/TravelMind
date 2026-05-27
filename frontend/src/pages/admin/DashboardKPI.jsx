@@ -26,7 +26,7 @@ export default function DashboardKPI() {
   }, []);
 
   if (loading) {
-    return <div style={{ color: 'white', textAlign: 'center', marginTop: '5rem' }}>Đang tải Dashboard KPI quản trị...</div>;
+    return <div style={{ color: 'var(--text-primary)', textAlign: 'center', marginTop: '5rem' }}>Đang tải Dashboard KPI quản trị...</div>;
   }
 
   const { kpis, charts } = data;
@@ -105,7 +105,7 @@ export default function DashboardKPI() {
             </div>
             <div>
               <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{kpi.label}</div>
-              <h3 style={{ fontSize: '1.6rem', color: 'white', fontWeight: 800, marginTop: '0.15rem' }}>{kpi.value}</h3>
+              <h3 style={{ fontSize: '1.6rem', color: 'var(--text-primary)', fontWeight: 800, marginTop: '0.15rem' }}>{kpi.value}</h3>
             </div>
           </GlassCard>
         ))}
@@ -115,7 +115,7 @@ export default function DashboardKPI() {
       <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '2rem' }}>
         {/* Doanh thu */}
         <GlassCard style={{ padding: '1.5rem' }} hover={false}>
-          <h4 style={{ color: 'white', fontSize: '1.1rem', marginBottom: '1rem' }}>Xu Hướng Doanh Thu Theo Tháng</h4>
+          <h4 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', marginBottom: '1rem' }}>Xu Hướng Doanh Thu Theo Tháng</h4>
           <div style={{ height: '300px' }}>
             <Line data={lineData} options={chartOptions} />
           </div>
@@ -123,7 +123,7 @@ export default function DashboardKPI() {
 
         {/* Kênh đặt phòng */}
         <GlassCard style={{ padding: '1.5rem' }} hover={false}>
-          <h4 style={{ color: 'white', fontSize: '1.1rem', marginBottom: '1rem' }}>Phân Bố Kênh Đặt Phòng</h4>
+          <h4 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', marginBottom: '1rem' }}>Phân Bố Kênh Đặt Phòng</h4>
           <div style={{ height: '300px', display: 'flex', justifyContent: 'center' }}>
             <Doughnut data={doughnutData} options={{ ...chartOptions, scales: {} }} />
           </div>
@@ -133,7 +133,7 @@ export default function DashboardKPI() {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
         {/* Lấp đầy theo mùa */}
         <GlassCard style={{ padding: '1.5rem' }} hover={false}>
-          <h4 style={{ color: 'white', fontSize: '1.1rem', marginBottom: '1rem' }}>Lượng Khách Đặt Theo Mùa</h4>
+          <h4 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', marginBottom: '1rem' }}>Lượng Khách Đặt Theo Mùa</h4>
           <div style={{ height: '300px' }}>
             <Bar data={barData} options={chartOptions} />
           </div>
@@ -141,13 +141,13 @@ export default function DashboardKPI() {
 
         {/* Top quốc gia */}
         <GlassCard style={{ padding: '1.5rem' }} hover={false}>
-          <h4 style={{ color: 'white', fontSize: '1.1rem', marginBottom: '1rem' }}>Top 10 Quốc Gia Gửi Khách</h4>
+          <h4 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', marginBottom: '1rem' }}>Top 10 Quốc Gia Gửi Khách</h4>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', height: '300px', overflowY: 'auto', paddingRight: '0.5rem' }}>
             {charts.top_countries.map((c, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                 <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', width: '20px' }}>{i+1}.</span>
-                <span style={{ fontSize: '0.85rem', color: 'white', width: '50px' }}>{c.country}</span>
-                <div style={{ flex: 1, height: '8px', background: 'rgba(255,255,255,0.02)', borderRadius: '4px', overflow: 'hidden' }}>
+                <span style={{ fontSize: '0.85rem', color: 'var(--text-primary)', width: '50px' }}>{c.country}</span>
+                <div style={{ flex: 1, height: '8px', background: 'var(--input-bg)', borderRadius: '4px', overflow: 'hidden' }}>
                   <div style={{
                     width: `${(c.count / charts.top_countries[0].count) * 100}%`,
                     height: '100%',

@@ -126,12 +126,12 @@ export default function VoucherManager() {
         </div>
 
         {loading ? (
-          <div style={{ color: 'white', textAlign: 'center', padding: '3rem' }}>Đang tải danh sách voucher...</div>
+          <div style={{ color: 'var(--text-primary)', textAlign: 'center', padding: '3rem' }}>Đang tải danh sách voucher...</div>
         ) : (
           <GlassCard style={{ padding: 0, overflow: 'hidden' }} hover={false}>
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
               <thead>
-                <tr style={{ background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid rgba(255,255,255,0.05)', color: 'white' }}>
+                <tr style={{ background: 'var(--input-bg)', borderBottom: '1px solid var(--section-border)', color: 'var(--text-primary)' }}>
                   <th style={{ padding: '1rem' }}>Mã Code</th>
                   <th style={{ padding: '1rem' }}>Chiết Khấu</th>
                   <th style={{ padding: '1rem' }}>Số Lượng (Đã Dùng)</th>
@@ -142,7 +142,7 @@ export default function VoucherManager() {
               <tbody>
                 {vouchers.map((v) => (
                   <tr key={v.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)', color: 'var(--text-secondary)' }}>
-                    <td style={{ padding: '1rem', fontWeight: 700, color: 'white' }}>{v.code}</td>
+                    <td style={{ padding: '1rem', fontWeight: 700, color: 'var(--text-primary)' }}>{v.code}</td>
                     <td style={{ padding: '1rem', fontWeight: 'bold' }}>
                       {v.discount_type === 'percent' ? `${v.discount_value}%` : `$${v.discount_value}`}
                     </td>
@@ -171,7 +171,7 @@ export default function VoucherManager() {
         <GlassCard style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }} hover={false}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--primary)' }}>
             <Tag size={20} />
-            <h3 style={{ fontSize: '1.15rem', color: 'white' }}>Đề Xuất Voucher Theo Phân Khúc</h3>
+            <h3 style={{ fontSize: '1.15rem', color: 'var(--text-primary)' }}>Đề Xuất Voucher Theo Phân Khúc</h3>
           </div>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -185,7 +185,7 @@ export default function VoucherManager() {
                 flexDirection: 'column',
                 gap: '0.4rem'
               }}>
-                <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: 'white' }}>{s.target}</span>
+                <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>{s.target}</span>
                 <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Mã gợi ý: **{s.code}**</span>
                 <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.5, marginTop: '0.2rem' }}>{s.desc}</p>
               </div>
@@ -207,7 +207,7 @@ export default function VoucherManager() {
           zIndex: 1000
         }} className="animate-fade-in">
           <GlassCard style={{ width: '100%', maxWidth: '500px', padding: '2rem' }} hover={false}>
-            <h3 style={{ fontSize: '1.25rem', color: 'white', marginBottom: '1.25rem' }}>
+            <h3 style={{ fontSize: '1.25rem', color: 'var(--text-primary)', marginBottom: '1.25rem' }}>
               {editingVoucher ? 'Chỉnh Sửa Voucher' : 'Tạo Voucher Mới'}
             </h3>
 
@@ -264,7 +264,7 @@ export default function VoucherManager() {
                 </div>
               </div>
 
-              <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'white', fontSize: '0.85rem', cursor: 'pointer', marginTop: '0.25rem' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-primary)', fontSize: '0.85rem', cursor: 'pointer', marginTop: '0.25rem' }}>
                 <input type="checkbox" checked={isActive} onChange={(e) => setIsActive(e.target.checked)} />
                 <span>Kích hoạt mã sử dụng</span>
               </label>

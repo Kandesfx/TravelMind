@@ -54,7 +54,7 @@ export default function LoginPage() {
           }}>
             <Sparkles size={24} color="white" />
           </div>
-          <h2 style={{ fontSize: '1.8rem', color: 'white', fontWeight: 800 }}>TravelMind</h2>
+          <h2 style={{ fontSize: '1.8rem', color: 'var(--text-primary)', fontWeight: 800 }}>TravelMind</h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>Đăng nhập tài khoản để đặt phòng & quản trị</p>
         </div>
 
@@ -72,9 +72,9 @@ export default function LoginPage() {
 
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-            <label style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>Tên đăng nhập / Email</label>
+            <label style={{ fontSize: '0.8rem', color: 'var(--label-color)' }}>Tên đăng nhập / Email</label>
             <div style={{ position: 'relative' }}>
-              <User size={16} color="rgba(255,255,255,0.4)" style={{ position: 'absolute', left: '12px', top: '13px' }} />
+              <User size={16} color="var(--text-muted)" style={{ position: 'absolute', left: '12px', top: '13px' }} />
               <input
                 type="text"
                 placeholder="Nhập username..."
@@ -88,9 +88,9 @@ export default function LoginPage() {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-            <label style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>Mật khẩu</label>
+            <label style={{ fontSize: '0.8rem', color: 'var(--label-color)' }}>Mật khẩu</label>
             <div style={{ position: 'relative' }}>
-              <KeyRound size={16} color="rgba(255,255,255,0.4)" style={{ position: 'absolute', left: '12px', top: '13px' }} />
+              <KeyRound size={16} color="var(--text-muted)" style={{ position: 'absolute', left: '12px', top: '13px' }} />
               <input
                 type="password"
                 placeholder="Nhập password..."
