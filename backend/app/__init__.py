@@ -61,6 +61,57 @@ def create_app(config_class=Config):
     def server_error(e):
         return jsonify({"error": f"Lỗi máy chủ nội bộ: {str(e)}", "code": 500}), 500
 
+    # Structured logging middleware for close monitoring
+    import time
+    import logging
+    from flask import request, g
+
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger("TravelMind-API")
+
+    @app.before_request
+    def start_timer():
+        g.start_time = time.time()
+
+    @app.after_request
+    def log_request(response):
+        if request.path.startswith('/static'):
+            return response
+
+        diff = time.time() - g.start_time
+        duration = int(diff * 1000)
+        
+        status_code = response.status_code
+        if 200 <= status_code < 300:
+            status_str = f"🟢 {status_code}"
+        elif 300 <= status_code < 400:
+            status_str = f"🔵 {status_code}"
+        elif 400 <= status_code < 500:
+            status_str = f"🟡 {status_code}"
+        else:
+            status_str = f"🔴 {status_code}"
+
+        payload = ""
+        if request.is_json and request.get_json(silent=True):
+            payload = f" | Payload: {request.get_json(silent=True)}"
+            if len(payload) > 150:
+                payload = payload[:147] + "..."
+
+        query_params = f" | Params: {dict(request.args)}" if request.args else ""
+
+        user_str = "Anonymous"
+        try:
+            from flask_login import current_user
+            if current_user and current_user.is_authenticated:
+                user_str = f"User({current_user.username}:{current_user.role})"
+        except Exception:
+            pass
+
+        logger.info(
+            f"{status_str} | {request.method} {request.path}{query_params}{payload} | {duration}ms | User: {user_str} | IP: {request.remote_addr}"
+        )
+        return response
+
     # Ensure tables are created
     with app.app_context():
         db.create_all()

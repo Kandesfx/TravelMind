@@ -112,7 +112,7 @@ export default function Navbar() {
 
         {auth.logged_in ? (
           <>
-            {auth.user.role === 'admin' && (
+            {auth.user?.role === 'admin' && (
               <Link to="/admin" className="glass-button glass-button-secondary" style={{
                 textDecoration: 'none',
                 padding: '0.5rem 1rem',
@@ -147,7 +147,7 @@ export default function Navbar() {
               }}>
                 <User size={15} color="var(--text-secondary)" />
               </div>
-              <span>{auth.user.full_name || auth.user.username}</span>
+              <span>{auth.user?.full_name || auth.user?.username}</span>
             </Link>
             <button
               onClick={handleLogout}

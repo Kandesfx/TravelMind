@@ -66,7 +66,7 @@ const RequireAuth = ({ children, role }) => {
     return <Navigate to="/login" replace />;
   }
   
-  if (role && auth.user.role !== role) {
+  if (role && (!auth.user || auth.user.role !== role)) {
     return <Navigate to="/" replace />;
   }
   
@@ -97,14 +97,25 @@ export default function App() {
   }, []);
 
   const login = async (username, password, rememberMe) => {
-    const res = await axios.post('/api/auth/login', { username, password, remember_me: rememberMe });
-    await checkAuth();
-    return res.data;
+    setLoading(true);
+    try {
+      const res = await axios.post('/api/auth/login', { username, password, remember_me: rememberMe });
+      await checkAuth();
+      return res.data;
+    } catch (e) {
+      setLoading(false);
+      throw e;
+    }
   };
 
   const logout = async () => {
-    await axios.post('/api/auth/logout');
-    setAuth({ logged_in: false, user: null });
+    setLoading(true);
+    try {
+      await axios.post('/api/auth/logout');
+      setAuth({ logged_in: false, user: null });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
