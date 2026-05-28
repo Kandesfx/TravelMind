@@ -492,8 +492,14 @@ def create_booking():
         data_source='web'
     )
 
-    db.session.add(booking)
-    db.session.commit()
+    try:
+        db.session.add(booking)
+        db.session.commit()
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        db.session.rollback()
+        return jsonify({"error": str(e), "traceback": traceback.format_exc(), "code": 500}), 500
 
     return jsonify({
         "booking_id": booking.id,

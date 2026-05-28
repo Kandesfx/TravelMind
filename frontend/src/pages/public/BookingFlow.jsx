@@ -58,12 +58,32 @@ export default function BookingFlow() {
     if (chs) setChildren(parseInt(chs));
     if (ml) setMeal(ml);
 
+    const roomType = searchParams.get('room_type');
+    const hotelType = searchParams.get('hotel_type');
+
     if (roomId) {
       setLoadingRoom(true);
       axios.get(`/api/public/rooms/${roomId}`)
         .then(res => {
           setRoom(res.data);
           if (res.data.hotel) setHotel(res.data.hotel);
+        })
+        .catch(console.error)
+        .finally(() => setLoadingRoom(false));
+    } else if (roomType && hotelType) {
+      setLoadingRoom(true);
+      axios.get(`/api/public/rooms/search?room_type=${roomType}&hotel_type=${hotelType}`)
+        .then(res => {
+          if (res.data.rooms && res.data.rooms.length > 0) {
+            return axios.get(`/api/public/rooms/${res.data.rooms[0].id}`);
+          }
+          throw new Error('Không tìm thấy phòng phù hợp');
+        })
+        .then(res => {
+          if (res) {
+            setRoom(res.data);
+            if (res.data.hotel) setHotel(res.data.hotel);
+          }
         })
         .catch(console.error)
         .finally(() => setLoadingRoom(false));

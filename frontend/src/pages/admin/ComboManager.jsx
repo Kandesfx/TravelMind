@@ -5,11 +5,19 @@ import axios from 'axios';
 import GlassCard from '../../components/GlassCard';
 import { Briefcase, Plus, Edit2, Trash2, Eye, FileText, Check, X } from 'lucide-react';
 
+const AVAILABLE_SERVICES_GROUPS = [
+  { label: 'Loại Khách Sạn', items: ['Resort', 'City Hotel'] },
+  { label: 'Loại Phòng', items: ['Room_A', 'Room_B', 'Room_C', 'Room_D', 'Room_E', 'Room_F', 'Room_G', 'Room_H'] },
+  { label: 'Bữa Ăn (Meal Plan)', items: ['BB', 'HB', 'FB', 'SC'] },
+  { label: 'Tiện Ích', items: ['Parking', 'No_Parking'] }
+];
+
 export default function ComboManager() {
   const [combos, setCombos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [editingCombo, setEditingCombo] = useState(null);
+  const [rules, setRules] = useState([]);
   
   // Form fields
   const [name, setName] = useState('');
@@ -21,6 +29,17 @@ export default function ComboManager() {
   const [targetGroup, setTargetGroup] = useState('Family');
   const [targetSeason, setTargetSeason] = useState('Summer');
   const [isActive, setIsActive] = useState(true);
+  const [useRule, setUseRule] = useState(true);
+
+  const toggleService = (srv) => {
+    let currentList = services ? services.split(',').map(s => s.trim()).filter(Boolean) : [];
+    if (currentList.includes(srv)) {
+      currentList = currentList.filter(s => s !== srv);
+    } else {
+      currentList.push(srv);
+    }
+    setServices(currentList.join(', '));
+  };
 
   const navigate = useNavigate();
 
@@ -35,8 +54,18 @@ export default function ComboManager() {
     }
   };
 
+  const fetchRules = async () => {
+    try {
+      const res = await axios.get('/api/admin/rules');
+      setRules(res.data.rules || []);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   useEffect(() => {
     fetchCombos();
+    fetchRules();
   }, []);
 
   const openCreateModal = () => {
@@ -50,6 +79,7 @@ export default function ComboManager() {
     setTargetGroup('Family');
     setTargetSeason('Summer');
     setIsActive(true);
+    setUseRule(true);
     setShowModal(true);
   };
 
@@ -64,6 +94,15 @@ export default function ComboManager() {
     setTargetGroup(c.target_group);
     setTargetSeason(c.target_season);
     setIsActive(c.is_active);
+    
+    const cServices = c.services.join(', ');
+    const isCustom = !rules.find(r => {
+      const antStr = r.antecedent ? r.antecedent.join(', ') : '';
+      const conStr = r.consequent ? r.consequent.join(', ') : '';
+      return [antStr, conStr].filter(Boolean).join(', ') === cServices;
+    });
+    setUseRule(!isCustom);
+    
     setShowModal(true);
   };
 
@@ -205,9 +244,63 @@ export default function ComboManager() {
                 <textarea value={shortDesc} onChange={(e) => setShortDesc(e.target.value)} className="glass-input" style={{ minHeight: '60px' }} />
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-                <label style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Dịch vụ (phân cách bằng dấu phẩy)</label>
-                <input type="text" value={services} onChange={(e) => setServices(e.target.value)} className="glass-input" required />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                <label style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Nguồn Dịch Vụ</label>
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                  <label style={{ fontSize: '0.85rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.4rem', cursor: 'pointer' }}>
+                    <input type="radio" checked={useRule} onChange={() => setUseRule(true)} />
+                    Từ luật kết hợp (AI)
+                  </label>
+                  <label style={{ fontSize: '0.85rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.4rem', cursor: 'pointer' }}>
+                    <input type="radio" checked={!useRule} onChange={() => setUseRule(false)} />
+                    Tự nhập thủ công
+                  </label>
+                </div>
+
+                {useRule ? (
+                  <select value={services} onChange={(e) => setServices(e.target.value)} className="glass-input" required>
+                    <option value="" disabled>-- Chọn tập dịch vụ kết hợp --</option>
+                    {rules.map(rule => {
+                      const antStr = rule.antecedent ? rule.antecedent.join(', ') : '';
+                      const conStr = rule.consequent ? rule.consequent.join(', ') : '';
+                      const combined = [antStr, conStr].filter(Boolean).join(', ');
+                      return (
+                        <option key={rule.id} value={combined}>
+                          {combined} (Độ tin cậy: {(rule.confidence * 100).toFixed(1)}%, Lift: {rule.lift.toFixed(2)})
+                        </option>
+                      );
+                    })}
+                    {services && !rules.find(r => {
+                      const antStr = r.antecedent ? r.antecedent.join(', ') : '';
+                      const conStr = r.consequent ? r.consequent.join(', ') : '';
+                      return [antStr, conStr].filter(Boolean).join(', ') === services;
+                    }) && (
+                       <option value={services}>{services} (Tùy chỉnh hiện tại)</option>
+                    )}
+                  </select>
+                ) : (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', background: 'rgba(0,0,0,0.1)', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                    {AVAILABLE_SERVICES_GROUPS.map(group => (
+                      <div key={group.label} style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                        <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: 'var(--text-secondary)' }}>{group.label}</span>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                          {group.items.map(srv => {
+                            const isChecked = (services ? services.split(',').map(s => s.trim()) : []).includes(srv);
+                            return (
+                              <label key={srv} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.8rem', color: 'var(--text-primary)', cursor: 'pointer', background: isChecked ? 'rgba(99, 102, 241, 0.15)' : 'rgba(255,255,255,0.03)', padding: '0.4rem 0.6rem', borderRadius: '6px', border: isChecked ? '1px solid var(--primary)' : '1px solid transparent', transition: 'all 0.2s' }}>
+                                <input type="checkbox" checked={isChecked} onChange={() => toggleService(srv)} style={{ display: 'none' }} />
+                                <div style={{ width: '14px', height: '14px', borderRadius: '3px', border: isChecked ? 'none' : '1px solid rgba(255,255,255,0.2)', background: isChecked ? 'var(--primary)' : 'transparent', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                  {isChecked && <Check size={10} color="white" />}
+                                </div>
+                                {srv}
+                              </label>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>

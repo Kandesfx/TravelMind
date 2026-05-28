@@ -99,6 +99,21 @@ export default function TravelerQuiz() {
     setResult(null);
   };
 
+  const getComboBuilderUrl = (personaType) => {
+    switch(personaType) {
+      case 'family':
+      case 'planner':
+        return '/combo-builder?hotel_type=Resort&group=Family&season=Summer';
+      case 'romantic':
+        return '/combo-builder?hotel_type=Resort&group=Couple&season=Autumn';
+      case 'business':
+      case 'last_minute':
+        return '/combo-builder?hotel_type=City&group=Solo&season=Summer';
+      default:
+        return '/combo-builder';
+    }
+  };
+
   return (
     <div style={{ maxWidth: '600px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '2rem' }} className="animate-fade-in">
       <div style={{ textAlign: 'center' }}>
@@ -212,7 +227,7 @@ export default function TravelerQuiz() {
                 <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Gợi ý combo dành cho bạn</span>
                 <h4 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', fontWeight: 700, marginTop: '0.15rem' }}>{result.recommended_combo.name}</h4>
               </div>
-              <Link to={`/combos/${result.recommended_combo.id}`} className="glass-button" style={{ padding: '0.4rem 1rem', fontSize: '0.8rem' }}>
+              <Link to={getComboBuilderUrl(result?.persona?.type)} className="glass-button" style={{ padding: '0.4rem 1rem', fontSize: '0.8rem' }}>
                 <span>Xem Ngay</span>
                 <ArrowRight size={12} />
               </Link>

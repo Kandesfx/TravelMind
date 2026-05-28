@@ -45,7 +45,7 @@ export default function RulesLab() {
   const fetchConfigsAndRules = async (configId = null) => {
     setLoading(true);
     try {
-      let url = `/api/admin/mining?sort=${sortBy}&limit=${limit}&min_confidence=${minConfidenceFilter}`;
+      let url = `/api/admin/rules?sort=${sortBy}&limit=${limit}&min_confidence=${minConfidenceFilter}`;
       if (configId) {
         url += `&config_id=${configId}`;
       }
@@ -96,7 +96,7 @@ export default function RulesLab() {
 
     setRunning(true);
     try {
-      const res = await axios.post('/api/admin/mining/run', {
+      const res = await axios.post('/api/admin/rules/run', {
         algorithm,
         min_support: parseFloat(minSupport),
         min_confidence: parseFloat(minConfidence),
