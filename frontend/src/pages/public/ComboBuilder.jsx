@@ -116,7 +116,9 @@ export default function ComboBuilder() {
     if (group === 'Solo') adults = 1;
     else if (group === 'Family') { adults = 2; children = 1; }
     else if (group === 'Large') adults = 4;
-    const meal = rec.combo.services.find(s => ['BB', 'HB', 'FB', 'SC'].includes(s)) || 'BB';
+    // Services now in Meal_BB format — extract meal code
+    const mealSvc = rec.combo.services.find(s => s.startsWith('Meal_'));
+    const meal = mealSvc ? mealSvc.replace('Meal_', '') : 'BB';
     const room = rec.combo.services.find(s => s.startsWith('Room_'))?.replace('Room_', '') || 'A';
     navigate(`/booking?combo_id=${rec.combo.id || 1}&hotel_type=${hotelType === 'Resort' ? 'Resort Hotel' : 'City Hotel'}&check_in=${checkIn}&check_out=${checkOut}&adults=${adults}&children=${children}&meal=${meal}&room_type=${room}`);
   };

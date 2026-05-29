@@ -58,20 +58,15 @@ def _extract_services_from_rule(rule):
         if cat in seen_categories:
             continue
 
-        if cat == 'hotel':
-            services.append(HOTEL_DISPLAY.get(item, item))
-            seen_categories.add(cat)
-        elif cat == 'meal':
-            services.append(item.replace('Meal_', ''))
-            seen_categories.add(cat)
-        elif cat == 'room':
+        # Keep the full item key (matching frontend SERVICE_MAP)
+        if cat in ('hotel', 'meal', 'room', 'group', 'season', 'price'):
             services.append(item)
             seen_categories.add(cat)
         elif item == 'Parking_Yes':
-            services.append('Parking')
+            services.append('Parking_Yes')
             seen_categories.add(cat)
-        elif cat == 'deposit' and item == 'Dep_NoDeposit':
-            services.append('NoDeposit')
+        elif cat == 'deposit' and item in ('Dep_NoDeposit', 'Dep_Refundable', 'Dep_NonRefund'):
+            services.append(item)
             seen_categories.add(cat)
 
     return services
@@ -170,13 +165,29 @@ def recommend_combos(hotel_type, group, season, budget):
             elif len(total_overlap) >= 3:
                 score += 0.08
 
+            # ── Service richness bonus ──────────────────────────────────────
+            # Rules with Meal_ or Room_ items are more useful for display.
+            # Pure behavioral rules (Ch_Groups → Cust_TransientParty) rank lower.
+            all_rule_items = ant_set | con_set
+            has_meal = any(i.startswith('Meal_') for i in all_rule_items)
+            has_room = any(i.startswith('Room_') for i in all_rule_items)
+            if has_meal and has_room:
+                score += 0.18   # Both: very rich combo info
+            elif has_meal or has_room:
+                score += 0.09   # One of them: partial info
+            else:
+                score -= 0.05   # No service detail → slight penalty
+
             matched_rules.append({
                 "rule": rule,
                 "match_ratio": match_ratio,
                 "ant_overlap": len(ant_overlap),
                 "total_overlap": len(total_overlap),
-                "score": score
+                "score": score,
+                "has_meal": has_meal,
+                "has_room": has_room,
             })
+
 
     # Sort by score descending
     matched_rules.sort(key=lambda x: x["score"], reverse=True)
@@ -190,6 +201,8 @@ def recommend_combos(hotel_type, group, season, budget):
     for item in matched_rules:
         if len(recommendations) >= 3:
             break
+
+        rank = len(recommendations) + 1  # Track current rank (1, 2, 3)
 
         rule = item["rule"]
         services = _extract_services_from_rule(rule)
@@ -247,17 +260,16 @@ def recommend_combos(hotel_type, group, season, budget):
 
         # Build services list — ensure it's never empty
         if not services:
-            services = [hotel_val]
-            # Add meal and room from the rule items
+            hotel_key = 'Hotel_Resort' if hotel_type.lower() == 'resort' else 'Hotel_City'
+            services = [hotel_key]
+            # Add meal and room from the rule items (use full key names)
             for it in rule.antecedent + rule.consequent:
-                if it.startswith('Meal_'):
-                    services.append(it.replace('Meal_', ''))
-                elif it.startswith('Room_'):
+                if it.startswith('Meal_') or it.startswith('Room_'):
                     services.append(it)
                 elif it == 'Parking_Yes':
-                    services.append('Parking')
-                elif it == 'Dep_NoDeposit':
-                    services.append('NoDeposit')
+                    services.append('Parking_Yes')
+                elif it in ('Dep_NoDeposit', 'Dep_Refundable', 'Dep_NonRefund'):
+                    services.append(it)
                 if len(services) >= 4:
                     break
 
@@ -279,16 +291,16 @@ def recommend_combos(hotel_type, group, season, budget):
         else:
             # Generate unique name that reflects the specific rule's services
             service_highlights = []
-            for s in services[:3]:
-                if s in ('BB', 'HB', 'FB', 'SC'):
-                    meal_full = {'BB': 'Ăn Sáng', 'HB': 'Nửa Bữa', 'FB': 'Trọn Gói', 'SC': 'Tự Túc'}
-                    service_highlights.append(meal_full.get(s, s))
+            meal_map = {'Meal_BB': 'Ăn Sáng', 'Meal_HB': 'Nửa Bữa', 'Meal_FB': 'Trọn Gói', 'Meal_SC': 'Tự Túc'}
+            room_names = {'A': 'Standard', 'B': 'Superior', 'C': 'Deluxe', 'D': 'Suite', 'E': 'Premium', 'F': 'Family', 'G': 'VIP'}
+            for s in services[:5]:
+                if s in meal_map:
+                    service_highlights.append(meal_map[s])
                 elif s.startswith('Room_'):
                     room_label = s.replace('Room_', '')
-                    room_names = {'A': 'Standard', 'B': 'Superior', 'C': 'Deluxe', 'D': 'Suite', 'E': 'Premium', 'F': 'Family', 'G': 'VIP'}
                     service_highlights.append(f"Phòng {room_names.get(room_label, room_label)}")
-                elif s in ('Resort', 'City Hotel'):
-                    service_highlights.append(s)
+                elif s in ('Hotel_Resort', 'Hotel_City'):
+                    service_highlights.append('Resort' if s == 'Hotel_Resort' else 'City')
 
             if service_highlights:
                 combo_name = f"{hotel_vn} {group_vn.get(group, group)} — {' + '.join(service_highlights[:2])}"
@@ -406,10 +418,10 @@ def _generate_contextual_fallback(hotel_type, group, season, budget):
 
     # Generate 3 different combos based on input
     meal_options = {
-        'Family': ['HB', 'FB', 'BB'],
-        'Couple': ['FB', 'HB', 'BB'],
-        'Solo': ['BB', 'SC', 'HB'],
-        'Large': ['HB', 'BB', 'FB'],
+        'Family': ['Meal_HB', 'Meal_FB', 'Meal_BB'],
+        'Couple': ['Meal_FB', 'Meal_HB', 'Meal_BB'],
+        'Solo': ['Meal_BB', 'Meal_SC', 'Meal_HB'],
+        'Large': ['Meal_HB', 'Meal_BB', 'Meal_FB'],
     }
     room_options = {
         'Family': ['Room_D', 'Room_F', 'Room_E'],
@@ -418,22 +430,20 @@ def _generate_contextual_fallback(hotel_type, group, season, budget):
         'Large': ['Room_F', 'Room_G', 'Room_D'],
     }
     extras_options = {
-        'Family': [['Parking'], ['NoDeposit'], ['Parking', 'NoDeposit']],
-        'Couple': [['NoDeposit'], [], ['Parking']],
-        'Solo': [['NoDeposit'], [], []],
-        'Large': [['Parking'], ['NoDeposit'], ['Parking', 'NoDeposit']],
+        'Family': [['Parking_Yes'], ['Dep_NoDeposit'], ['Parking_Yes', 'Dep_NoDeposit']],
+        'Couple': [['Dep_NoDeposit'], [], ['Parking_Yes']],
+        'Solo': [['Dep_NoDeposit'], [], []],
+        'Large': [['Parking_Yes'], ['Dep_NoDeposit'], ['Parking_Yes', 'Dep_NoDeposit']],
     }
 
-    meals = meal_options.get(group, ['BB', 'HB', 'FB'])
+    meals = meal_options.get(group, ['Meal_BB', 'Meal_HB', 'Meal_FB'])
     rooms = room_options.get(group, ['Room_A', 'Room_B', 'Room_C'])
     extras = extras_options.get(group, [[], [], []])
 
     result = []
     for i in range(3):
-        services = [hotel_val]
-        services.append(meals[i])
-        services.append(rooms[i])
-        services.extend(extras[i])
+        hotel_key = 'Hotel_Resort' if hotel_val == 'Resort' else 'Hotel_City'
+        services = [hotel_key, meals[i], rooms[i]] + extras[i]
 
         rank_labels = ['⭐ Phù hợp nhất', '👍 Rất phù hợp', '✨ Phù hợp']
         price_adj = base_price + (i * 15) - 10  # slight variation
