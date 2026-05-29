@@ -15,7 +15,7 @@ export default function CustomerAnalysis() {
   useEffect(() => {
     const fetchSegments = async () => {
       try {
-        const res = await axios.get('/api/admin/mining/segments');
+        const res = await axios.get('/api/admin/rules/segments');
         setSegments(res.data.segments);
         if (res.data.segments.length > 0) {
           setSelectedSegment(res.data.segments[0]);

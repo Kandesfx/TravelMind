@@ -1,6 +1,6 @@
 # 📋 Đặc Tả Chức Năng — TravelMind
 
-> Tài liệu đặc tả chi tiết 28 chức năng của hệ thống, bao gồm mục đích, user story, giao diện, logic backend và API liên quan.
+> Tài liệu đặc tả chi tiết 33 chức năng của hệ thống, bao gồm mục đích, user story, giao diện, logic backend và API liên quan.
 >
 > **Kiến trúc Decoupled:** Mỗi tính năng bao gồm hai thành phần tách biệt:
 > - **React Route (Frontend):** URL mà React Router quản lý trên SPA tại `frontend/`.
@@ -8,7 +8,7 @@
 
 ---
 
-## PHẦN 1: Chức Năng Người Dùng (Public — 8 trang React)
+## PHẦN 1: Chức Năng Người Dùng (Public — 10 trang React)
 
 ---
 
@@ -286,7 +286,7 @@ flowchart LR
 
 ---
 
-## PHẦN 2: Chức Năng Quản Trị (Admin — 18 trang React)
+## PHẦN 2: Chức Năng Quản Trị (Admin — 21 trang React)
 
 > Tất cả trang admin yêu cầu role `admin`. React Router sẽ kiểm tra auth context và redirect về `/login` nếu chưa đăng nhập. Layout: Sidebar cố định + Content area.
 
@@ -417,7 +417,7 @@ flowchart LR
 | Features | Chọn features đưa vào | Tất cả 15 |
 | Chỉ booking thành công | Lọc bỏ canceled | ✅ Bật |
 
-**Output:** Bảng luật (có filter/sort) + Network graph (mối liên kết giữa services) + Scatter plot (support vs lift).
+**Output:** Bảng luật (có filter/sort) + Scatter plot (Support vs Confidence, size = Lift) + Bảng thống kê tổng hợp.
 
 **API:** `POST /api/admin/rules/run`, `GET /api/admin/rules`
 
@@ -449,9 +449,9 @@ flowchart LR
 
 **Route:** `/admin/ai/images`
 
-**Chức năng:** Tạo ảnh banner, combo card, event header bằng AI. AI tự tạo prompt từ ngữ cảnh. Editor chỉnh sửa.
+**Chức năng:** Tạo ảnh banner, combo card, event header bằng AI sử dụng Google Imagen 3 (hoặc matplotlib gradient làm dự phòng). Hỗ trợ xem thử overlay nhãn chữ tiếp thị.
 
-**Luồng:** Chọn loại ảnh → AI tạo prompt → Sinh 4 ảnh → Admin chọn → Editor (crop, text overlay) → Duyệt.
+**Luồng:** Chọn loại ảnh → Nhập prompt mô tả → Sinh 1 ảnh chất lượng cao → Xem thử overlay (tiêu đề, màu, cỡ chữ, vị trí) → Phê duyệt áp dụng trực tiếp cho thực thể.
 
 **API:** `POST /api/admin/ai/media/generate-image`
 
@@ -461,7 +461,7 @@ flowchart LR
 
 **Route:** `/admin/ai/videos`
 
-**Chức năng:** Tạo video slideshow ngắn (10-30s) từ ảnh AI + text + nhạc nền. Dùng FFmpeg (local, miễn phí).
+**Chức năng:** Tạo video slideshow ngắn (10-30s) từ ảnh AI trong thư viện + phụ đề từng phân cảnh + nhạc nền. Kết xuất bằng bộ lọc nâng cấp của FFmpeg cục bộ (zoompan, xfade, drawtext).
 
 **API:** `POST /api/admin/ai/media/generate-video`
 
@@ -555,17 +555,17 @@ flowchart LR
 
 ```mermaid
 pie title Phân bố chức năng theo vai trò
-    "Public (Người dùng)" : 8
-    "Admin (Quản trị)" : 18
+    "Public (Người dùng)" : 10
+    "Admin (Quản trị)" : 21
     "Auth (Xác thực)" : 2
 ```
 
 | Nhóm | Số lượng | Core Features |
 |---|---|---|
-| Public | 8 | Smart Combo Builder, Traveler Quiz, Booking Flow |
-| Admin - Kinh doanh | 7 | Combo, Promotion, Event, Banner, Voucher, Reports, Dashboard |
+| Public | 10 | Smart Combo Builder, Traveler Quiz, Booking Flow, Hotel Explorer |
+| Admin - Kinh doanh | 9 | Combo, Promotion, Event, Banner, Voucher, Booking, Hotel, Reports, Dashboard |
 | Admin - Dữ liệu | 3 | Customer Analysis, Rules Lab, Data Manager |
-| Admin - AI | 6 | Content Studio, Image Studio, Video Studio, Media, Templates, History |
+| Admin - AI | 7 | AI Insights, Content Studio, Image Studio, Video Studio, Media, Templates, History |
 | Admin - Hệ thống | 2 | API Key Settings, AI Usage Dashboard |
 | Auth | 2 | Login, Register |
 

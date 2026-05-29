@@ -694,11 +694,9 @@ Duyệt nội dung AI.
 }
 ```
 
----
-
 ### POST `/api/admin/ai/media/generate-image`
 
-Tạo ảnh bằng AI.
+Tạo ảnh bằng AI sử dụng Google Imagen 3 (REST API v1beta) hoặc fallback matplotlib gradient cục bộ.
 
 **Auth:** Admin
 
@@ -708,7 +706,6 @@ Tạo ảnh bằng AI.
   "prompt": "A luxurious tropical resort with a family enjoying breakfast...",
   "style": "photography",
   "aspect_ratio": "16:9",
-  "num_images": 4,
   "target_type": "banner",
   "target_id": 1
 }
@@ -716,13 +713,14 @@ Tạo ảnh bằng AI.
 // Response 200
 {
   "images": [
-    { "id": 1, "url": "/static/uploads/ai_img_001.png", "dimensions": "1920x1080" },
-    { "id": 2, "url": "/static/uploads/ai_img_002.png", "dimensions": "1920x1080" },
-    { "id": 3, "url": "/static/uploads/ai_img_003.png", "dimensions": "1920x1080" },
-    { "id": 4, "url": "/static/uploads/ai_img_004.png", "dimensions": "1920x1080" }
+    {
+      "id": 1,
+      "url": "/static/uploads/ai_img_1780013159_banner_1.jpg",
+      "dimensions": "1280x720",
+      "source": "imagen3" // Hoặc "local_gradient" nếu fallback
+    }
   ],
-  "credits_used": 4,
-  "cost_usd": 0.04
+  "message": "Sinh ảnh thành công! Hình ảnh đã lưu vào hàng đợi nháp."
 }
 ```
 

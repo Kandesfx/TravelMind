@@ -12,8 +12,8 @@
 flowchart TB
     subgraph CLIENT["⚛️ Frontend (React SPA on Vite)"]
         direction TB
-        PUB["Public Pages\n(8 trang React)"]
-        ADM["Admin Panel\n(18 trang React)"]
+        PUB["Public Pages\n(10 trang React)"]
+        ADM["Admin Panel\n(21 trang React)"]
         AUTH_P["Auth Pages\n(2 trang React)"]
         STORE["React State / Context\n(Session, Auth, Cart)"]
     end
@@ -59,7 +59,7 @@ flowchart TB
 | Lớp | Công nghệ | Vai trò |
 |---|---|---|
 | **Presentation (Frontend)** | React 18, Vite, React Router, Plotly.js, Chart.js | Single Page Application, vẽ biểu đồ tương tác |
-| **Styling (CSS)** | CSS Modules / Vanilla CSS | Xây dựng giao diện kính mờ (Glassmorphism), vi hoạt ảnh |
+| **Styling (CSS)** | Vanilla CSS | Xây dựng giao diện kính mờ (Glassmorphism), vi hoạt ảnh |
 | **API Gateway (Backend)** | Flask, Flask-CORS, Flask-Login | Định tuyến, quản lý phiên qua cookie, kiểm tra quyền |
 | **Business Logic** | Python modules (mlxtend, pandas, numpy) | Chạy Apriori/FP-Growth, tính toán score gợi ý |
 | **Data Access** | SQLAlchemy 2.0 ORM | Truy xuất và cập nhật SQLite database |
@@ -76,42 +76,47 @@ flowchart TB
 - **Routing:** React Router v6 (quản lý URL, phân chia các route Công khai và Bảo mật Admin).
 - **State Management:** React Context (quản lý trạng thái đăng nhập `AuthContext`, giỏ hàng hoặc thông tin combo).
 - **Biểu đồ:** `react-chartjs-2` (cho Chart.js), `plotly.js-dist-min` (cho bản đồ và heatmap tương tác).
-- **Styling:** CSS Modules giúp tránh chồng chéo class CSS, hỗ trợ hiệu ứng kính mờ (Glassmorphism) và dark-mode hiện đại.
+- **Styling:** Vanilla CSS với naming convention rõ ràng, hỗ trợ hiệu ứng kính mờ (Glassmorphism) và dark-mode hiện đại.
 
-### 2.2 Cấu trúc trang (28 trang)
+### 2.2 Cấu trúc trang (33 trang)
 
 ```mermaid
 graph TB
-    subgraph PUBLIC["🌐 Public Pages (8 trang)"]
+    subgraph PUBLIC["🌐 Public Pages (10 trang)"]
         P1["/ — Landing Page"]
-        P2["/hotels — Hotel Explorer"]
-        P3["/combo-builder — Smart Combo Builder ⭐"]
-        P4["/quiz — Traveler Quiz"]
-        P5["/booking — Booking Flow"]
-        P6["/insights — Travel Insights"]
-        P7["/events/:slug — Event Page"]
-        P8["/profile — User Profile"]
+        P2["/hotels — Hotel List"]
+        P3["/hotels/:id — Hotel Detail"]
+        P4["/hotel-explorer — Hotel Explorer"]
+        P5["/combo-builder — Smart Combo Builder ⭐"]
+        P6["/quiz — Traveler Quiz"]
+        P7["/booking — Booking Flow"]
+        P8["/insights — Travel Insights"]
+        P9["/events/:slug — Event Page"]
+        P10["/profile — User Profile"]
     end
 
-    subgraph ADMIN["🔒 Admin Panel (18 trang)"]
+    subgraph ADMIN["🔒 Admin Panel (21 trang)"]
         A1["/admin — Dashboard KPI"]
         A2["/admin/combos — Quản lý Combo"]
         A3["/admin/promotions — Quản lý Ưu đãi"]
         A4["/admin/events — Quản lý Sự kiện"]
         A5["/admin/banners — Quản lý Banner"]
         A6["/admin/vouchers — Quản lý Voucher"]
-        A7["/admin/reports — Báo cáo hiệu quả"]
-        A8["/admin/customers — Phân tích KH"]
-        A9["/admin/rules — Rules Lab"]
-        A10["/admin/data — Quản lý dữ liệu"]
-        A11["/admin/ai/content — AI Content Studio"]
-        A12["/admin/ai/images — AI Image Studio"]
-        A13["/admin/ai/videos — AI Video Studio"]
-        A14["/admin/ai/media — Thư viện Media"]
-        A15["/admin/ai/templates — Template AI"]
-        A16["/admin/ai/history — Lịch sử kiểm duyệt"]
-        A17["/admin/settings/api-keys — API Key Settings"]
-        A18["/admin/settings/ai-usage — AI Usage Dashboard"]
+        A7["/admin/bookings — Quản lý Booking"]
+        A8["/admin/hotels — Quản lý KS"]
+        A9["/admin/reports — Báo cáo hiệu quả"]
+        A10["/admin/customers — Phân tích KH"]
+        A11["/admin/rules — Rules Lab"]
+        A12["/admin/ai/insights — AI Insights"]
+        A13["/admin/data — Quản lý dữ liệu"]
+        A14["/admin/ai/content — AI Content Studio"]
+        A15["/admin/ai/images — AI Image Studio"]
+        A16["/admin/ai/videos — AI Video Studio"]
+        A17["/admin/ai/media — Thư viện Media"]
+        A18["/admin/ai/templates — Template AI"]
+        A19["/admin/ai/history — Lịch sử kiểm duyệt"]
+        A20["/admin/settings/api-keys — API Key Settings"]
+        A21["/admin/settings/ai-usage — AI Usage Dashboard"]
     end
 
     subgraph AUTH_PAGES["🔐 Auth (2 trang)"]
@@ -253,12 +258,12 @@ DAMH/
     ├── src/
     │   ├── assets/               # CSS global, ảnh nền, logo
     │   ├── components/           # UI components (GlassCard, Nav, Sidebar)
-    │   ├── pages/                # 28 pages as React components
+    │   ├── pages/                # 33 pages as React components
     │   │   ├── public/           # Landing, Explorer, Builder, Quiz, Booking, Insights
     │   │   ├── admin/            # Dashboard, CRUD managers, AI Studios, Settings
     │   │   └── auth/             # Login, Register
     │   ├── services/             # Axios/fetch API wrappers
-    │   ├── styles/               # CSS Modules tương ứng cho từng component/page
+    │   ├── styles/               # Vanilla CSS tương ứng cho từng component/page
     │   ├── App.jsx               # React Router & Context providers
     │   └── main.jsx
     ├── package.json

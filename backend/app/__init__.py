@@ -1,3 +1,13 @@
+# Suppress ALL warnings globally first, then selectively re-enable important ones.
+# This is needed because PyparsingDeprecationWarning is NOT a subclass of
+# standard DeprecationWarning, so specific filters don't catch it.
+import warnings
+warnings.simplefilter("ignore")
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+# Re-enable only critical warnings (RuntimeWarning, UserWarning)
+warnings.filterwarnings("default", category=RuntimeWarning)
+warnings.filterwarnings("default", category=UserWarning)
+
 from flask import Flask, jsonify
 from app.config import Config
 from app.extensions import db, cors, login_manager
@@ -47,27 +57,42 @@ def create_app(config_class=Config):
     # Global error handlers
     @app.errorhandler(401)
     def unauthorized(e):
-        return jsonify({"error": "Chưa đăng nhập", "code": 401}), 401
+        return jsonify({"error": "Chua dang nhap", "code": 401}), 401
 
     @app.errorhandler(403)
     def forbidden(e):
-        return jsonify({"error": "Không có quyền truy cập", "code": 403}), 403
+        return jsonify({"error": "Khong co quyen truy cap", "code": 403}), 403
 
     @app.errorhandler(404)
     def not_found(e):
-        return jsonify({"error": "Không tìm thấy tài nguyên", "code": 404}), 404
+        return jsonify({"error": "Khong tim thay tai nguyen", "code": 404}), 404
 
     @app.errorhandler(500)
     def server_error(e):
-        return jsonify({"error": f"Lỗi máy chủ nội bộ: {str(e)}", "code": 500}), 500
+        return jsonify({"error": f"Loi may chu noi bo: {str(e)}", "code": 500}), 500
 
     # Structured logging middleware for close monitoring
     import time
     import logging
+    import sys
     from flask import request, g
 
-    logging.basicConfig(level=logging.INFO)
-    logger = logging.getLogger("TravelMind-API")
+    # Configure clean logging format
+    log_handler = logging.StreamHandler(sys.stdout)
+    log_handler.setLevel(logging.INFO)
+    log_handler.setFormatter(logging.Formatter(
+        '[%(asctime)s] %(name)s | %(message)s',
+        datefmt='%H:%M:%S'
+    ))
+    
+    logger = logging.getLogger("TravelMind")
+    logger.setLevel(logging.INFO)
+    logger.handlers.clear()
+    logger.addHandler(log_handler)
+    logger.propagate = False
+
+    # Quiet down werkzeug default logging (it duplicates our custom logs)
+    logging.getLogger("werkzeug").setLevel(logging.WARNING)
 
     @app.before_request
     def start_timer():
@@ -83,37 +108,44 @@ def create_app(config_class=Config):
         
         status_code = response.status_code
         if 200 <= status_code < 300:
-            status_str = f"🟢 {status_code}"
+            status_str = f"OK {status_code}"
         elif 300 <= status_code < 400:
-            status_str = f"🔵 {status_code}"
+            status_str = f"REDIRECT {status_code}"
         elif 400 <= status_code < 500:
-            status_str = f"🟡 {status_code}"
+            status_str = f"ERR {status_code}"
         else:
-            status_str = f"🔴 {status_code}"
+            status_str = f"FAIL {status_code}"
 
         payload = ""
         if request.is_json and request.get_json(silent=True):
-            payload = f" | Payload: {request.get_json(silent=True)}"
-            if len(payload) > 150:
-                payload = payload[:147] + "..."
+            payload = f" | Body: {request.get_json(silent=True)}"
+            if len(payload) > 120:
+                payload = payload[:117] + "..."
 
-        query_params = f" | Params: {dict(request.args)}" if request.args else ""
+        query_params = f" | Q: {dict(request.args)}" if request.args else ""
 
-        user_str = "Anonymous"
+        user_str = "Anon"
         try:
             from flask_login import current_user
             if current_user and current_user.is_authenticated:
-                user_str = f"User({current_user.username}:{current_user.role})"
+                user_str = f"{current_user.username}({current_user.role})"
         except Exception:
             pass
 
         logger.info(
-            f"{status_str} | {request.method} {request.path}{query_params}{payload} | {duration}ms | User: {user_str} | IP: {request.remote_addr}"
+            f"{status_str} | {request.method} {request.path}{query_params}{payload} | {duration}ms | {user_str}"
         )
         return response
 
     # Ensure tables are created
     with app.app_context():
         db.create_all()
+
+        # Auto-mine association rules if none exist
+        try:
+            from app.services.mining_service import ensure_rules_exist
+            ensure_rules_exist()
+        except Exception as e:
+            print(f"[TravelMind] Warning: Could not run auto-mining: {str(e)}")
 
     return app

@@ -11,7 +11,7 @@
 | **Database Engine** | SQLite 3 |
 | **ORM** | SQLAlchemy 2.0 |
 | **Lý do chọn SQLite** | Nhẹ, không cần server riêng, dễ triển khai, đủ cho đồ án |
-| **Số bảng** | 17 bảng |
+| **Số bảng** | 19 bảng |
 | **File database** | `backend/instance/travelmind.db` |
 
 ---

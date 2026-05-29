@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
 from app.extensions import db
 from app.models.rule import RuleConfig, AssociationRule
-from app.services.mining_service import run_association_rules_mining
+from app.services.mining_service import run_association_rules_mining, generate_combos_from_rules
 from app.services.ai_insight_service import (
     generate_mining_insight_summary,
     suggest_promotions_from_rules,
@@ -44,7 +44,10 @@ def run_mining():
     
     if not config:
         return jsonify({"error": msg, "code": 400}), 400
-        
+
+    # Auto-generate combos from the new rules
+    combos_count = generate_combos_from_rules(config.id)
+
     # Get top 10 rules generated in this config run
     top_rules = AssociationRule.query.filter_by(config_id=config.id).order_by(AssociationRule.lift.desc()).limit(10).all()
     
@@ -53,9 +56,10 @@ def run_mining():
         "algorithm": config.algorithm,
         "total_transactions": config.total_transactions,
         "total_rules": config.total_rules_generated,
+        "combos_generated": combos_count,
         "execution_time_seconds": config.execution_time_seconds,
         "top_rules": [r.to_dict() for r in top_rules],
-        "message": msg
+        "message": msg + f" Đã tự động tạo {combos_count} combo."
     }), 200
 
 @admin_mining_bp.route('', methods=['GET'])
@@ -91,6 +95,25 @@ def get_rules():
         "rules": [r.to_dict() for r in rules],
         "configs": [c.to_dict() for c in all_configs],
         "selected_config_id": config_id
+    }), 200
+
+@admin_mining_bp.route('/generate-combos', methods=['POST'])
+def generate_combos():
+    """Manually trigger combo generation from existing rules."""
+    data = request.get_json() or {}
+    config_id = data.get('config_id')
+    
+    if not config_id:
+        latest = RuleConfig.query.order_by(RuleConfig.created_at.desc()).first()
+        if not latest:
+            return jsonify({"error": "Chưa có cấu hình khai phá nào"}), 400
+        config_id = latest.id
+    
+    combos_count = generate_combos_from_rules(config_id)
+    return jsonify({
+        "combos_generated": combos_count,
+        "config_id": config_id,
+        "message": f"Đã tạo thành công {combos_count} combo từ luật kết hợp."
     }), 200
 
 @admin_mining_bp.route('/segments', methods=['GET'])

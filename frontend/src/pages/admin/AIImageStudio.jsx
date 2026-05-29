@@ -117,7 +117,7 @@ export default function AIImageStudio() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }} className="animate-fade-in">
       <div>
         <h1 style={{ fontSize: '1.8rem', fontWeight: 800 }}>🎨 AI Image Studio</h1>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>Sinh ảnh minh họa cho combo hoặc banner tiếp thị, thiết kế nhãn chữ nghệ thuật đè trực tiếp.</p>
+        <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>Sinh ảnh thực tế bằng <strong style={{color:'var(--primary)'}}>Google Imagen 3</strong> (khi có API key) hoặc gradient AI cục bộ làm dự phòng. Áp dụng trực tiếp cho combo, banner, sự kiện.</p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 2fr', gap: '2rem' }}>
@@ -177,7 +177,7 @@ export default function AIImageStudio() {
               </div>
 
               <button type="submit" disabled={loading} className="glass-button" style={{ marginTop: '0.5rem', justifyContent: 'center' }}>
-                {loading ? 'Đang vẽ ảnh AI...' : 'Tạo Ảnh Minh Họa'}
+                {loading ? '⏳ Đang gọi Imagen 3...' : '✨ Tạo Ảnh Bằng AI'}
               </button>
             </form>
           </GlassCard>
@@ -224,8 +224,8 @@ export default function AIImageStudio() {
           {loading && (
             <div style={{ color: 'var(--text-primary)', textAlign: 'center', padding: '6rem', background: 'var(--input-bg)', borderRadius: '16px', border: '1px solid var(--badge-border)' }}>
               <Sparkles size={32} color="var(--primary)" className="animate-pulse" style={{ margin: '0 auto 1rem auto' }} />
-              <h3>AI Đang Bắt Đầu Vẽ...</h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', marginTop: '0.5rem' }}>Mô phỏng hoặc gọi API tạo hình ảnh nghệ thuật, quá trình sẽ mất vài giây.</p>
+              <h3>Gọi Imagen 3 API...</h3>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', marginTop: '0.5rem' }}>Google Imagen 3 đang sinh ảnh từ mô tả của bạn. Thường mất 5–15 giây.</p>
             </div>
           )}
 
@@ -302,7 +302,10 @@ export default function AIImageStudio() {
                   </div>
 
                   <span style={{ position: 'absolute', top: '10px', right: '10px', background: 'rgba(0,0,0,0.6)', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.7rem', color: '#94a3b8' }}>
-                    {selectedImage.dimensions || '1024x1024'}
+                    {selectedImage.dimensions || '1280x720'}
+                  </span>
+                  <span style={{ position: 'absolute', top: '10px', left: '10px', background: selectedImage.source === 'imagen3' ? 'rgba(16,185,129,0.85)' : 'rgba(99,102,241,0.85)', padding: '0.25rem 0.6rem', borderRadius: '4px', fontSize: '0.7rem', color: 'white', fontWeight: 700 }}>
+                    {selectedImage.source === 'imagen3' ? '🌐 Google Imagen 3' : '🎨 AI Local Gradient'}
                   </span>
                 </div>
 

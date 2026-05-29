@@ -55,3 +55,9 @@ yarn-error.log*
 # OS files
 .DS_Store
 Thumbs.db
+
+# Large binary tools (FFmpeg, etc.) - download locally, do not commit
+backend/bin/
+
+# Generated uploads (AI images, videos) - do not commit to repo
+backend/uploads/

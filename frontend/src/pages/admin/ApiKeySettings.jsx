@@ -256,6 +256,25 @@ export default function ApiKeySettings() {
             <AlertCircle size={16} style={{ flexShrink: 0 }} />
             <span>Mã hóa AES-256 đảm bảo an toàn tuyệt đối. Kể cả khi cơ sở dữ liệu bị truy cập trái phép, khóa API của bạn vẫn được bảo vệ.</span>
           </div>
+
+          {/* Gemini multi-use info */}
+          <div style={{ display: 'flex', gap: '0.5rem', background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.25)', padding: '0.85rem', borderRadius: '8px', fontSize: '0.75rem', color: 'var(--text-primary)' }}>
+            <HelpCircle size={16} color="var(--primary)" style={{ flexShrink: 0, marginTop: '1px' }} />
+            <div>
+              <strong style={{ display: 'block', marginBottom: '0.35rem', color: 'var(--primary)' }}>
+                🌐 1 API Key Gemini — dùng được cả Text lẫn Ảnh
+              </strong>
+              <span style={{ color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                Chỉ cần cấu hình <strong>Google Gemini</strong> (service_type: <em>text</em>) với API key thực của bạn. Hệ thống sẽ tự động dùng key đó để:<br />
+                • <strong>Sinh văn bản</strong> qua <em>gemini-2.0-flash</em><br />
+                • <strong>Sinh ảnh</strong> qua <em>imagen-3.0-generate-002</em> (~$0.04/ảnh)<br />
+                • <strong>Phân tích luật kết hợp</strong> &amp; Q&amp;A kinh doanh<br />
+                <span style={{ marginTop: '0.35rem', display: 'block', color: 'var(--text-muted)' }}>
+                  Lấy key miễn phí tại: <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noreferrer" style={{ color: 'var(--primary)' }}>aistudio.google.com/app/apikey</a>
+                </span>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -325,17 +325,39 @@ def submit_quiz():
 
     selected_persona = persona_map.get(max_choice, persona_map['e'])
 
-    recommended_combo = None
-    if selected_persona["type"] == 'family':
-        recommended_combo = Combo.query.filter_by(slug='family-summer-pack').first()
-    elif selected_persona["type"] == 'romantic':
-        recommended_combo = Combo.query.filter_by(slug='romantic-autumn-getaway').first()
-    else:
-        recommended_combo = Combo.query.filter_by(slug='city-business-express').first()
+    # Map persona to recommendation parameters for dynamic recommendation
+    persona_params = {
+        'planner': {'hotel_type': 'Resort', 'group': 'Family', 'season': 'Summer', 'budget': 'Mid'},
+        'last_minute': {'hotel_type': 'City', 'group': 'Couple', 'season': 'Summer', 'budget': 'Budget'},
+        'business': {'hotel_type': 'City', 'group': 'Solo', 'season': 'Spring', 'budget': 'Mid'},
+        'romantic': {'hotel_type': 'Resort', 'group': 'Couple', 'season': 'Autumn', 'budget': 'Premium'},
+        'family': {'hotel_type': 'Resort', 'group': 'Family', 'season': 'Summer', 'budget': 'Mid'},
+    }
 
+    params = persona_params.get(selected_persona["type"], persona_params['family'])
+    recs = recommend_combos(**params)
+
+    # Use the top recommendation as the suggested combo
+    recommended_combo = None
     combo_info = None
+    top_rec = recs[0] if recs else None
+
+    if top_rec and top_rec["combo"].get("id"):
+        recommended_combo = Combo.query.get(top_rec["combo"]["id"])
+
     if recommended_combo:
-        combo_info = {"id": recommended_combo.id, "name": recommended_combo.name, "slug": recommended_combo.slug, "match_confidence": recommended_combo.match_confidence}
+        combo_info = {
+            "id": recommended_combo.id, "name": recommended_combo.name,
+            "slug": recommended_combo.slug, "match_confidence": recommended_combo.match_confidence
+        }
+    elif top_rec:
+        combo_info = {
+            "id": None, "name": top_rec["combo"]["name"],
+            "slug": top_rec["combo"]["slug"], "match_confidence": top_rec["confidence"]
+        }
+
+    # Also include all recommendations for richer quiz results
+    quiz_recommendations = recs[:3] if recs else []
 
     uid = current_user.id if current_user.is_authenticated else None
     result = QuizResult(user_id=uid, answers=answers, persona_type=selected_persona["type"],
@@ -343,7 +365,13 @@ def submit_quiz():
     db.session.add(result)
     db.session.commit()
 
-    return jsonify({"persona": selected_persona, "recommended_combo": combo_info}), 200
+    return jsonify({
+        "persona": selected_persona,
+        "recommended_combo": combo_info,
+        "recommendations": quiz_recommendations,
+        "recommendation_params": params
+    }), 200
+
 
 
 # ==========================================
@@ -492,8 +520,14 @@ def create_booking():
         data_source='web'
     )
 
-    db.session.add(booking)
-    db.session.commit()
+    try:
+        db.session.add(booking)
+        db.session.commit()
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        db.session.rollback()
+        return jsonify({"error": str(e), "traceback": traceback.format_exc(), "code": 500}), 500
 
     return jsonify({
         "booking_id": booking.id,
